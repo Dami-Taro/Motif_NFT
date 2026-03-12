@@ -1,0 +1,56 @@
+=== non-contiguous nft : chains ===
+Found 56 chain interruption in 52 different nfts
+nft:	 node1 -> node2 ... 	|	 nextChain ...
+
+10278:	2668f7cf -> 83b35cfb	|	c44e2d10 -> 824bc420	|	
+10295:	7be5a946 -> 73628234	|	25709b1b -> f096e059	|	
+10421:	5a137b4c -> 905d8cf3	|	ce426faa -> 48c8b70e	|	
+105:	c9b203b9 -> e0b78561 -> e4a029d6	|	c2ed2ad3 -> 1179f4be	|	
+1169:	b3890adb -> c4ff103a -> 374db939	|	8d4c9796 -> 353eb109	|	
+1952:	8a604642 -> 5e098823 -> f8df130f	|	82ddc00f -> 6c7f30e0 -> 7f67a173	|	
+2570:	26be0966 -> b9e035d5	|	8a00cd49 -> 1ffb7d2e	|	
+29:	a9ced158 -> bf935bcc	|	f6543236 -> b64c70c0	|	
+3426:	dd99e1b6 -> 0f34bfdc	|	dd99e1b6 -> de433bce	|	
+3481:	410ade6f -> 47a640ea	|	410ade6f -> 47a640ea	|	4bb50dde -> 9022dfb2 -> 80a3283d	|	
+3673:	783172b7 -> 395c4326 -> ba6892fd	|	395c4326 -> ba6892fd	|	
+3717:	0bd14fc2 -> 6d1359ae	|	7a973706 -> 98ccc140	|	
+4041:	36c837bf -> a2506b7e	|	36c837bf -> f9a4c1b9	|	
+4068:	2ec5f788 -> a3d481ca	|	6cda8495 -> 2c72fb95	|	
+4073:	5840d4bf -> 87b16318	|	e0f7bfa9 -> 1ffb7d2e	|	
+4194:	8f482e91 -> c4bf954d	|	df4349e9 -> 5615dc7b	|	
+439:	97bf4ddb -> a544f3c4	|	2f308ee5 -> dd742c0e	|	
+4391:	f89b084d -> 4f3d166b	|	5a155a38 -> 9a9b949b	|	
+4492:	077e5ac9 -> 45e75e4e -> 11148dfe -> 23c65df0	|	12ff1354 -> d3a6ad50 -> 43482e51	|	
+4820:	6da5327f -> 1b22841f	|	c464eca7 -> 65b4841e	|	
+4891:	a0d87eb6 -> b68879a1 -> 9514a3b3	|	e12ac2d3 -> 496c378a	|	
+5111:	ec34b551 -> 073040fc	|	be606805 -> cb8f9a79	|	
+5175:	67426064 -> 3631cae6 -> aed8dfba	|	3631cae6 -> aed8dfba	|	
+5192:	ca1af9de -> 395c4326 -> ba6892fd	|	395c4326 -> ba6892fd	|	
+534:	c6ac727b -> 16dd53d8	|	7a0bcc70 -> bff0b6b3	|	
+5421:	ae8f26ef -> f3d780ab	|	c94d8afe -> 971c8ccd	|	
+5574:	874e1a87 -> 7701dde3 -> 4948aa2c -> 1dfdc2b2 -> 25709b1b	|	e6e93b83 -> 3045c1d6 -> 8e676609	|	
+5738:	b6e89392 -> a34ecd7a -> e4a029d6	|	c2ed2ad3 -> de277d07	|	
+6035:	feb0b257 -> f126d055 -> 6abf791b	|	f126d055 -> 6abf791b	|	
+6037:	feb0b257 -> 69bfea7f	|	86f94ea7 -> 96718ce5	|	
+6132:	636482d8 -> 25709b1b	|	e0419898 -> de277d07	|	
+6277:	ca1af9de -> 8884099d	|	3a7da28f -> dfbf4566	|	
+639:	5af49784 -> 06aaa0c9	|	e8e5d3f5 -> ce426faa -> 313fdda4	|	
+6491:	03d18dbe -> 262c1548	|	03d18dbe -> 6c6286b6 -> 4ebbded7	|	
+6571:	884be47b -> 0d708f6c	|	7c367996 -> 9a9b949b	|	
+6806:	c04ce7a0 -> b0f49f6d	|	a48f6fa7 -> e8b3e669 -> 0344a32b	|	
+7301:	592e9331 -> 007f2410 -> f25d1bd5	|	c2557705 -> 8ab7ca2f	|	
+733:	e6b4378d -> 71db3508 -> d5012809	|	71db3508 -> d5012809	|	
+7346:	eaed6731 -> d9cfdfbe	|	caa29ba2 -> 70471b8e	|	
+7395:	0e4a9109 -> 7aeeecc7	|	681fd1c7 -> bb1ad6b6 -> c78fe1e7	|	
+7597:	bb3e779b -> 60ecfdf0	|	bb3e779b -> 60ecfdf0	|	
+7925:	997325d4 -> 2e895e4c	|	de224be1 -> d9cfdfbe	|	
+7959:	480cb7c6 -> 1de87204	|	15417318 -> 480cb7c6	|	1de87204 -> ef835647 -> 4833894f	|	
+8318:	d36da8aa -> 05a812ee	|	041e1ca4 -> 70f906e3	|	
+894:	8409e4fb -> 9285c55f	|	fb3b7d94 -> b2a5312a	|	
+9400:	2e895e4c -> f85e0932	|	2e895e4c -> f85e0932	|	
+9408:	1532a437 -> d3d3486f	|	1532a437 -> 3f11521b	|	d3d3486f -> f2017dc2	|	
+9455:	480cb7c6 -> 052e00f3	|	57c91ecb -> 480cb7c6	|	052e00f3 -> aa8c6213	|	
+9549:	7f025bc7 -> 0d708f6c	|	7c367996 -> c2ed2ad3	|	
+9820:	c219daf0 -> b3ffea03 -> ca32ddb6	|	9029c623 -> cefa3b4e	|	
+9829:	c219daf0 -> ec616eab -> 8bc588fc	|	60157847 -> 7d72bf15	|	
+9852:	932e5489 -> 411a8b93	|	be134da7 -> 3cbd5e5b	|	

@@ -7,6 +7,9 @@ import src.graph.UserNode;
 
 public class GiveAndTake extends Pattern {
 
+    @Override
+    public String getName() { return "GiveAndTake";}
+
     public GiveAndTake(List<Edge> edges) {
         super(edges);
     }
@@ -26,14 +29,10 @@ public class GiveAndTake extends Pattern {
     @Override
     public void validate() throws PatternValidationException {
         if (edges.size() < 2) {
-            throw new PatternValidationException(
-                "GiveAndTake must contain at least 2 edges"
-            );
+            throw new PatternValidationException( getName() + " must contain at least 2 edges");
         }
         if (edges.size() % 2 != 0) {
-            throw new PatternValidationException(
-                "GiveAndTake must contain an even number of edges"
-            );
+            throw new PatternValidationException( getName() + " must contain an even number of edges");
         }
 
         UserNode center = getCenterNode();
@@ -44,16 +43,12 @@ public class GiveAndTake extends Pattern {
             if (i % 2 == 0) {
                 // vendita: center → X
                 if (!e.getFrom().equals(center)) {
-                    throw new PatternValidationException(
-                        "Expected selling edge at position " + i
-                    );
+                    throw new PatternValidationException( getName() + ": Expected selling edge at position " + i );
                 }
             } else {
                 // acquisto: Y → center
                 if (!e.getTo().equals(center)) {
-                    throw new PatternValidationException(
-                        "Expected buying edge at position " + i
-                    );
+                    throw new PatternValidationException( getName() + ": Expected buying edge at position " + i );
                 }
             }
         }
@@ -62,7 +57,8 @@ public class GiveAndTake extends Pattern {
     @Override
     public String toString() {
         return String.format(
-            "GiveAndTake:  %s → [%s] → %s (k=%d , Δt=%d sec)",
+            "%s:  %s → [%s] → %s (k=%d , Δt=%d sec)",
+            getName(),
             getFromNode().getSimpleAddress(),
             getCenterNode().getSimpleAddress(),
             getToNode().getSimpleAddress(),

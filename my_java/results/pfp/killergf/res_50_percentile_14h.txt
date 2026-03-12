@@ -1,0 +1,103 @@
+
+=== GRAPH INFO ===
+Nodi: 13097
+Archi: 19633
+Duration (sec): 63192964 = 2y in interval [1643070883, 1706263847]
+Delta (sec): 53409 = 14h50min9s
+
+
+=== InStar Counts by Size (grouped by size) ===
+Totale pattern: 2860
+
+size 2 → 1796 pattern
+size 3 → 486 pattern
+size 4 → 223 pattern
+size 5 → 123 pattern
+size 6 → 67 pattern
+size 7 → 34 pattern
+size 8 → 22 pattern
+size 9 → 23 pattern
+size 10 → 21 pattern
+size 11 → 16 pattern
+size 12 → 5 pattern
+size 13 → 6 pattern
+size 14 → 4 pattern
+size 15 → 5 pattern
+size 16 → 1 pattern
+size 17 → 1 pattern
+size 18 → 1 pattern
+size 19 → 4 pattern
+size 20 → 5 pattern
+size 22 → 2 pattern
+size 23 → 2 pattern
+size 25 → 2 pattern
+size 26 → 1 pattern
+size 27 → 1 pattern
+size 31 → 1 pattern
+size 35 → 1 pattern
+size 36 → 2 pattern
+size 40 → 1 pattern
+size 49 → 1 pattern
+size 53 → 1 pattern
+size 54 → 1 pattern
+size 84 → 1 pattern
+
+=== GiveAndTake Counts by Size (grouped by size) ===
+Totale pattern: 987
+
+size 2 → 897 pattern
+size 4 → 80 pattern
+size 6 → 9 pattern
+size 8 → 1 pattern
+
+=== ReceiveAndForward Counts by Size (grouped by size) ===
+Totale pattern: 1760
+
+size 2 → 1642 pattern
+size 4 → 102 pattern
+size 6 → 15 pattern
+size 10 → 1 pattern
+
+=== ReceiveAndForwardNFT Counts by Size (grouped by size) ===
+Totale pattern: 1402
+
+size 2 → 1299 pattern
+size 4 → 90 pattern
+size 6 → 12 pattern
+size 10 → 1 pattern
+
+=== DATASETNFT INFO ===
+NFTs: 6598
+Archi: 19633
+Delta (sec): 53409
+
+
+=== SameNFTChain Counts by Size (grouped by size) ===
+Totale pattern: 2495
+
+size 2 → 2199 pattern
+size 3 → 261 pattern
+size 4 → 30 pattern
+size 5 → 3 pattern
+size 6 → 2 pattern
+Contiguous
+
+=== SameNFTChain Counts by Size (grouped by size) ===
+Totale pattern: 2186
+
+size 2 → 1938 pattern
+size 3 → 219 pattern
+size 4 → 25 pattern
+size 5 → 2 pattern
+size 6 → 2 pattern
+
+=== SameNFTCycle Counts by Size (grouped by size) ===
+Totale pattern: 18
+
+size 2 → 18 pattern
+Contiguous
+
+=== SameNFTCycle Counts by Size (grouped by size) ===
+Totale pattern: 1
+
+size 2 → 1 pattern

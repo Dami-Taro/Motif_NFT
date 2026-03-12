@@ -1,16 +1,19 @@
 package src.main;
 
-import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
 
+import src.graph.DatasetNFT;
+import src.graph.Edge;
 import src.graph.Graph;
-import src.io.GraphLoader;
+import src.io.Loader;
 import src.io.ResultWriter;
 import src.io.TimeFormatter;
-import src.motifMiner.TemporalMotifMiner;
+import src.motifMiner.GraphTemporalMotifMiner;
+import src.motifMiner.NFTsTemporalMotifMiner;
 import src.motifMiner.patterns.*;
 
 public class Main {
@@ -18,72 +21,147 @@ public class Main {
     public static void main(String[] args) {
 
         // ===== PARAMETRI GLOBALI =====
-        long delta = 60*60*24*365*5;          // finestra temporale
-        double percentage = 5.0;   // percentile per stima delta
         //int minOneWay = 2;
         int minMergedInStar = 2;
         int minMergedGiveAndTake = 2;
         int minMergedReceiveAndForward = 2;
+        int minSameNFTChain = 2;
+        int minSameNFTCycle = 2;
+
+        boolean processFileList = false; // se true per ogni file crea datsetNFT e vede se è valido
+        boolean loadFileList = true; // se true, carica i FileInfos da file invece di ricostruirli da zero
+        boolean customFileList = true; // se true, carica i FileInfos da file invece di ricostruirli da zero
+        boolean continueDeltaAfterFileListBuilt = true; // se true, continua con l'analisi dopo la creazione di filesInfos
+        boolean continueMiningAfterDeltaComputed = true; // se true, continua con l'analisi dopo la creazione di filesInfos
         
 
-        // ===== LISTA DELLE COLLEZIONI DA ANALIZZARE =====
-        List<Path> collectionFiles = new ArrayList<>();
-        collectionFiles.add(Paths.get("collections/boredapeyachtclub.json"));
-        //collectionFiles.add(Paths.get("collections/TestcaseDistinctInStar.json"));
-        //collectionFiles.add(Paths.get("collections/TestcaseOneWayCouple.json"));
-        //collectionFiles.add(Paths.get("collections/TestcaseMergedInStar.json")); 
-        //collectionFiles.add(Paths.get("collections/TestcaseMergedGiveAndTake.json")); 
-        //collectionFiles.add(Paths.get("collections/TestcaseMergedReceiveAndForward.json"));
 
-        for (Path collectionPath : collectionFiles) {
+        // ===== BUILD LIST OF FILES ORDER =====
+        List<FileInfos> fileList = new ArrayList<>();
 
-            String fileName = collectionPath.getFileName().toString();
-            String collectionName = fileName.replaceFirst("\\.json$", "");
+        if ( processFileList ){
+            System.out.println("== processing new FileList ==");
 
+            Path root = Paths.get("collections");
+            List<Path> jsonFiles = Preprocess.scanJsonFiles(root);
+            Preprocess.sortByDescendingSize(jsonFiles);
+
+            fileList = Preprocess.buildFileInfos(jsonFiles);
+
+            Path fileListFile = Paths.get("results/file_infos.txt");
+            Preprocess.writeFileInfosToFile(fileList, fileListFile);
+        }
+        else if (loadFileList) {
+            fileList = Preprocess.readFileInfosFromFile(Paths.get("results/file_infos.txt"));
+        }
+        else if (customFileList) {
+            //fileList.add(new FileInfos(Paths.get("collections/boredapeyachtclub.json"), 0));
+            fileList.add(new FileInfos(Paths.get("collections/pfp/proof-moonbirds.json"), 0));
+            //fileList.add(new FileInfos(Paths.get("collections/pfp/cyberkongz.json"), 0));
+            //fileList.add(new FileInfos(Paths.get("collections/gaming/cryptokitties.json"), 0));
+            //fileList.add(new FileInfos(Paths.get("collections/gaming/neo-tokyo-part-4-land-deeds-legacy.json"), 0));
+            //fileList.add(new FileInfos(Paths.get("collections/gaming/nftrees.json"), 0));
+            //fileList.add(new FileInfos(Paths.get("collections/TestcaseSameNFTCycle.json"), 0));
+            //fileList.add(new FileInfos(Paths.get("collections/gaming/bccg.json"), 0));
+        }
+
+        System.out.println("== File list of " + fileList.size() + " collections ===");
+        if( fileList.isEmpty()) return;
+
+        if ( !continueDeltaAfterFileListBuilt ) {return;}
+        //===== PROCESS FILE LIST =====
+
+        for (FileInfos fi : fileList) {  //Path collectionPath : collectionFiles
+
+            // processiamo solo file validi e non ancora processati
+            //if (!fi.isValid() || fi.isProcessed()) { continue;}
+
+            Path collectionPath = fi.getPath();
+            Path resultPath = Preprocess.createResultDirectory(collectionPath);
+
+            String collectionName = collectionPath.getFileName().toString().replaceFirst("\\.json$", "");
             System.out.println("\n=== Processing collection: " + collectionName + " ===");
 
             try {
                 // ===== LOAD GRAPH =====
-                Graph g = GraphLoader.loadFromJsonNFT(collectionPath);
-                DeltaEstimator deltaEstimator = new DeltaEstimator(g);
-                //delta = deltaEstimator.getPercentile(percentage); // 90th percentile
-                //System.out.println("⏱️ Estimated delta " + percentage + "th percentile): " + delta + " sec = " + TimeFormatter.secondsToSimpleString(delta));
-                if(delta<=0) {
-                    System.out.println("⚠️ Estimated delta is not valid, skipping collection " + collectionName);
-                    continue;
+                Graph g = Loader.loadGraphFromJsonNFT(collectionPath);
+                DatasetNFT dsNFT = Loader.LoadDatasetNFTFromJson(collectionPath);
+
+                // CONTINUOUS TRANSACTIONS FILES
+                Path resultContiguousFile = resultPath.resolve("zContinuousTransactions.txt");
+                Path resultNonContiguousFile = resultPath.resolve("zNonContiguousTransactions.txt");
+                ResultWriter.createNewFile(resultContiguousFile);
+                ResultWriter.createNewFile(resultNonContiguousFile);
+                dsNFT.printNftContiguousTransactionSizes(resultContiguousFile);
+                dsNFT.printOnlyNonContiguousTransactions(resultNonContiguousFile);
+                
+                // ===== SET DELTAS =====
+                Map<String, Long> deltas = Preprocess.computeDeltaMap(g);
+
+                for (Map.Entry<String, Long> entry : deltas.entrySet()) {
+
+                    String label = entry.getKey();
+                    long delta = entry.getValue();
+
+                    if ( !continueMiningAfterDeltaComputed ) {continue;}
+
+                    // ===== OUTPUT PATH =====
+                    Path resultResFile = resultPath.resolve("res_" + label + "_" + TimeFormatter.secondsToSimpleString(delta) + ".txt");
+                    ResultWriter.createNewFile(resultResFile);
+                    
+
+
+                    // ===== MINING =====
+                    GraphTemporalMotifMiner graphMiner = new GraphTemporalMotifMiner(g, delta);
+
+                    List<InStar> mergedInStar = graphMiner.findMergedInStars(minMergedInStar);
+                    List<GiveAndTake> mergedGiveAndTake = graphMiner.findMergedGiveAndTakes(minMergedGiveAndTake);
+                    List<ReceiveAndForward> mergedReceiveAndForward = graphMiner.findMergedReceiveAndForward(minMergedReceiveAndForward);
+                    List<ReceiveAndForwardNFT> mergedReceiveAndForwardNFT = graphMiner.findMergedReceiveAndForwardNFT(minMergedReceiveAndForward, mergedReceiveAndForward);
+
+                    NFTsTemporalMotifMiner nftMiner = new NFTsTemporalMotifMiner(dsNFT, delta);
+
+                    List<SameNFTChain> sameNFTChain = nftMiner.findSameNFTChains(minSameNFTChain);
+                    List<SameNFTChain> contiguousSameNFTChain = nftMiner.findContiguousSameNFTChains(minSameNFTChain);
+                    List<SameNFTCycle> sameNFTCycle = nftMiner.findSameNFTCycle(minSameNFTCycle);
+                    List<SameNFTCycle> contiguousSameNFTCycle = nftMiner.findContiguousSameNFTCycle(minSameNFTCycle);
+                    //List<SameNFTCycle> sameNFTCycleFromChains = nftMiner.findSameNFTCycleFromChains(sameNFTChain, minSameNFTCycle);
+
+
+                    // ===== SCRITTURA RISULTATI =====
+                    ResultWriter.writeGraphInfoToFile(g, delta, resultResFile);
+                    ResultWriter.appendPatternCountsBySizeToFile(mergedInStar, resultResFile);
+                    ResultWriter.appendPatternCountsBySizeToFile(mergedGiveAndTake, resultResFile);
+                    ResultWriter.appendPatternCountsBySizeToFile(mergedReceiveAndForward, resultResFile);
+                    ResultWriter.appendPatternCountsBySizeToFile(mergedReceiveAndForwardNFT, resultResFile);
+
+                    ResultWriter.writeDatasetNFTInfoToFile(dsNFT, delta, resultResFile);
+                    ResultWriter.appendPatternCountsBySizeToFile(sameNFTChain, resultResFile);
+                    ResultWriter.appendLinesToFile(new ArrayList<String>(){{add("Contiguous");}}, resultResFile);
+                    ResultWriter.appendPatternCountsBySizeToFile(contiguousSameNFTChain, resultResFile);
+                    ResultWriter.appendPatternCountsBySizeToFile(sameNFTCycle, resultResFile);
+                    ResultWriter.appendLinesToFile(new ArrayList<String>(){{add("Contiguous");}}, resultResFile);
+                    ResultWriter.appendPatternCountsBySizeToFile(contiguousSameNFTCycle, resultResFile);
+                    //ResultWriter.appendPatternCountsBySizeToFile(sameNFTCycleFromChains, resultResFile);
+
+                    //ResultWriter.appendPatternsToFile(sameNFTCycle, resultResFile);
+                    //ResultWriter.appendPatternsToFile(mergedInStar, resultResFile);
+                    //ResultWriter.appendPatternsToFile(mergedGiveAndTake, resultResFile);
+                    //ResultWriter.appendPatternsToFile(mergedReceiveAndForward, resultResFile);
+                    //ResultWriter.appendPatternsToFile(mergedReceiveAndForwardNFT, resultResFile);
+
+                    
+
+                    System.out.println("✅ Risultati scritti in " + resultResFile);
                 }
 
-                // ===== OUTPUT PATH =====
-                Path resultDir = Paths.get("results", collectionName);
-                Files.createDirectories(resultDir);
-                Path outputFile = resultDir.resolve("res_" + TimeFormatter.secondsToSimpleString(delta) + ".txt");
-
-                // ===== MINING =====
-                TemporalMotifMiner miner = new TemporalMotifMiner(g, delta);
-
-                List<InStar> mergedInStar = miner.findMergedInStars(minMergedInStar);
-                List<GiveAndTake> mergedGiveAndTake = miner.findMergedGiveAndTakes(minMergedGiveAndTake);
-                List<ReceiveAndForward> mergedReceiveAndForward = miner.findMergedReceiveAndForward(minMergedReceiveAndForward);
-                List<ReceiveAndForwardNFT> mergedReceiveAndForwardNFT = miner.findMergedReceiveAndForwardNFT(minMergedReceiveAndForward, mergedReceiveAndForward);
-
-                // ===== SCRITTURA RISULTATI =====
-                ResultWriter.writeGraphInfoToFile(g, delta, outputFile);
-                ResultWriter.appendPatternCountsBySizeToFile("MergedInStar", mergedInStar, outputFile);
-                ResultWriter.appendPatternCountsBySizeToFile("MergedGiveAndTake", mergedGiveAndTake, outputFile);
-                ResultWriter.appendPatternCountsBySizeToFile("MergedReceiveAndForward", mergedReceiveAndForward, outputFile);
-                ResultWriter.appendPatternCountsBySizeToFile("MergedReceiveAndForwardNFT", mergedReceiveAndForwardNFT, outputFile);
                 
-                //ResultWriter.appendPatternsToFile("MergedInStar", mergedInStar, outputFile);
-                //ResultWriter.appendPatternsToFile("MergedGiveAndTake", mergedGiveAndTake, outputFile);
-                //ResultWriter.appendPatternsToFile("MergedReceiveAndForward", mergedReceiveAndForward, outputFile);
-                //ResultWriter.appendPatternsToFile("MergedReceiveAndForwardNFT", mergedReceiveAndForwardNFT, outputFile);
-
-
-                System.out.println("✅ Risultati scritti in " + outputFile);
+                
 
             } catch (OutOfMemoryError e) {
                 System.err.println("⚠️ OutOfMemoryError durante l'analisi di "
                         + collectionName + " — risultati parziali possibili");
+                e.printStackTrace();
             } catch (Exception e) {
                 System.err.println("❌ Errore durante l'analisi di "
                         + collectionName);
@@ -91,6 +169,6 @@ public class Main {
             }
         }
 
-        System.out.println("\n=== Analisi completata ===");
+        System.out.println("=== Analisi completata ===");
     }
 }

@@ -3,58 +3,44 @@ package src.motifMiner.patterns;
 import java.util.List;
 
 import src.graph.Edge;
-import src.graph.UserNode;
+import src.graph.EdgeNFT;
 
 public class ReceiveAndForwardNFT extends ReceiveAndForward {
+
+    @Override
+    public String getName() { return "ReceiveAndForwardNFT";}
 
     public ReceiveAndForwardNFT(List<Edge> edges) {
         super(edges);
     }
 
+    public String getNft() {
+        if (edges.isEmpty()) {
+            return null;
+        }
+        Edge firstEdge = edges.get(0);
+        if (firstEdge instanceof EdgeNFT) {
+            return ((EdgeNFT) firstEdge).getNftId();
+        }
+        return null;
+    }
+
     @Override
     public void validate() throws PatternValidationException {
-        System.err.println("incoming ...");
-        if (edges.size() < 2) {
-            throw new PatternValidationException(
-                "ReceiveAndForwardNFT must contain at least 2 edges"
-            );
-        }
-        if (edges.size() % 2 != 0) {
-            throw new PatternValidationException(
-                "ReceiveAndForwardNFT must contain an even number of edges"
-            );
-        }
+        System.err.println("incoming ... da controllare che tutti gli edge siano EdgeNFT e che abbiano lo stesso NFT ID");
+        super.validate();
 
-        UserNode center = getCenterNode();
-
-        for (int i = 0; i < edges.size(); i++) {
-            Edge e = edges.get(i);
-
-            if (i % 2 == 0) {
-                // acquisto: Y → center
-                if (!e.getTo().equals(center)) {
-                    throw new PatternValidationException(
-                        "Expected buying edge at position " + i
-                    );
-                }
-            } else {
-                // vendita: center → X
-                if (!e.getFrom().equals(center)) {
-                    throw new PatternValidationException(
-                        "Expected selling edge at position " + i
-                    );
-                }
-            }
-        }
     }
 
     @Override
     public String toString() {
         return String.format(
-            "ReceiveAndForwardNFT: %s → [%s] → %s (k=%d , Δt=%d sec)",
+            "%s: %s → [%s] → %s nft:%s (k=%d , Δt=%d sec)",
+            getName(),
             getReceiveFromNode().getSimpleAddress(),
             getCenterNode().getSimpleAddress(),
             getForwardToNode().getSimpleAddress(),
+            getNft(),
             getSize(),
             getDuration()
         );

@@ -1,0 +1,102 @@
+
+=== GRAPH INFO ===
+Nodi: 17976
+Archi: 55234
+Duration (sec): 86113905 = 2y in interval [1620060350, 1706174255]
+Delta (sec): 293 = 4min53s
+
+
+=== InStar Counts by Size (grouped by size) ===
+Totale pattern: 4233
+
+size 2 → 2738 pattern
+size 3 → 686 pattern
+size 4 → 262 pattern
+size 5 → 178 pattern
+size 6 → 88 pattern
+size 7 → 54 pattern
+size 8 → 47 pattern
+size 9 → 29 pattern
+size 10 → 46 pattern
+size 11 → 17 pattern
+size 12 → 17 pattern
+size 13 → 9 pattern
+size 14 → 7 pattern
+size 15 → 10 pattern
+size 16 → 8 pattern
+size 17 → 7 pattern
+size 18 → 1 pattern
+size 19 → 4 pattern
+size 20 → 7 pattern
+size 21 → 3 pattern
+size 22 → 1 pattern
+size 23 → 1 pattern
+size 24 → 1 pattern
+size 25 → 1 pattern
+size 26 → 1 pattern
+size 27 → 1 pattern
+size 28 → 2 pattern
+size 30 → 1 pattern
+size 36 → 1 pattern
+size 38 → 2 pattern
+size 39 → 1 pattern
+size 41 → 1 pattern
+size 42 → 1 pattern
+
+=== GiveAndTake Counts by Size (grouped by size) ===
+Totale pattern: 5483
+
+size 2 → 4444 pattern
+size 4 → 807 pattern
+size 6 → 209 pattern
+size 8 → 22 pattern
+size 10 → 1 pattern
+
+=== ReceiveAndForward Counts by Size (grouped by size) ===
+Totale pattern: 5148
+
+size 2 → 4259 pattern
+size 4 → 656 pattern
+size 6 → 211 pattern
+size 8 → 21 pattern
+size 12 → 1 pattern
+
+=== ReceiveAndForwardNFT Counts by Size (grouped by size) ===
+Totale pattern: 2785
+
+size 2 → 2766 pattern
+size 4 → 19 pattern
+
+=== DATASETNFT INFO ===
+NFTs: 10563
+Archi: 55234
+Delta (sec): 293
+
+
+=== SameNFTChain Counts by Size (grouped by size) ===
+Totale pattern: 3581
+
+size 2 → 3356 pattern
+size 3 → 221 pattern
+size 4 → 4 pattern
+Contiguous
+
+=== SameNFTChain Counts by Size (grouped by size) ===
+Totale pattern: 2930
+
+size 2 → 2737 pattern
+size 3 → 191 pattern
+size 4 → 2 pattern
+
+=== SameNFTCycle Counts by Size (grouped by size) ===
+Totale pattern: 4226
+
+size 2 → 4225 pattern
+size 3 → 1 pattern
+Contiguous
+
+=== SameNFTCycle Counts by Size (grouped by size) ===
+Totale pattern: 4166
+
+size 2 → 4165 pattern
+size 3 → 1 pattern

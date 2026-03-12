@@ -25,6 +25,14 @@ public class Edge {
     public UserNode getTo() { return to; }
     public long getTimestamp() { return timestamp; }
 
+    public boolean isIncomingTo(UserNode user){
+        return this.getTo().equals(user);
+    }
+
+    public boolean isOutgoingFrom(UserNode user){
+        return this.getFrom().equals(user);
+    }
+
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;

@@ -7,6 +7,9 @@ import src.graph.UserNode;
 
 public class OneWayCouple extends Pattern {
 
+    @Override
+    public String getName() { return "OneWayCouple";}
+
     public OneWayCouple(List<Edge> edges) {
         super(edges);
     }
@@ -23,7 +26,7 @@ public class OneWayCouple extends Pattern {
     public void validate() throws PatternValidationException {
         if (edges.size() < 2) {
             throw new PatternValidationException(
-                "OneWayCouple must contain at least 2 edges"
+                getName() + " must contain at least 2 edges"
             );
         }
 
@@ -33,7 +36,7 @@ public class OneWayCouple extends Pattern {
         for (Edge e : edges) {
             if (!e.getFrom().equals(from) || !e.getTo().equals(to)) {
                 throw new PatternValidationException(
-                    "All edges must have the same source and destination"
+                    getName() + ": All edges must have the same source and destination"
                 );
             }
         }
@@ -42,7 +45,8 @@ public class OneWayCouple extends Pattern {
     @Override
     public String toString() {
         return String.format(
-            "OneWayCouple: %s → %s (k=%d , Δt=%d sec)",
+            "%s: %s → %s (k=%d , Δt=%d sec)",
+            getName(),
             getBuyer().getSimpleAddress(),
             getSeller().getSimpleAddress(),
             getSize(),

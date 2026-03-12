@@ -10,10 +10,21 @@ import java.util.List;
 import java.util.Map;
 import java.util.TreeMap;
 
+import src.graph.DatasetNFT;
 import src.graph.Graph;
 import src.motifMiner.patterns.Pattern;
 
 public class ResultWriter {
+
+    // Crea e sovrascrive nuovo file
+    public static void createNewFile(Path output){
+        try (BufferedWriter writer = Files.newBufferedWriter(output)) {} 
+        catch (IOException e) {
+            System.err.println("Errore creazione file: "
+                    + output);
+            e.printStackTrace();
+        }
+    }
 
     // Scrive le informazioni base del grafo su file di testo
     public static void writeGraphInfoToFile(
@@ -21,11 +32,38 @@ public class ResultWriter {
             long delta,
             Path output) {
 
-        try (BufferedWriter writer = Files.newBufferedWriter(output)) {
+        try (BufferedWriter writer = Files.newBufferedWriter(
+                output,
+                StandardOpenOption.CREATE,
+                StandardOpenOption.APPEND)) {
 
-            writer.write("=== GRAPH INFO ===\n");
+            writer.write("\n=== GRAPH INFO ===\n");
             writer.write("Nodi: " + graph.getNodes().size() + "\n");
             writer.write("Archi: " + graph.getTotalEdges() + "\n");
+            writer.write("Duration (sec): " + graph.getDuration() + " = " + TimeFormatter.secondsToSimpleString(graph.getDuration()) + " in interval [" + graph.getMinDate() + ", " + graph.getMaxDate() + "]\n");
+            writer.write("Delta (sec): " + delta + " = " + TimeFormatter.secondsToTruncatedString(delta) + "\n\n");
+
+        } catch (IOException e) {
+            System.err.println("Errore durante la scrittura delle informazioni del grafo su file: "
+                    + output);
+            e.printStackTrace();
+        }
+    }
+
+    // Scrive le informazioni base del DatasetNFT su file di testo
+    public static void writeDatasetNFTInfoToFile(
+            DatasetNFT datasetNFT,
+            long delta,
+            Path output) {
+
+        try (BufferedWriter writer = Files.newBufferedWriter(
+                output,
+                StandardOpenOption.CREATE,
+                StandardOpenOption.APPEND)) {
+
+            writer.write("\n=== DATASETNFT INFO ===\n");
+            writer.write("NFTs: " + datasetNFT.getTotalNFTs() + "\n");
+            writer.write("Archi: " + datasetNFT.getTotalTransactions() + "\n");
             writer.write("Delta (sec): " + delta + "\n\n");
 
         } catch (IOException e) {
@@ -35,11 +73,34 @@ public class ResultWriter {
         }
     }
 
+    // Appende una lista di string lines a un file già esistente
+    public static void appendLinesToFile(
+            List<String> lines,
+            Path output) {
+
+        String title = lines.isEmpty() ? "no lines appended to file" : "===" + lines.get(0) + "===";
+
+        try (BufferedWriter writer = Files.newBufferedWriter(
+                output,
+                StandardOpenOption.CREATE,
+                StandardOpenOption.APPEND)){
+
+            for (String line : lines) {
+                writer.write(line + "\n");
+            }
+
+        } catch (IOException e) {
+            System.err.println("Errore durante l'append delle linee su file: " + output + " (section: " + title + ")");
+            e.printStackTrace();
+        }
+    }
+
     // Appende una lista di pattern a un file già esistente
     public static void appendPatternsToFile(
-            String title,
             List<? extends Pattern> patterns,
             Path output) {
+
+        String title = patterns.isEmpty() ? "Pattern Counts by Size" : patterns.get(0).getName() + " Counts by Size";
 
         try (BufferedWriter writer = Files.newBufferedWriter(
                 output,
@@ -65,11 +126,12 @@ public class ResultWriter {
 
     // Raggruppa i pattern per dimensione in una mappa ordinata
     public static void appendPatternCountsBySizeToFile(
-            String title,
             List<? extends Pattern> patterns,
             Path output) {
 
         Map<Integer, List<Pattern>> groupedBySize = groupPatternsBySize(patterns);
+
+        String title = patterns.isEmpty() ? "Pattern Counts by Size" : patterns.get(0).getName() + " Counts by Size";
 
         try (BufferedWriter writer = Files.newBufferedWriter(
                 output,
@@ -99,6 +161,7 @@ public class ResultWriter {
     }
 
 
+    // Raggruppa i pattern per dimensione in una mappa ordinata
     private static Map<Integer, List<Pattern>> groupPatternsBySize(List<? extends Pattern> patterns) {
 
         Map<Integer, List<Pattern>> grouped = new TreeMap<>();

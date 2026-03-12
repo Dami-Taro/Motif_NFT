@@ -1,0 +1,44 @@
+
+=== GRAPH INFO ===
+Nodi: 2
+Archi: 2
+Delta (sec): 100
+
+
+=== Pattern Counts by Size (grouped by size) ===
+Totale pattern: 0
+
+
+=== GiveAndTake Counts by Size (grouped by size) ===
+Totale pattern: 1
+
+size 2 → 1 pattern
+
+=== ReceiveAndForward Counts by Size (grouped by size) ===
+Totale pattern: 1
+
+size 2 → 1 pattern
+
+=== ReceiveAndForwardNFT Counts by Size (grouped by size) ===
+Totale pattern: 1
+
+size 2 → 1 pattern
+
+=== DATASETNFT INFO ===
+NFTs: 1
+Archi: 2
+Delta (sec): 100
+
+
+=== Pattern Counts by Size (grouped by size) ===
+Totale pattern: 0
+
+
+=== SameNFTCycle Counts by Size (grouped by size) ===
+Totale pattern: 1
+
+size 2 → 1 pattern
+
+=== Pattern Counts by Size (grouped by size) ===
+Totale pattern: 0
+

@@ -1,0 +1,74 @@
+=== non-contiguous nft : chains ===
+Found 74 chain interruption in 70 different nfts
+nft:	 node1 -> node2 ... 	|	 nextChain ...
+
+1016:	a22ae0af -> b3033792	|	89e8f9bd -> e41f82b9	|	
+1018:	d41a706b -> 78513cd6 -> d29a6bff	|	c1365cd8 -> c85707e0	|	
+1038:	474df52d -> 6eed0a71	|	a088f00c -> 81d73218 -> a982d276	|	
+105:	ed8b3e86 -> 0a41915b	|	8abc8e7c -> 10df534f	|	
+1157:	fa0aaf1a -> 8dffde5c	|	fed75678 -> d41a706b -> 91f8d270 -> a8214e01	|	
+1161:	d04edded -> 7a80fabe	|	42e60604 -> ec63666d -> fdbfa065	|	
+1180:	52a04edf -> dd0ba149	|	5d36ac73 -> bd2ef2e4	|	
+1183:	5317aabe -> d5c6c450	|	da48ef96 -> 808729d2 -> c7eb24bd	|	
+1302:	5be804fb -> 68657741	|	d6298e63 -> 8646766c	|	
+1317:	4f89bdef -> 8e184491 -> ba768b40	|	47824a06 -> cb9b7908	|	
+1327:	1d61047a -> dc72048f	|	3853ffc0 -> 4ed46569	|	
+1345:	656a34ca -> ab7d7cb7	|	16bf4ab7 -> 269ffe69	|	
+1413:	b9ed3a12 -> 3c3f5eb3	|	77eb9061 -> c8d681b1	|	
+1455:	86c3c94c -> 356ee46a	|	a1c9b151 -> b9ed3a12	|	
+153:	a32b233a -> ae2daec4	|	d224bc40 -> fc65d993	|	
+154:	5fff9efb -> 5011c904 -> 7cb0a588	|	ecb4f8c6 -> b6ef9bd1	|	
+1579:	25b005f1 -> 4bfb00e8	|	9342e0c0 -> 20c6610c	|	
+1587:	a6f8d9cf -> 5755e377	|	af43ac80 -> 7a54b862	|	
+1624:	659be6d1 -> 305b29f8 -> 76570e5a	|	0150b006 -> 2f80a383	|	
+1649:	953a2062 -> dd26aa44	|	68657741 -> eb6a78db -> be4b9c00 -> 165d3853	|	
+1683:	9aede2de -> ab3bf38b -> 51868e52	|	d6caf110 -> d6298e63	|	
+1698:	77d59ef0 -> f168d4e5 -> 0b47b287 -> daf4b580	|	0b47b287 -> daf4b580	|	
+1708:	e8c98c72 -> 25ab8ccb	|	3e2fe860 -> 6b5ae439	|	
+1759:	d0948c42 -> c92f0cac -> 870f3d31	|	8ff9436b -> 5c7edb5f	|	
+1895:	a3d19ba3 -> 877f9c95 -> f86a31cf	|	8dffde5c -> 4d1d71e5	|	
+1937:	7365a692 -> 680bf9bf	|	00a362a9 -> a1449510	|	
+1956:	1392d4ba -> 432bbd9e	|	54741557 -> bf5d6ceb	|	
+1986:	128dd6c4 -> dd0ba149	|	5d36ac73 -> 87b99ac6	|	
+1996:	304624bf -> 2151c03b	|	66dfe261 -> acd6e4f0 -> 97aeb932	|	acd6e4f0 -> 97aeb932	|	
+2083:	99be9788 -> 1f4ad054	|	df6dbc76 -> 9e4674e4	|	
+214:	fe3989c5 -> fbf1ae66	|	fddb64f9 -> c0e438de	|	
+228:	827d9d52 -> 8dffde5c	|	03b60a22 -> 1687fe27	|	
+24:	e0c13203 -> c92f0cac -> 30ca9a70	|	e41f82b9 -> df386bf5	|	
+248:	462ab815 -> dd0ba149	|	5d36ac73 -> 8d940c7b	|	
+289:	353217fc -> 049d8848	|	71a9b71b -> 46c92b37	|	
+336:	3b4b4d8c -> 4608d166	|	619bf3f9 -> 10bac7dd	|	
+388:	3dad3cc4 -> 25865835	|	45c49f4c -> 6c7bc173	|	
+404:	53f2e4c5 -> 7af03f80	|	b6ef9bd1 -> 0fe7fc47	|	
+409:	a22ed823 -> 4278aff3	|	df6dbc76 -> 09ecdbd8	|	c27833a3 -> 8fb1647e	|	c27833a3 -> 8fb1647e	|	
+434:	8d579ee6 -> ebfe20b4	|	98b916d0 -> 0d52f0dc	|	
+456:	f762113d -> 2f82e7c2	|	8e5cf0f9 -> bd3b3bea	|	
+47:	01a97a08 -> 59b28ff4	|	df67c68b -> 19cc2ce7 -> 4e48e5b8	|	
+514:	fbae8f2f -> 58f969b0	|	b4d69e7b -> c0e4a004 -> 4b6d4673	|	
+550:	2eb36694 -> 52c24fb1	|	44ca4313 -> b7a28c01 -> 8d940c7b	|	
+571:	70d0a573 -> 9983fb37	|	47f9d950 -> 51dd910b	|	
+599:	72950ffd -> f53c3796	|	d155241c -> 09dc7b1b	|	
+603:	a4bcb348 -> 98005a19	|	ed4855ae -> 08cf74f2	|	
+61:	f42362dd -> dd26aa44	|	43cc480f -> 79917c2b	|	
+618:	ae43efd2 -> fe00a2db	|	2292edac -> 64b28613	|	
+647:	fa7a8eaf -> 54745682	|	a5fb98eb -> 86b93fbc	|	
+654:	207d8bc9 -> ff4625fe	|	e430984e -> d57d2762	|	
+665:	8baf0dd0 -> ed8b1cc8	|	791f7225 -> 48e6b291	|	
+699:	32e7217c -> 547e74d0	|	1174a2d2 -> b68f5173	|	
+754:	9afe89b9 -> fb01b2a1 -> ca278192	|	b563a988 -> 9436f868	|	
+759:	1dbdea9c -> 674a8e09 -> 4ca11543 -> da6c0848	|	9e3ab0c2 -> 1550ed2f	|	b816ed55 -> b9ed3a12	|	
+78:	bf2ea04f -> 92fcc834	|	a9093604 -> ff7124b1	|	
+788:	84826a9a -> 60ad6a7c	|	566b9876 -> 532b45ea -> 1f4ad054 -> 196c4ebe -> 508e16f4	|	
+796:	2a981ce0 -> ab543fed -> 5e1b3fbf	|	ccf241eb -> bb749ca8	|	
+800:	1c9d40e1 -> 246d9638	|	7f908fe6 -> 2fe0dfc0 -> 7500d70b	|	
+803:	72950ffd -> d506fd8e -> a5fb98eb	|	50e353b5 -> 35c79a16	|	
+807:	017afcfd -> 5b9e5419	|	a2ba4b9b -> 91db146d -> 00952132	|	
+835:	2cf9ae52 -> 6b1b6eb4	|	6c145ced -> 77dab136	|	
+851:	82dd57dd -> 1dbb22cc -> 4ffbc78f -> 9701f908	|	91bb81a3 -> 9701f908	|	
+874:	77924e7e -> c30b419d -> 7a062475	|	0c10af3e -> 47f9d950	|	
+889:	2a600fa1 -> bf1b5be7	|	30357698 -> 07a8a904	|	
+909:	41803e86 -> ecb8ea6e	|	f328024c -> e309821b	|	
+927:	a314158d -> 03ad2536	|	b8a60d00 -> 3ff2fb6e	|	
+942:	f2a3135f -> 4b8609c5	|	cd5b90ca -> b7a28c01	|	
+960:	7fbc68ff -> d1d79d80	|	71d4a461 -> 45c49f4c	|	
+971:	7979dee4 -> 88baf037	|	0d46079e -> d418c3bf	|	

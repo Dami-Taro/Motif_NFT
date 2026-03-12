@@ -1,0 +1,103 @@
+
+=== GRAPH INFO ===
+Nodi: 6165
+Archi: 17466
+Duration (sec): 78514866 = 2y in interval [1628230241, 1706745107]
+Delta (sec): 7788 = 2h9min48s
+
+
+=== InStar Counts by Size (grouped by size) ===
+Totale pattern: 3137
+
+size 2 → 2292 pattern
+size 3 → 453 pattern
+size 4 → 202 pattern
+size 5 → 78 pattern
+size 6 → 33 pattern
+size 7 → 25 pattern
+size 8 → 12 pattern
+size 9 → 1 pattern
+size 10 → 11 pattern
+size 11 → 4 pattern
+size 12 → 5 pattern
+size 13 → 3 pattern
+size 14 → 4 pattern
+size 15 → 1 pattern
+size 16 → 1 pattern
+size 17 → 1 pattern
+size 18 → 1 pattern
+size 19 → 3 pattern
+size 21 → 1 pattern
+size 23 → 1 pattern
+size 28 → 2 pattern
+size 58 → 1 pattern
+size 67 → 1 pattern
+size 186 → 1 pattern
+
+=== GiveAndTake Counts by Size (grouped by size) ===
+Totale pattern: 202
+
+size 2 → 200 pattern
+size 4 → 1 pattern
+size 6 → 1 pattern
+
+=== ReceiveAndForward Counts by Size (grouped by size) ===
+Totale pattern: 131
+
+size 2 → 129 pattern
+size 4 → 1 pattern
+size 6 → 1 pattern
+
+=== ReceiveAndForwardNFT Counts by Size (grouped by size) ===
+Totale pattern: 36
+
+size 2 → 35 pattern
+size 4 → 1 pattern
+
+=== DATASETNFT INFO ===
+NFTs: 1624
+Archi: 17466
+Delta (sec): 7788
+
+
+=== SameNFTChain Counts by Size (grouped by size) ===
+Totale pattern: 2307
+
+size 2 → 1754 pattern
+size 3 → 278 pattern
+size 4 → 121 pattern
+size 5 → 52 pattern
+size 6 → 33 pattern
+size 7 → 24 pattern
+size 8 → 15 pattern
+size 9 → 6 pattern
+size 10 → 7 pattern
+size 11 → 6 pattern
+size 12 → 1 pattern
+size 13 → 1 pattern
+size 14 → 2 pattern
+size 15 → 1 pattern
+size 16 → 2 pattern
+size 17 → 1 pattern
+size 19 → 1 pattern
+size 21 → 1 pattern
+size 27 → 1 pattern
+Contiguous
+
+=== SameNFTChain Counts by Size (grouped by size) ===
+Totale pattern: 47
+
+size 2 → 47 pattern
+
+=== SameNFTCycle Counts by Size (grouped by size) ===
+Totale pattern: 33
+
+size 2 → 31 pattern
+size 4 → 1 pattern
+size 5 → 1 pattern
+Contiguous
+
+=== SameNFTCycle Counts by Size (grouped by size) ===
+Totale pattern: 2
+
+size 2 → 2 pattern

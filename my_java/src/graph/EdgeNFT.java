@@ -6,9 +6,7 @@ public class EdgeNFT extends Edge {
 
     private final String nftId;
 
-    public EdgeNFT(UserNode from,
-                   UserNode to,
-                   long timestamp,
+    public EdgeNFT(UserNode from, UserNode to, long timestamp, 
                    String nftId) {
         super(from, to, timestamp);
         this.nftId = nftId;

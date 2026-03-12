@@ -1,0 +1,103 @@
+
+=== GRAPH INFO ===
+Nodi: 5979
+Archi: 13963
+Duration (sec): 77618978 = 2y in interval [1629090009, 1706708987]
+Delta (sec): 58231 = 16h10min31s
+
+
+=== InStar Counts by Size (grouped by size) ===
+Totale pattern: 2204
+
+size 2 → 1264 pattern
+size 3 → 391 pattern
+size 4 → 199 pattern
+size 5 → 106 pattern
+size 6 → 56 pattern
+size 7 → 40 pattern
+size 8 → 22 pattern
+size 9 → 23 pattern
+size 10 → 18 pattern
+size 11 → 11 pattern
+size 12 → 13 pattern
+size 13 → 12 pattern
+size 14 → 8 pattern
+size 15 → 5 pattern
+size 16 → 3 pattern
+size 17 → 5 pattern
+size 18 → 4 pattern
+size 19 → 7 pattern
+size 20 → 1 pattern
+size 23 → 1 pattern
+size 24 → 4 pattern
+size 25 → 1 pattern
+size 30 → 2 pattern
+size 31 → 1 pattern
+size 33 → 1 pattern
+size 41 → 1 pattern
+size 42 → 1 pattern
+size 44 → 1 pattern
+size 46 → 1 pattern
+size 50 → 1 pattern
+size 70 → 1 pattern
+
+=== GiveAndTake Counts by Size (grouped by size) ===
+Totale pattern: 400
+
+size 2 → 376 pattern
+size 4 → 18 pattern
+size 6 → 3 pattern
+size 8 → 1 pattern
+size 10 → 1 pattern
+size 12 → 1 pattern
+
+=== ReceiveAndForward Counts by Size (grouped by size) ===
+Totale pattern: 499
+
+size 2 → 474 pattern
+size 4 → 20 pattern
+size 6 → 2 pattern
+size 8 → 1 pattern
+size 10 → 1 pattern
+size 12 → 1 pattern
+
+=== ReceiveAndForwardNFT Counts by Size (grouped by size) ===
+Totale pattern: 283
+
+size 2 → 267 pattern
+size 4 → 12 pattern
+size 6 → 1 pattern
+size 8 → 1 pattern
+size 10 → 1 pattern
+size 12 → 1 pattern
+
+=== DATASETNFT INFO ===
+NFTs: 6736
+Archi: 13963
+Delta (sec): 58231
+
+
+=== SameNFTChain Counts by Size (grouped by size) ===
+Totale pattern: 732
+
+size 2 → 695 pattern
+size 3 → 30 pattern
+size 4 → 7 pattern
+Contiguous
+
+=== SameNFTChain Counts by Size (grouped by size) ===
+Totale pattern: 524
+
+size 2 → 511 pattern
+size 3 → 12 pattern
+size 4 → 1 pattern
+
+=== SameNFTCycle Counts by Size (grouped by size) ===
+Totale pattern: 6
+
+size 2 → 6 pattern
+Contiguous
+
+=== Pattern Counts by Size (grouped by size) ===
+Totale pattern: 0
+

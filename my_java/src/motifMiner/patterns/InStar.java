@@ -9,6 +9,9 @@ import src.graph.UserNode;
 
 public class InStar extends Pattern {
 
+    @Override
+    public String getName() { return "InStar";}
+
     public InStar(List<Edge> edges) {
         super(edges);
     }
@@ -28,18 +31,14 @@ public class InStar extends Pattern {
     @Override
     public void validate() throws PatternValidationException {
         if (edges.size() < 2) {
-            throw new PatternValidationException(
-                "InStar must contain at least 2 edges"
-            );
+            throw new PatternValidationException( getName() + " must contain at least 2 edges");
         }
 
         UserNode center = edges.get(0).getTo();
 
         for (Edge e : edges) {
             if (!e.getTo().equals(center)) {
-                throw new PatternValidationException(
-                    "All edges must point to the same center node"
-                );
+                throw new PatternValidationException( getName() + ": All edges must point to the same center node");
             }
         }
     }
@@ -47,7 +46,8 @@ public class InStar extends Pattern {
     @Override
     public String toString() {
         return String.format(
-            "InStar: center %s (k=%d , Δt=%d sec)",
+            "%s: center %s (k=%d , Δt=%d sec)",
+            getName(),
             getCenter().getAddress(),
             getSize(),
             getDuration()

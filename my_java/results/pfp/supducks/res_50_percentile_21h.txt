@@ -1,0 +1,102 @@
+
+=== GRAPH INFO ===
+Nodi: 11092
+Archi: 25396
+Duration (sec): 79753981 = 2y in interval [1626495430, 1706249411]
+Delta (sec): 79036 = 21h57min16s
+
+
+=== InStar Counts by Size (grouped by size) ===
+Totale pattern: 3822
+
+size 2 → 2305 pattern
+size 3 → 733 pattern
+size 4 → 278 pattern
+size 5 → 179 pattern
+size 6 → 99 pattern
+size 7 → 50 pattern
+size 8 → 40 pattern
+size 9 → 22 pattern
+size 10 → 32 pattern
+size 11 → 21 pattern
+size 12 → 13 pattern
+size 13 → 7 pattern
+size 14 → 7 pattern
+size 15 → 11 pattern
+size 16 → 3 pattern
+size 17 → 5 pattern
+size 18 → 3 pattern
+size 19 → 2 pattern
+size 20 → 2 pattern
+size 21 → 1 pattern
+size 22 → 1 pattern
+size 24 → 1 pattern
+size 26 → 2 pattern
+size 32 → 1 pattern
+size 37 → 1 pattern
+size 50 → 1 pattern
+size 51 → 1 pattern
+size 75 → 1 pattern
+
+=== GiveAndTake Counts by Size (grouped by size) ===
+Totale pattern: 1101
+
+size 2 → 1014 pattern
+size 4 → 69 pattern
+size 6 → 15 pattern
+size 8 → 2 pattern
+size 10 → 1 pattern
+
+=== ReceiveAndForward Counts by Size (grouped by size) ===
+Totale pattern: 1663
+
+size 2 → 1552 pattern
+size 4 → 98 pattern
+size 6 → 9 pattern
+size 8 → 4 pattern
+
+=== ReceiveAndForwardNFT Counts by Size (grouped by size) ===
+Totale pattern: 1178
+
+size 2 → 1109 pattern
+size 4 → 63 pattern
+size 6 → 2 pattern
+size 8 → 4 pattern
+
+=== DATASETNFT INFO ===
+NFTs: 7511
+Archi: 25396
+Delta (sec): 79036
+
+
+=== SameNFTChain Counts by Size (grouped by size) ===
+Totale pattern: 2462
+
+size 2 → 2191 pattern
+size 3 → 225 pattern
+size 4 → 39 pattern
+size 5 → 6 pattern
+size 6 → 1 pattern
+Contiguous
+
+=== SameNFTChain Counts by Size (grouped by size) ===
+Totale pattern: 2150
+
+size 2 → 1967 pattern
+size 3 → 166 pattern
+size 4 → 14 pattern
+size 5 → 2 pattern
+size 6 → 1 pattern
+
+=== SameNFTCycle Counts by Size (grouped by size) ===
+Totale pattern: 22
+
+size 2 → 21 pattern
+size 3 → 1 pattern
+Contiguous
+
+=== SameNFTCycle Counts by Size (grouped by size) ===
+Totale pattern: 10
+
+size 2 → 9 pattern
+size 3 → 1 pattern

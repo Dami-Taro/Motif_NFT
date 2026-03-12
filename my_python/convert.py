@@ -1,29 +1,56 @@
+import os
 import json
 import ast
 
-input_file = "boredapeyachtclub.txt"
-output_file = "output_file.json"
+INPUT_BASE = "dataset-nft-FULL"
+OUTPUT_BASE = "jsonCollections"
+SUBDIRS = ["pfp", "gaming"]
 
-with open(input_file, "r") as fin, open(output_file, "w") as fout:
-    for line_number, line in enumerate(fin, start=1):
-        line = line.strip()
+def convert_file(input_path, output_path):
+    with open(input_path, "r") as fin, open(output_path, "w") as fout:
+        for line_number, line in enumerate(fin, start=1):
+            line = line.strip()
 
-        # Salta righe vuote
-        if not line:
+            if not line:
+                continue
+
+            try:
+                python_obj = ast.literal_eval(line)
+
+                # opzionale: assicura che sia un dizionario
+                if not isinstance(python_obj, dict):
+                    continue
+
+                json_line = json.dumps(python_obj, separators=(',', ':'))
+                fout.write(json_line + "\n")
+
+            except (SyntaxError, ValueError):
+                print(f"⚠️  {input_path} | riga {line_number} ignorata")
+
+def main():
+    for subdir in SUBDIRS:
+        input_dir = os.path.join(INPUT_BASE, subdir)
+        output_dir = os.path.join(OUTPUT_BASE, subdir)
+
+        if not os.path.isdir(input_dir):
+            print(f"❌ Directory input non trovata: {input_dir}")
             continue
 
-        try:
-            # Prova a interpretare la riga come dizionario Python
-            python_obj = ast.literal_eval(line)
+        # Crea la directory di output se non esiste
+        os.makedirs(output_dir, exist_ok=True)
 
-            # Converti in JSON compatto (una sola linea)
-            json_line = json.dumps(python_obj, separators=(',', ':'))
+        for filename in os.listdir(input_dir):
+            input_path = os.path.join(input_dir, filename)
 
-            # Scrive una riga JSON
-            fout.write(json_line + "\n")
+            if not os.path.isfile(input_path):
+                continue
 
-        except (SyntaxError, ValueError):
-            # Riga non convertibile → ignorata
-            print(f"⚠️ Riga {line_number} ignorata (non è un dict valido)")
+            output_path = os.path.join(output_dir, filename + ".json")
 
-print("✅ Conversione riga per riga completata!")
+            print(f"➡️  Converto {input_path}")
+            convert_file(input_path, output_path)
+
+    print("\n✅ Conversione COMPLETATA")
+
+if __name__ == "__main__":
+    main()

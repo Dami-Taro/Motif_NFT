@@ -11,6 +11,7 @@ import src.graph.Edge;
 public abstract class Pattern {
 
     protected final List<Edge> edges;
+    public abstract String getName();
 
     protected Pattern(List<Edge> edges) {
         this.edges = edges;

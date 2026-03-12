@@ -1,0 +1,196 @@
+
+=== GRAPH INFO ===
+Nodi: 9193
+Archi: 25033
+Duration (sec): 68576908 = 2y in interval [1638073615, 1706650523]
+Delta (sec): 65804475 = 2y1m
+
+
+=== InStar Counts by Size (grouped by size) ===
+Totale pattern: 4459
+
+size 2 → 2137 pattern
+size 3 → 825 pattern
+size 4 → 457 pattern
+size 5 → 269 pattern
+size 6 → 193 pattern
+size 7 → 126 pattern
+size 8 → 89 pattern
+size 9 → 62 pattern
+size 10 → 52 pattern
+size 11 → 43 pattern
+size 12 → 31 pattern
+size 13 → 21 pattern
+size 14 → 21 pattern
+size 15 → 13 pattern
+size 16 → 17 pattern
+size 17 → 8 pattern
+size 18 → 14 pattern
+size 19 → 13 pattern
+size 20 → 13 pattern
+size 21 → 3 pattern
+size 22 → 5 pattern
+size 23 → 3 pattern
+size 24 → 5 pattern
+size 25 → 2 pattern
+size 26 → 2 pattern
+size 27 → 3 pattern
+size 28 → 2 pattern
+size 29 → 1 pattern
+size 30 → 1 pattern
+size 31 → 2 pattern
+size 32 → 1 pattern
+size 33 → 3 pattern
+size 34 → 1 pattern
+size 35 → 1 pattern
+size 39 → 2 pattern
+size 41 → 2 pattern
+size 42 → 1 pattern
+size 43 → 1 pattern
+size 44 → 1 pattern
+size 46 → 1 pattern
+size 51 → 2 pattern
+size 54 → 1 pattern
+size 56 → 1 pattern
+size 60 → 1 pattern
+size 61 → 1 pattern
+size 76 → 1 pattern
+size 92 → 1 pattern
+size 99 → 1 pattern
+size 107 → 1 pattern
+size 110 → 1 pattern
+size 281 → 1 pattern
+
+=== GiveAndTake Counts by Size (grouped by size) ===
+Totale pattern: 2294
+
+size 2 → 1803 pattern
+size 4 → 326 pattern
+size 6 → 87 pattern
+size 8 → 44 pattern
+size 10 → 18 pattern
+size 12 → 9 pattern
+size 14 → 4 pattern
+size 16 → 1 pattern
+size 20 → 1 pattern
+size 34 → 1 pattern
+
+=== ReceiveAndForward Counts by Size (grouped by size) ===
+Totale pattern: 4519
+
+size 2 → 3811 pattern
+size 4 → 492 pattern
+size 6 → 130 pattern
+size 8 → 55 pattern
+size 10 → 14 pattern
+size 12 → 6 pattern
+size 14 → 7 pattern
+size 16 → 2 pattern
+size 20 → 1 pattern
+size 34 → 1 pattern
+
+=== ReceiveAndForwardNFT Counts by Size (grouped by size) ===
+Totale pattern: 3240
+
+size 2 → 2710 pattern
+size 4 → 362 pattern
+size 6 → 104 pattern
+size 8 → 36 pattern
+size 10 → 11 pattern
+size 12 → 7 pattern
+size 14 → 6 pattern
+size 16 → 2 pattern
+size 20 → 1 pattern
+size 34 → 1 pattern
+
+=== DATASETNFT INFO ===
+NFTs: 9564
+Archi: 25033
+Delta (sec): 65804475
+
+
+=== SameNFTChain Counts by Size (grouped by size) ===
+Totale pattern: 5912
+
+size 2 → 2519 pattern
+size 3 → 1412 pattern
+size 4 → 771 pattern
+size 5 → 453 pattern
+size 6 → 250 pattern
+size 7 → 142 pattern
+size 8 → 86 pattern
+size 9 → 60 pattern
+size 10 → 51 pattern
+size 11 → 43 pattern
+size 12 → 28 pattern
+size 13 → 19 pattern
+size 14 → 13 pattern
+size 15 → 11 pattern
+size 16 → 13 pattern
+size 17 → 9 pattern
+size 18 → 4 pattern
+size 19 → 9 pattern
+size 20 → 4 pattern
+size 21 → 2 pattern
+size 23 → 1 pattern
+size 24 → 4 pattern
+size 25 → 1 pattern
+size 26 → 4 pattern
+size 29 → 2 pattern
+size 31 → 1 pattern
+Contiguous
+
+=== SameNFTChain Counts by Size (grouped by size) ===
+Totale pattern: 6027
+
+size 2 → 3117 pattern
+size 3 → 1428 pattern
+size 4 → 696 pattern
+size 5 → 320 pattern
+size 6 → 164 pattern
+size 7 → 83 pattern
+size 8 → 64 pattern
+size 9 → 29 pattern
+size 10 → 30 pattern
+size 11 → 32 pattern
+size 12 → 18 pattern
+size 13 → 14 pattern
+size 14 → 7 pattern
+size 15 → 4 pattern
+size 16 → 8 pattern
+size 17 → 4 pattern
+size 18 → 3 pattern
+size 19 → 2 pattern
+size 20 → 1 pattern
+size 23 → 2 pattern
+size 24 → 1 pattern
+
+=== SameNFTCycle Counts by Size (grouped by size) ===
+Totale pattern: 270
+
+size 2 → 131 pattern
+size 3 → 54 pattern
+size 4 → 27 pattern
+size 5 → 29 pattern
+size 6 → 11 pattern
+size 7 → 8 pattern
+size 8 → 4 pattern
+size 9 → 3 pattern
+size 10 → 1 pattern
+size 11 → 1 pattern
+size 13 → 1 pattern
+Contiguous
+
+=== SameNFTCycle Counts by Size (grouped by size) ===
+Totale pattern: 233
+
+size 2 → 109 pattern
+size 3 → 48 pattern
+size 4 → 26 pattern
+size 5 → 27 pattern
+size 6 → 9 pattern
+size 7 → 6 pattern
+size 8 → 3 pattern
+size 9 → 3 pattern
+size 10 → 1 pattern
+size 13 → 1 pattern

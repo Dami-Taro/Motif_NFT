@@ -1,0 +1,104 @@
+
+=== GRAPH INFO ===
+Nodi: 7393
+Archi: 32135
+Duration (sec): 45987492 = 1y in interval [1660268243, 1706255735]
+Delta (sec): 2952 = 49min12s
+
+
+=== InStar Counts by Size (grouped by size) ===
+Totale pattern: 4595
+
+size 2 → 2519 pattern
+size 3 → 860 pattern
+size 4 → 420 pattern
+size 5 → 260 pattern
+size 6 → 124 pattern
+size 7 → 95 pattern
+size 8 → 46 pattern
+size 9 → 59 pattern
+size 10 → 44 pattern
+size 11 → 31 pattern
+size 12 → 21 pattern
+size 13 → 16 pattern
+size 14 → 13 pattern
+size 15 → 15 pattern
+size 16 → 11 pattern
+size 17 → 9 pattern
+size 18 → 7 pattern
+size 19 → 6 pattern
+size 20 → 2 pattern
+size 21 → 1 pattern
+size 22 → 5 pattern
+size 23 → 3 pattern
+size 24 → 3 pattern
+size 25 → 5 pattern
+size 26 → 1 pattern
+size 27 → 2 pattern
+size 28 → 3 pattern
+size 29 → 3 pattern
+size 30 → 2 pattern
+size 32 → 1 pattern
+size 33 → 2 pattern
+size 36 → 1 pattern
+size 50 → 2 pattern
+size 54 → 1 pattern
+size 55 → 1 pattern
+size 60 → 1 pattern
+
+=== GiveAndTake Counts by Size (grouped by size) ===
+Totale pattern: 678
+
+size 2 → 660 pattern
+size 4 → 16 pattern
+size 6 → 1 pattern
+size 8 → 1 pattern
+
+=== ReceiveAndForward Counts by Size (grouped by size) ===
+Totale pattern: 1550
+
+size 2 → 1530 pattern
+size 4 → 16 pattern
+size 6 → 3 pattern
+size 8 → 1 pattern
+
+=== ReceiveAndForwardNFT Counts by Size (grouped by size) ===
+Totale pattern: 1138
+
+size 2 → 1125 pattern
+size 4 → 10 pattern
+size 6 → 3 pattern
+
+=== DATASETNFT INFO ===
+NFTs: 6582
+Archi: 32135
+Delta (sec): 2952
+
+
+=== SameNFTChain Counts by Size (grouped by size) ===
+Totale pattern: 2045
+
+size 2 → 1966 pattern
+size 3 → 75 pattern
+size 4 → 2 pattern
+size 5 → 2 pattern
+Contiguous
+
+=== SameNFTChain Counts by Size (grouped by size) ===
+Totale pattern: 1730
+
+size 2 → 1664 pattern
+size 3 → 63 pattern
+size 4 → 1 pattern
+size 5 → 2 pattern
+
+=== SameNFTCycle Counts by Size (grouped by size) ===
+Totale pattern: 72
+
+size 2 → 72 pattern
+Contiguous
+
+=== SameNFTCycle Counts by Size (grouped by size) ===
+Totale pattern: 38
+
+size 2 → 38 pattern

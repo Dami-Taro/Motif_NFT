@@ -9,6 +9,9 @@ import src.graph.UserNode;
 
 public class OutStar extends Pattern {
 
+    @Override
+    public String getName() { return "OutStar";}
+
     public OutStar(List<Edge> edges) {
         super(edges);
     }
@@ -29,7 +32,7 @@ public class OutStar extends Pattern {
     public void validate() throws PatternValidationException {
         if (edges.size() < 2) {
             throw new PatternValidationException(
-                "OutStar must contain at least 2 edges"
+                getName() + " must contain at least 2 edges"
             );
         }
 
@@ -39,13 +42,13 @@ public class OutStar extends Pattern {
         for (Edge e : edges) {
             if (!e.getFrom().equals(center)) {
                 throw new PatternValidationException(
-                    "All edges must originate from the same center node"
+                    getName() + ": All edges must originate from the same center node"
                 );
             }
 
             if (!targets.add(e.getTo())) {
                 throw new PatternValidationException(
-                    "Duplicate target node in OutStar"
+                    getName() + ": Duplicate target node in OutStar"
                 );
             }
         }
@@ -54,7 +57,8 @@ public class OutStar extends Pattern {
     @Override
     public String toString() {
         return String.format(
-            "OutStar: center %s (k=%d , Δt=%d sec)",
+            "%s: center %s (k=%d , Δt=%d sec)",
+            getName(),
             getCenter().getSimpleAddress(),
             getSize(),
             getDuration()

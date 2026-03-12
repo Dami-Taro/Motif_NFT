@@ -1,0 +1,103 @@
+
+=== GRAPH INFO ===
+Nodi: 4850
+Archi: 8721
+Duration (sec): 75334276 = 2y in interval [1630822627, 1706156903]
+Delta (sec): 327756 = 3d19h2min36s
+
+
+=== InStar Counts by Size (grouped by size) ===
+Totale pattern: 1365
+
+size 2 → 860 pattern
+size 3 → 231 pattern
+size 4 → 105 pattern
+size 5 → 49 pattern
+size 6 → 23 pattern
+size 7 → 30 pattern
+size 8 → 15 pattern
+size 9 → 9 pattern
+size 10 → 7 pattern
+size 11 → 7 pattern
+size 12 → 3 pattern
+size 13 → 1 pattern
+size 14 → 4 pattern
+size 15 → 2 pattern
+size 16 → 1 pattern
+size 17 → 3 pattern
+size 18 → 2 pattern
+size 19 → 3 pattern
+size 20 → 3 pattern
+size 24 → 2 pattern
+size 25 → 3 pattern
+size 28 → 1 pattern
+size 68 → 1 pattern
+
+=== GiveAndTake Counts by Size (grouped by size) ===
+Totale pattern: 445
+
+size 2 → 404 pattern
+size 4 → 37 pattern
+size 6 → 4 pattern
+
+=== ReceiveAndForward Counts by Size (grouped by size) ===
+Totale pattern: 822
+
+size 2 → 768 pattern
+size 4 → 44 pattern
+size 6 → 10 pattern
+
+=== ReceiveAndForwardNFT Counts by Size (grouped by size) ===
+Totale pattern: 631
+
+size 2 → 590 pattern
+size 4 → 33 pattern
+size 6 → 8 pattern
+
+=== DATASETNFT INFO ===
+NFTs: 3953
+Archi: 8721
+Delta (sec): 327756
+
+
+=== SameNFTChain Counts by Size (grouped by size) ===
+Totale pattern: 1304
+
+size 2 → 1110 pattern
+size 3 → 134 pattern
+size 4 → 35 pattern
+size 5 → 12 pattern
+size 6 → 8 pattern
+size 7 → 3 pattern
+size 8 → 1 pattern
+size 9 → 1 pattern
+Contiguous
+
+=== SameNFTChain Counts by Size (grouped by size) ===
+Totale pattern: 967
+
+size 2 → 840 pattern
+size 3 → 86 pattern
+size 4 → 20 pattern
+size 5 → 10 pattern
+size 6 → 7 pattern
+size 7 → 2 pattern
+size 8 → 1 pattern
+size 9 → 1 pattern
+
+=== SameNFTCycle Counts by Size (grouped by size) ===
+Totale pattern: 53
+
+size 2 → 41 pattern
+size 3 → 8 pattern
+size 4 → 3 pattern
+size 5 → 1 pattern
+Contiguous
+
+=== SameNFTCycle Counts by Size (grouped by size) ===
+Totale pattern: 39
+
+size 2 → 27 pattern
+size 3 → 8 pattern
+size 4 → 3 pattern
+size 5 → 1 pattern

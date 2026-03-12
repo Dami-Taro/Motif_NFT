@@ -7,6 +7,9 @@ import src.graph.UserNode;
 
 public class ReceiveAndForward extends Pattern {
 
+    @Override
+    public String getName() { return "ReceiveAndForward";}
+
     public ReceiveAndForward(List<Edge> edges) {
         super(edges);
     }
@@ -27,12 +30,12 @@ public class ReceiveAndForward extends Pattern {
     public void validate() throws PatternValidationException {
         if (edges.size() < 2) {
             throw new PatternValidationException(
-                "ReceiveAndForward must contain at least 2 edges"
+                getName() + " must contain at least 2 edges"
             );
         }
         if (edges.size() % 2 != 0) {
             throw new PatternValidationException(
-                "ReceiveAndForward must contain an even number of edges"
+                getName() + " must contain an even number of edges"
             );
         }
 
@@ -45,14 +48,14 @@ public class ReceiveAndForward extends Pattern {
                 // acquisto: Y → center
                 if (!e.getTo().equals(center)) {
                     throw new PatternValidationException(
-                        "Expected buying edge at position " + i
+                        getName() + ": Expected buying edge at position " + i
                     );
                 }
             } else {
                 // vendita: center → X
                 if (!e.getFrom().equals(center)) {
                     throw new PatternValidationException(
-                        "Expected selling edge at position " + i
+                        getName() + ": Expected selling edge at position " + i
                     );
                 }
             }
@@ -62,7 +65,8 @@ public class ReceiveAndForward extends Pattern {
     @Override
     public String toString() {
         return String.format(
-            "ReceiveAndForward: %s → [%s] → %s (k=%d , Δt=%d sec)",
+            "%s: %s → [%s] → %s (k=%d , Δt=%d sec)",
+            getName(),
             getReceiveFromNode().getSimpleAddress(),
             getCenterNode().getSimpleAddress(),
             getForwardToNode().getSimpleAddress(),

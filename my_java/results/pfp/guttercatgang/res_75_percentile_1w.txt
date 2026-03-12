@@ -1,0 +1,100 @@
+
+=== GRAPH INFO ===
+Nodi: 5984
+Archi: 13140
+Duration (sec): 83007064 = 2y in interval [1623181891, 1706188955]
+Delta (sec): 1142216 = 1w6d5h16min56s
+
+
+=== InStar Counts by Size (grouped by size) ===
+Totale pattern: 2266
+
+size 2 → 1351 pattern
+size 3 → 427 pattern
+size 4 → 178 pattern
+size 5 → 105 pattern
+size 6 → 61 pattern
+size 7 → 41 pattern
+size 8 → 21 pattern
+size 9 → 27 pattern
+size 10 → 10 pattern
+size 11 → 6 pattern
+size 12 → 8 pattern
+size 13 → 7 pattern
+size 14 → 4 pattern
+size 15 → 3 pattern
+size 16 → 2 pattern
+size 17 → 1 pattern
+size 18 → 3 pattern
+size 20 → 3 pattern
+size 21 → 1 pattern
+size 22 → 1 pattern
+size 23 → 2 pattern
+size 24 → 1 pattern
+size 31 → 2 pattern
+size 33 → 1 pattern
+
+=== GiveAndTake Counts by Size (grouped by size) ===
+Totale pattern: 1391
+
+size 2 → 1173 pattern
+size 4 → 177 pattern
+size 6 → 34 pattern
+size 8 → 6 pattern
+size 14 → 1 pattern
+
+=== ReceiveAndForward Counts by Size (grouped by size) ===
+Totale pattern: 2115
+
+size 2 → 1854 pattern
+size 4 → 221 pattern
+size 6 → 30 pattern
+size 8 → 9 pattern
+size 14 → 1 pattern
+
+=== ReceiveAndForwardNFT Counts by Size (grouped by size) ===
+Totale pattern: 1400
+
+size 2 → 1258 pattern
+size 4 → 122 pattern
+size 6 → 14 pattern
+size 8 → 5 pattern
+size 14 → 1 pattern
+
+=== DATASETNFT INFO ===
+NFTs: 2787
+Archi: 13140
+Delta (sec): 1142216
+
+
+=== SameNFTChain Counts by Size (grouped by size) ===
+Totale pattern: 3021
+
+size 2 → 2231 pattern
+size 3 → 596 pattern
+size 4 → 156 pattern
+size 5 → 31 pattern
+size 6 → 6 pattern
+size 7 → 1 pattern
+Contiguous
+
+=== SameNFTChain Counts by Size (grouped by size) ===
+Totale pattern: 2793
+
+size 2 → 2083 pattern
+size 3 → 541 pattern
+size 4 → 142 pattern
+size 5 → 22 pattern
+size 6 → 5 pattern
+
+=== SameNFTCycle Counts by Size (grouped by size) ===
+Totale pattern: 31
+
+size 2 → 30 pattern
+size 3 → 1 pattern
+Contiguous
+
+=== SameNFTCycle Counts by Size (grouped by size) ===
+Totale pattern: 22
+
+size 2 → 22 pattern

@@ -1,0 +1,148 @@
+
+=== GRAPH INFO ===
+Nodi: 9776
+Archi: 18507
+Duration (sec): 33093648 = 1y in interval [1673100407, 1706194055]
+Delta (sec): 1155576 = 1w6d8h59min36s
+
+
+=== InStar Counts by Size (grouped by size) ===
+Totale pattern: 2769
+
+size 2 → 1509 pattern
+size 3 → 564 pattern
+size 4 → 244 pattern
+size 5 → 110 pattern
+size 6 → 101 pattern
+size 7 → 51 pattern
+size 8 → 34 pattern
+size 9 → 28 pattern
+size 10 → 22 pattern
+size 11 → 13 pattern
+size 12 → 10 pattern
+size 13 → 11 pattern
+size 14 → 7 pattern
+size 15 → 14 pattern
+size 16 → 5 pattern
+size 17 → 2 pattern
+size 18 → 4 pattern
+size 19 → 2 pattern
+size 20 → 1 pattern
+size 21 → 1 pattern
+size 22 → 4 pattern
+size 23 → 1 pattern
+size 24 → 3 pattern
+size 26 → 3 pattern
+size 27 → 2 pattern
+size 28 → 3 pattern
+size 30 → 1 pattern
+size 32 → 1 pattern
+size 33 → 1 pattern
+size 34 → 3 pattern
+size 38 → 2 pattern
+size 39 → 1 pattern
+size 40 → 1 pattern
+size 41 → 1 pattern
+size 42 → 1 pattern
+size 43 → 2 pattern
+size 46 → 1 pattern
+size 50 → 1 pattern
+size 59 → 1 pattern
+size 60 → 1 pattern
+size 65 → 1 pattern
+size 89 → 1 pattern
+
+=== GiveAndTake Counts by Size (grouped by size) ===
+Totale pattern: 2057
+
+size 2 → 1636 pattern
+size 4 → 281 pattern
+size 6 → 77 pattern
+size 8 → 32 pattern
+size 10 → 13 pattern
+size 12 → 11 pattern
+size 14 → 4 pattern
+size 16 → 1 pattern
+size 18 → 1 pattern
+size 22 → 1 pattern
+
+=== ReceiveAndForward Counts by Size (grouped by size) ===
+Totale pattern: 2925
+
+size 2 → 2398 pattern
+size 4 → 348 pattern
+size 6 → 110 pattern
+size 8 → 33 pattern
+size 10 → 17 pattern
+size 12 → 9 pattern
+size 14 → 5 pattern
+size 16 → 3 pattern
+size 20 → 1 pattern
+size 22 → 1 pattern
+
+=== ReceiveAndForwardNFT Counts by Size (grouped by size) ===
+Totale pattern: 2342
+
+size 2 → 1914 pattern
+size 4 → 284 pattern
+size 6 → 86 pattern
+size 8 → 28 pattern
+size 10 → 19 pattern
+size 12 → 7 pattern
+size 14 → 2 pattern
+size 20 → 1 pattern
+size 22 → 1 pattern
+
+=== DATASETNFT INFO ===
+NFTs: 6115
+Archi: 18507
+Delta (sec): 1155576
+
+
+=== SameNFTChain Counts by Size (grouped by size) ===
+Totale pattern: 3974
+
+size 2 → 2700 pattern
+size 3 → 813 pattern
+size 4 → 294 pattern
+size 5 → 102 pattern
+size 6 → 35 pattern
+size 7 → 14 pattern
+size 8 → 12 pattern
+size 9 → 2 pattern
+size 10 → 1 pattern
+size 11 → 1 pattern
+Contiguous
+
+=== SameNFTChain Counts by Size (grouped by size) ===
+Totale pattern: 3680
+
+size 2 → 2613 pattern
+size 3 → 692 pattern
+size 4 → 232 pattern
+size 5 → 90 pattern
+size 6 → 29 pattern
+size 7 → 14 pattern
+size 8 → 6 pattern
+size 9 → 2 pattern
+size 10 → 1 pattern
+size 11 → 1 pattern
+
+=== SameNFTCycle Counts by Size (grouped by size) ===
+Totale pattern: 50
+
+size 2 → 41 pattern
+size 3 → 5 pattern
+size 4 → 1 pattern
+size 5 → 2 pattern
+size 6 → 1 pattern
+Contiguous
+
+=== SameNFTCycle Counts by Size (grouped by size) ===
+Totale pattern: 43
+
+size 2 → 35 pattern
+size 3 → 5 pattern
+size 4 → 1 pattern
+size 5 → 1 pattern
+size 6 → 1 pattern

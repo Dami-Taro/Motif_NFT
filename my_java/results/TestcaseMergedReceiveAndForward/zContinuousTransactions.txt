@@ -1,0 +1,11 @@
+=== non-contiguous nft : chains ===
+Found 6 chain interruption in 7 different nfts
+nft:	 contiguousTransactionCount1 contiguousTransactionCount2 ...
+
+0xNFT1:	2 1 2 2 1 
+0xNFT2:	1 
+0xNFT3:	1 1 1 
+0xNFT4:	1 
+0xNFT5:	1 
+0xNFT6:	1 
+0xNFT7:	1 

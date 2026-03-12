@@ -1,0 +1,24 @@
+=== non-contiguous nft : chains ===
+Found 20 chain interruption in 20 different nfts
+nft:	 node1 -> node2 ... 	|	 nextChain ...
+
+1044:	5c56e4c3 -> 3e99f08b	|	a616520b -> b9ed3a12 -> 59695ec3	|	
+1361:	82c976b9 -> 7cb0a588	|	ecb4f8c6 -> 3545e82d	|	
+1362:	45c49f4c -> 3c3c1831	|	7c534ad6 -> edf859e2	|	
+1512:	5e3125b1 -> 77bb201d	|	84df5b96 -> 22b69e88	|	
+1631:	a1449510 -> 81d99f12	|	2e2bac71 -> dd5c5cd7	|	
+1782:	263fda88 -> 7aecd688	|	8957241a -> 31d0039d	|	
+2116:	c21f0580 -> 8e900e2f	|	a2ba4b9b -> 24cce7ec	|	
+2122:	9f03f051 -> 9983fb37	|	47f9d950 -> 77bb201d	|	
+226:	92aae5f8 -> 93f049b9	|	48e6fcb0 -> 45c49f4c	|	
+234:	697c9228 -> a088f00c	|	54a67e83 -> c7eb24bd	|	
+239:	86c3c94c -> 356ee46a	|	0daad017 -> 9c1a3268	|	
+240:	f168d4e5 -> e971107b	|	f168d4e5 -> e971107b	|	
+2505:	32064cf5 -> d82d70be -> 5d6ae55b -> 97aeb932	|	5d6ae55b -> 97aeb932	|	
+2575:	23386f98 -> 070d8650	|	23386f98 -> 070d8650	|	
+2584:	3545e82d -> 4ab10fe6	|	eeaa4cfa -> 2accdabe	|	
+2597:	760855f3 -> bf53cf42	|	d5c6c450 -> c02707ae	|	
+46:	35b12b84 -> 8aa66739	|	b4a27bca -> bbb33605	|	
+642:	b9ed3a12 -> fca72d65	|	b9ed3a12 -> fca72d65	|	
+873:	b9ed3a12 -> 00dae09e	|	b9ed3a12 -> 00dae09e	|	
+992:	bf7134f2 -> 5a40572d	|	bf7134f2 -> 5a40572d	|	

@@ -1,0 +1,104 @@
+
+=== GRAPH INFO ===
+Nodi: 12294
+Archi: 28144
+Duration (sec): 73113972 = 2y in interval [1633391087, 1706505059]
+Delta (sec): 19855 = 5h30min55s
+
+
+=== InStar Counts by Size (grouped by size) ===
+Totale pattern: 4547
+
+size 2 → 2698 pattern
+size 3 → 826 pattern
+size 4 → 343 pattern
+size 5 → 229 pattern
+size 6 → 128 pattern
+size 7 → 73 pattern
+size 8 → 46 pattern
+size 9 → 47 pattern
+size 10 → 42 pattern
+size 11 → 27 pattern
+size 12 → 11 pattern
+size 13 → 7 pattern
+size 14 → 6 pattern
+size 15 → 10 pattern
+size 16 → 3 pattern
+size 17 → 6 pattern
+size 18 → 4 pattern
+size 19 → 6 pattern
+size 20 → 6 pattern
+size 21 → 2 pattern
+size 22 → 1 pattern
+size 23 → 1 pattern
+size 24 → 5 pattern
+size 25 → 6 pattern
+size 26 → 2 pattern
+size 27 → 1 pattern
+size 30 → 2 pattern
+size 32 → 1 pattern
+size 33 → 2 pattern
+size 35 → 1 pattern
+size 37 → 1 pattern
+size 38 → 1 pattern
+size 40 → 1 pattern
+size 48 → 1 pattern
+size 137 → 1 pattern
+
+=== GiveAndTake Counts by Size (grouped by size) ===
+Totale pattern: 392
+
+size 2 → 378 pattern
+size 4 → 11 pattern
+size 12 → 1 pattern
+size 16 → 1 pattern
+size 24 → 1 pattern
+
+=== ReceiveAndForward Counts by Size (grouped by size) ===
+Totale pattern: 887
+
+size 2 → 857 pattern
+size 4 → 25 pattern
+size 6 → 2 pattern
+size 12 → 1 pattern
+size 16 → 1 pattern
+size 24 → 1 pattern
+
+=== ReceiveAndForwardNFT Counts by Size (grouped by size) ===
+Totale pattern: 678
+
+size 2 → 659 pattern
+size 4 → 17 pattern
+size 6 → 2 pattern
+
+=== DATASETNFT INFO ===
+NFTs: 9656
+Archi: 28144
+Delta (sec): 19855
+
+
+=== SameNFTChain Counts by Size (grouped by size) ===
+Totale pattern: 1624
+
+size 2 → 1531 pattern
+size 3 → 86 pattern
+size 4 → 7 pattern
+Contiguous
+
+=== SameNFTChain Counts by Size (grouped by size) ===
+Totale pattern: 1279
+
+size 2 → 1212 pattern
+size 3 → 64 pattern
+size 4 → 3 pattern
+
+=== SameNFTCycle Counts by Size (grouped by size) ===
+Totale pattern: 30
+
+size 2 → 30 pattern
+Contiguous
+
+=== SameNFTCycle Counts by Size (grouped by size) ===
+Totale pattern: 27
+
+size 2 → 27 pattern

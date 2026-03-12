@@ -1,0 +1,5 @@
+=== non-contiguous nft : chains ===
+Found 1 chain interruption in 1 different nfts
+nft:	 node1 -> node2 ... 	|	 nextChain ...
+
+0xNFT6:	0xusr101 -> 0xusr102 -> 0xusr103	|	0xusr104 -> 0xusr101	|	

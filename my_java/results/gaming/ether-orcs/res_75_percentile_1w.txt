@@ -1,0 +1,102 @@
+
+=== GRAPH INFO ===
+Nodi: 2616
+Archi: 6217
+Duration (sec): 72220468 = 2y in interval [1634430043, 1706650511]
+Delta (sec): 1076453 = 1w5d11h
+
+
+=== InStar Counts by Size (grouped by size) ===
+Totale pattern: 1110
+
+size 2 → 578 pattern
+size 3 → 199 pattern
+size 4 → 115 pattern
+size 5 → 59 pattern
+size 6 → 38 pattern
+size 7 → 24 pattern
+size 8 → 14 pattern
+size 9 → 17 pattern
+size 10 → 12 pattern
+size 11 → 9 pattern
+size 12 → 4 pattern
+size 13 → 1 pattern
+size 14 → 5 pattern
+size 15 → 4 pattern
+size 16 → 3 pattern
+size 17 → 4 pattern
+size 18 → 3 pattern
+size 19 → 4 pattern
+size 20 → 1 pattern
+size 21 → 2 pattern
+size 22 → 1 pattern
+size 25 → 2 pattern
+size 26 → 1 pattern
+size 27 → 2 pattern
+size 28 → 1 pattern
+size 30 → 1 pattern
+size 32 → 1 pattern
+size 33 → 2 pattern
+size 37 → 1 pattern
+size 46 → 2 pattern
+
+=== GiveAndTake Counts by Size (grouped by size) ===
+Totale pattern: 146
+
+size 2 → 129 pattern
+size 4 → 14 pattern
+size 6 → 2 pattern
+size 8 → 1 pattern
+
+=== ReceiveAndForward Counts by Size (grouped by size) ===
+Totale pattern: 576
+
+size 2 → 534 pattern
+size 4 → 36 pattern
+size 6 → 5 pattern
+size 8 → 1 pattern
+
+=== ReceiveAndForwardNFT Counts by Size (grouped by size) ===
+Totale pattern: 466
+
+size 2 → 430 pattern
+size 4 → 30 pattern
+size 6 → 5 pattern
+size 8 → 1 pattern
+
+=== DATASETNFT INFO ===
+NFTs: 2990
+Archi: 6217
+Delta (sec): 1076453
+
+
+=== SameNFTChain Counts by Size (grouped by size) ===
+Totale pattern: 993
+
+size 2 → 779 pattern
+size 3 → 154 pattern
+size 4 → 43 pattern
+size 5 → 11 pattern
+size 6 → 5 pattern
+size 7 → 1 pattern
+Contiguous
+
+=== SameNFTChain Counts by Size (grouped by size) ===
+Totale pattern: 824
+
+size 2 → 666 pattern
+size 3 → 114 pattern
+size 4 → 32 pattern
+size 5 → 9 pattern
+size 6 → 3 pattern
+
+=== SameNFTCycle Counts by Size (grouped by size) ===
+Totale pattern: 11
+
+size 2 → 11 pattern
+Contiguous
+
+=== SameNFTCycle Counts by Size (grouped by size) ===
+Totale pattern: 6
+
+size 2 → 6 pattern

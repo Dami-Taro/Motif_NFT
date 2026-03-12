@@ -1,0 +1,47 @@
+
+=== GRAPH INFO ===
+Nodi: 5
+Archi: 6
+Duration (sec): 500 = 8min in interval [1700000100, 1700000600]
+Delta (sec): 1500 = 25min
+
+
+=== Pattern Counts by Size (grouped by size) ===
+Totale pattern: 0
+
+
+=== GiveAndTake Counts by Size (grouped by size) ===
+Totale pattern: 1
+
+size 4 → 1 pattern
+
+=== ReceiveAndForward Counts by Size (grouped by size) ===
+Totale pattern: 5
+
+size 2 → 5 pattern
+
+=== ReceiveAndForwardNFT Counts by Size (grouped by size) ===
+Totale pattern: 5
+
+size 2 → 5 pattern
+
+=== DATASETNFT INFO ===
+NFTs: 1
+Archi: 6
+Delta (sec): 1500
+
+
+=== SameNFTChain Counts by Size (grouped by size) ===
+Totale pattern: 1
+
+size 6 → 1 pattern
+
+=== SameNFTCycle Counts by Size (grouped by size) ===
+Totale pattern: 2
+
+size 3 → 2 pattern
+
+=== SameNFTCycle Counts by Size (grouped by size) ===
+Totale pattern: 2
+
+size 3 → 2 pattern

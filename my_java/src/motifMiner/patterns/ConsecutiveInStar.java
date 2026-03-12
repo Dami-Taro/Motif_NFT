@@ -6,6 +6,8 @@ import src.graph.Edge;
 
 public class ConsecutiveInStar extends DistinctInStar {
 
+    @Override
+    public String getName() { return "ConsecutiveInStar";}
     private final Edge firstSell;
     private final Edge lastSell;
 
@@ -13,7 +15,7 @@ public class ConsecutiveInStar extends DistinctInStar {
         super(edges);
 
         if (firstSell == null || lastSell == null) {
-            throw new IllegalArgumentException("firstSell and lastSell cannot be null");
+            throw new IllegalArgumentException(getName() + "'s firstSell and lastSell cannot be null");
         }
 
         this.firstSell = firstSell;
@@ -31,7 +33,8 @@ public class ConsecutiveInStar extends DistinctInStar {
     @Override
     public String toString() {
         return String.format(
-            "ConsecutiveInStar: center %s (k=%d , Δt=%d sec)",
+            "%s: center %s (k=%d , Δt=%d sec)",
+            getName(),
             getCenter().getSimpleAddress(),
             getSize(),
             getDuration()

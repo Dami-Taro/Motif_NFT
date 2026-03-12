@@ -9,6 +9,9 @@ import src.graph.UserNode;
 
 public class DistinctInStar extends InStar {
 
+    @Override
+    public String getName() { return "DistinctInStar";}
+
     public DistinctInStar(List<Edge> edges) {
         super(edges);
     }
@@ -22,9 +25,7 @@ public class DistinctInStar extends InStar {
         for (Edge e : edges) {
 
             if (!sources.add(e.getFrom())) {
-                throw new PatternValidationException(
-                    "Duplicate source node in DistinctInStar"
-                );
+                throw new PatternValidationException("Duplicate source node in " + getName());
             }
         }
     }
@@ -32,7 +33,8 @@ public class DistinctInStar extends InStar {
     @Override
     public String toString() {
         return String.format(
-            "DistinctInStar: center %s (k=%d , Δt=%d sec)",
+            "%s: center %s (k=%d , Δt=%d sec)",
+            getName(),
             getCenter().getSimpleAddress(),
             getSize(),
             getDuration()

@@ -1,0 +1,102 @@
+
+=== GRAPH INFO ===
+Nodi: 9654
+Archi: 23648
+Duration (sec): 94223707 = 2y in interval [1611960064, 1706183771]
+Delta (sec): 38584 = 10h43min4s
+
+
+=== InStar Counts by Size (grouped by size) ===
+Totale pattern: 3528
+
+size 2 → 2098 pattern
+size 3 → 685 pattern
+size 4 → 269 pattern
+size 5 → 148 pattern
+size 6 → 84 pattern
+size 7 → 53 pattern
+size 8 → 38 pattern
+size 9 → 24 pattern
+size 10 → 19 pattern
+size 11 → 18 pattern
+size 12 → 13 pattern
+size 13 → 11 pattern
+size 14 → 7 pattern
+size 15 → 10 pattern
+size 16 → 14 pattern
+size 17 → 7 pattern
+size 18 → 2 pattern
+size 19 → 1 pattern
+size 20 → 3 pattern
+size 21 → 1 pattern
+size 22 → 3 pattern
+size 24 → 3 pattern
+size 25 → 1 pattern
+size 26 → 2 pattern
+size 27 → 1 pattern
+size 30 → 2 pattern
+size 31 → 2 pattern
+size 35 → 1 pattern
+size 37 → 1 pattern
+size 38 → 1 pattern
+size 40 → 1 pattern
+size 41 → 2 pattern
+size 46 → 1 pattern
+size 81 → 1 pattern
+size 126 → 1 pattern
+
+=== GiveAndTake Counts by Size (grouped by size) ===
+Totale pattern: 1129
+
+size 2 → 1041 pattern
+size 4 → 79 pattern
+size 6 → 8 pattern
+size 8 → 1 pattern
+
+=== ReceiveAndForward Counts by Size (grouped by size) ===
+Totale pattern: 1220
+
+size 2 → 1124 pattern
+size 4 → 84 pattern
+size 6 → 10 pattern
+size 8 → 2 pattern
+
+=== ReceiveAndForwardNFT Counts by Size (grouped by size) ===
+Totale pattern: 600
+
+size 2 → 573 pattern
+size 4 → 25 pattern
+size 6 → 1 pattern
+size 8 → 1 pattern
+
+=== DATASETNFT INFO ===
+NFTs: 10024
+Archi: 23648
+Delta (sec): 38584
+
+
+=== SameNFTChain Counts by Size (grouped by size) ===
+Totale pattern: 1603
+
+size 2 → 1518 pattern
+size 3 → 76 pattern
+size 4 → 9 pattern
+Contiguous
+
+=== SameNFTChain Counts by Size (grouped by size) ===
+Totale pattern: 1356
+
+size 2 → 1301 pattern
+size 3 → 51 pattern
+size 4 → 4 pattern
+
+=== SameNFTCycle Counts by Size (grouped by size) ===
+Totale pattern: 29
+
+size 2 → 29 pattern
+Contiguous
+
+=== SameNFTCycle Counts by Size (grouped by size) ===
+Totale pattern: 6
+
+size 2 → 6 pattern

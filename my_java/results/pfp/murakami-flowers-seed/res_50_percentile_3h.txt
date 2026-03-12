@@ -1,0 +1,199 @@
+
+=== GRAPH INFO ===
+Nodi: 7748
+Archi: 8379
+Duration (sec): 57008562 = 1y in interval [1648524245, 1705532807]
+Delta (sec): 12814 = 3h33min34s
+
+
+=== InStar Counts by Size (grouped by size) ===
+Totale pattern: 936
+
+size 2 → 620 pattern
+size 3 → 150 pattern
+size 4 → 74 pattern
+size 5 → 37 pattern
+size 6 → 16 pattern
+size 7 → 8 pattern
+size 8 → 7 pattern
+size 9 → 2 pattern
+size 10 → 10 pattern
+size 11 → 3 pattern
+size 12 → 1 pattern
+size 13 → 1 pattern
+size 14 → 1 pattern
+size 15 → 1 pattern
+size 16 → 1 pattern
+size 24 → 1 pattern
+size 35 → 1 pattern
+size 41 → 1 pattern
+size 48 → 1 pattern
+
+=== GiveAndTake Counts by Size (grouped by size) ===
+Totale pattern: 86
+
+size 2 → 77 pattern
+size 4 → 5 pattern
+size 6 → 3 pattern
+size 8 → 1 pattern
+
+=== ReceiveAndForward Counts by Size (grouped by size) ===
+Totale pattern: 140
+
+size 2 → 130 pattern
+size 4 → 7 pattern
+size 6 → 2 pattern
+size 8 → 1 pattern
+
+=== ReceiveAndForwardNFT Counts by Size (grouped by size) ===
+Totale pattern: 140
+
+size 2 → 130 pattern
+size 4 → 7 pattern
+size 6 → 2 pattern
+size 8 → 1 pattern
+
+=== DATASETNFT INFO ===
+NFTs: 1
+Archi: 8379
+Delta (sec): 12814
+
+
+=== SameNFTChain Counts by Size (grouped by size) ===
+Totale pattern: 458
+
+size 2 → 106 pattern
+size 3 → 44 pattern
+size 4 → 41 pattern
+size 5 → 36 pattern
+size 6 → 22 pattern
+size 7 → 24 pattern
+size 8 → 12 pattern
+size 9 → 14 pattern
+size 10 → 10 pattern
+size 11 → 5 pattern
+size 12 → 5 pattern
+size 13 → 7 pattern
+size 14 → 7 pattern
+size 15 → 5 pattern
+size 16 → 10 pattern
+size 17 → 3 pattern
+size 18 → 4 pattern
+size 19 → 4 pattern
+size 20 → 6 pattern
+size 21 → 6 pattern
+size 22 → 6 pattern
+size 23 → 2 pattern
+size 24 → 5 pattern
+size 25 → 4 pattern
+size 26 → 2 pattern
+size 27 → 3 pattern
+size 28 → 3 pattern
+size 29 → 4 pattern
+size 30 → 2 pattern
+size 31 → 2 pattern
+size 32 → 1 pattern
+size 33 → 4 pattern
+size 34 → 3 pattern
+size 35 → 1 pattern
+size 36 → 2 pattern
+size 37 → 2 pattern
+size 40 → 2 pattern
+size 42 → 1 pattern
+size 43 → 1 pattern
+size 46 → 1 pattern
+size 47 → 1 pattern
+size 48 → 1 pattern
+size 49 → 2 pattern
+size 50 → 1 pattern
+size 51 → 2 pattern
+size 52 → 1 pattern
+size 60 → 1 pattern
+size 62 → 1 pattern
+size 63 → 1 pattern
+size 64 → 1 pattern
+size 65 → 1 pattern
+size 66 → 1 pattern
+size 67 → 3 pattern
+size 68 → 1 pattern
+size 70 → 1 pattern
+size 72 → 1 pattern
+size 73 → 1 pattern
+size 82 → 1 pattern
+size 83 → 1 pattern
+size 84 → 1 pattern
+size 88 → 1 pattern
+size 97 → 1 pattern
+size 103 → 1 pattern
+size 104 → 1 pattern
+size 110 → 1 pattern
+size 131 → 1 pattern
+size 171 → 1 pattern
+size 186 → 1 pattern
+size 214 → 1 pattern
+size 327 → 1 pattern
+size 408 → 1 pattern
+size 924 → 1 pattern
+Contiguous
+
+=== SameNFTChain Counts by Size (grouped by size) ===
+Totale pattern: 11
+
+size 2 → 11 pattern
+
+=== SameNFTCycle Counts by Size (grouped by size) ===
+Totale pattern: 114
+
+size 2 → 35 pattern
+size 3 → 14 pattern
+size 4 → 6 pattern
+size 5 → 4 pattern
+size 8 → 2 pattern
+size 9 → 2 pattern
+size 11 → 1 pattern
+size 12 → 3 pattern
+size 13 → 2 pattern
+size 15 → 2 pattern
+size 17 → 2 pattern
+size 19 → 1 pattern
+size 20 → 1 pattern
+size 22 → 2 pattern
+size 23 → 1 pattern
+size 24 → 1 pattern
+size 25 → 1 pattern
+size 26 → 1 pattern
+size 27 → 2 pattern
+size 28 → 1 pattern
+size 29 → 1 pattern
+size 36 → 1 pattern
+size 38 → 1 pattern
+size 40 → 1 pattern
+size 42 → 1 pattern
+size 46 → 1 pattern
+size 52 → 1 pattern
+size 61 → 1 pattern
+size 62 → 1 pattern
+size 65 → 1 pattern
+size 73 → 1 pattern
+size 79 → 1 pattern
+size 82 → 1 pattern
+size 93 → 1 pattern
+size 98 → 3 pattern
+size 113 → 1 pattern
+size 125 → 1 pattern
+size 209 → 1 pattern
+size 238 → 1 pattern
+size 251 → 1 pattern
+size 278 → 1 pattern
+size 349 → 1 pattern
+size 351 → 1 pattern
+size 485 → 1 pattern
+size 528 → 1 pattern
+size 613 → 1 pattern
+size 714 → 1 pattern
+size 733 → 1 pattern
+Contiguous
+
+=== Pattern Counts by Size (grouped by size) ===
+Totale pattern: 0
+

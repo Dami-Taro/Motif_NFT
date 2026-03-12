@@ -1,0 +1,113 @@
+
+=== GRAPH INFO ===
+Nodi: 14803
+Archi: 23416
+Duration (sec): 71959997 = 2y in interval [1634257698, 1706217695]
+Delta (sec): 284328 = 3d6h58min48s
+
+
+=== InStar Counts by Size (grouped by size) ===
+Totale pattern: 3239
+
+size 2 → 2246 pattern
+size 3 → 468 pattern
+size 4 → 207 pattern
+size 5 → 98 pattern
+size 6 → 57 pattern
+size 7 → 34 pattern
+size 8 → 30 pattern
+size 9 → 18 pattern
+size 10 → 28 pattern
+size 11 → 12 pattern
+size 12 → 5 pattern
+size 13 → 9 pattern
+size 14 → 4 pattern
+size 15 → 5 pattern
+size 16 → 3 pattern
+size 17 → 1 pattern
+size 18 → 2 pattern
+size 20 → 3 pattern
+size 22 → 1 pattern
+size 24 → 1 pattern
+size 25 → 2 pattern
+size 28 → 1 pattern
+size 35 → 1 pattern
+size 39 → 1 pattern
+size 41 → 1 pattern
+size 87 → 1 pattern
+
+=== GiveAndTake Counts by Size (grouped by size) ===
+Totale pattern: 1171
+
+size 2 → 1068 pattern
+size 4 → 87 pattern
+size 6 → 14 pattern
+size 8 → 2 pattern
+
+=== ReceiveAndForward Counts by Size (grouped by size) ===
+Totale pattern: 2959
+
+size 2 → 2754 pattern
+size 4 → 181 pattern
+size 6 → 17 pattern
+size 8 → 6 pattern
+size 10 → 1 pattern
+
+=== ReceiveAndForwardNFT Counts by Size (grouped by size) ===
+Totale pattern: 2522
+
+size 2 → 2346 pattern
+size 4 → 155 pattern
+size 6 → 15 pattern
+size 8 → 5 pattern
+size 10 → 1 pattern
+
+=== DATASETNFT INFO ===
+NFTs: 7170
+Archi: 23416
+Delta (sec): 284328
+
+
+=== SameNFTChain Counts by Size (grouped by size) ===
+Totale pattern: 4053
+
+size 2 → 3150 pattern
+size 3 → 622 pattern
+size 4 → 170 pattern
+size 5 → 60 pattern
+size 6 → 31 pattern
+size 7 → 12 pattern
+size 8 → 5 pattern
+size 9 → 2 pattern
+size 17 → 1 pattern
+Contiguous
+
+=== SameNFTChain Counts by Size (grouped by size) ===
+Totale pattern: 3358
+
+size 2 → 2621 pattern
+size 3 → 509 pattern
+size 4 → 130 pattern
+size 5 → 50 pattern
+size 6 → 26 pattern
+size 7 → 12 pattern
+size 8 → 8 pattern
+size 9 → 1 pattern
+size 17 → 1 pattern
+
+=== SameNFTCycle Counts by Size (grouped by size) ===
+Totale pattern: 93
+
+size 2 → 74 pattern
+size 3 → 14 pattern
+size 4 → 3 pattern
+size 7 → 2 pattern
+Contiguous
+
+=== SameNFTCycle Counts by Size (grouped by size) ===
+Totale pattern: 52
+
+size 2 → 34 pattern
+size 3 → 14 pattern
+size 4 → 2 pattern
+size 7 → 2 pattern

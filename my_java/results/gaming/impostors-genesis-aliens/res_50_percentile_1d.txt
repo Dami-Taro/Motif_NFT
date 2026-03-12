@@ -1,0 +1,102 @@
+
+=== GRAPH INFO ===
+Nodi: 10085
+Archi: 17606
+Duration (sec): 58211862 = 1y in interval [1648494233, 1706706095]
+Delta (sec): 97980 = 1d3h13min
+
+
+=== InStar Counts by Size (grouped by size) ===
+Totale pattern: 2709
+
+size 2 → 1724 pattern
+size 3 → 458 pattern
+size 4 → 214 pattern
+size 5 → 106 pattern
+size 6 → 57 pattern
+size 7 → 34 pattern
+size 8 → 19 pattern
+size 9 → 13 pattern
+size 10 → 26 pattern
+size 11 → 7 pattern
+size 12 → 10 pattern
+size 13 → 5 pattern
+size 14 → 3 pattern
+size 15 → 4 pattern
+size 16 → 4 pattern
+size 17 → 1 pattern
+size 18 → 3 pattern
+size 19 → 3 pattern
+size 20 → 2 pattern
+size 21 → 3 pattern
+size 22 → 1 pattern
+size 23 → 1 pattern
+size 25 → 3 pattern
+size 26 → 1 pattern
+size 30 → 1 pattern
+size 34 → 1 pattern
+size 35 → 1 pattern
+size 37 → 1 pattern
+size 38 → 1 pattern
+size 46 → 1 pattern
+size 68 → 1 pattern
+
+=== GiveAndTake Counts by Size (grouped by size) ===
+Totale pattern: 891
+
+size 2 → 857 pattern
+size 4 → 33 pattern
+size 6 → 1 pattern
+
+=== ReceiveAndForward Counts by Size (grouped by size) ===
+Totale pattern: 1552
+
+size 2 → 1481 pattern
+size 4 → 69 pattern
+size 6 → 2 pattern
+
+=== ReceiveAndForwardNFT Counts by Size (grouped by size) ===
+Totale pattern: 1287
+
+size 2 → 1230 pattern
+size 4 → 56 pattern
+size 6 → 1 pattern
+
+=== DATASETNFT INFO ===
+NFTs: 6949
+Archi: 17606
+Delta (sec): 97980
+
+
+=== SameNFTChain Counts by Size (grouped by size) ===
+Totale pattern: 2294
+
+size 2 → 1948 pattern
+size 3 → 276 pattern
+size 4 → 58 pattern
+size 5 → 10 pattern
+size 6 → 1 pattern
+size 7 → 1 pattern
+Contiguous
+
+=== SameNFTChain Counts by Size (grouped by size) ===
+Totale pattern: 1720
+
+size 2 → 1510 pattern
+size 3 → 171 pattern
+size 4 → 31 pattern
+size 5 → 7 pattern
+size 7 → 1 pattern
+
+=== SameNFTCycle Counts by Size (grouped by size) ===
+Totale pattern: 43
+
+size 2 → 42 pattern
+size 5 → 1 pattern
+Contiguous
+
+=== SameNFTCycle Counts by Size (grouped by size) ===
+Totale pattern: 15
+
+size 2 → 14 pattern
+size 5 → 1 pattern
