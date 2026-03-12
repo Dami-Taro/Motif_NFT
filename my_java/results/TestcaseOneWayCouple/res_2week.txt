@@ -1,0 +1,23 @@
+=== GRAPH INFO ===
+Nodi: 2
+Archi: 10
+Delta (sec): 1209600
+
+
+=== OneWayCouple (grouped by size) ===
+Totale pattern: 9
+
+size 2 → 1 pattern
+size 3 → 1 pattern
+size 4 → 1 pattern
+size 5 → 1 pattern
+size 6 → 1 pattern
+size 7 → 1 pattern
+size 8 → 1 pattern
+size 9 → 1 pattern
+size 10 → 1 pattern
+
+=== InStar (grouped by size) ===
+Totale pattern: 10
+
+size 1 → 10 pattern
