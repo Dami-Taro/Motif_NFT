@@ -11,64 +11,44 @@ import src.graph.UserNode;
  * Pattern: Chain
  *
  * Sequenza temporale di archi A→B, B→C, C→D, ...
- * Tutti gli archi sono ordinati temporalmente.
+ * etichettati con lo stesso NFT
  */
 public class Chain extends Pattern {
 
     public Chain(List<Edge> edges) {
         super(edges);
-        validateChain();
     }
 
-    
-    //Verifica che gli archi formino una catena valida: to(i) == from(i+1)
-    public void validateChain() {
-        if (edges.size() < 2) {
-            throw new IllegalArgumentException("Chain must contain at least 2 edges");
-        }
-
-        for (int i = 0; i < edges.size() - 1; i++) {
-            UserNode currentTo = edges.get(i).getTo();
-            UserNode nextFrom = edges.get(i + 1).getFrom();
-
-            if (!currentTo.equals(nextFrom)) {
-                throw new IllegalArgumentException(
-                    "Invalid Chain: edge " + i +
-                    " destination != edge " + (i + 1) + " source"
-                );
-            }
-        }
+    public String getNFT() {
+        if (edges.isEmpty()) return null;
+        if( !(edges.get(0) instanceof EdgeNFT)) return null;
+        return ((EdgeNFT) edges.get(0)).getNftId();
     }
 
-    public void validateChainNFT() {
+    @Override
+    public void validate() throws PatternValidationException {
         if (edges.size() < 2) {
-            throw new IllegalArgumentException("Chain must contain at least 2 edges");
+            throw new PatternValidationException("Chain must contain at least 2 edges");
         }
         
-        if (!(edges.get(0) instanceof EdgeNFT)) {
-            throw new IllegalArgumentException("ChainNFT requires EdgeNFT edges only");
+        for( Edge e : edges ) {
+            if (!(e instanceof EdgeNFT)) {
+                throw new PatternValidationException("Chain requires all edges to be EdgeNFT");
+            }
         }
 
-        String nft= ((EdgeNFT) edges.get(0)).getNftId();
+        for (int i = 0; i < edges.size() - 1; i++) {
+            if (!edges.get(i).getTo().equals(edges.get(i + 1).getFrom())) {
+                throw new PatternValidationException( "Chain's adjacent nodes don't match at position " + i);
+            }
+        }
+
+        String nft= getNFT();
 
         for (int i = 0; i < edges.size() - 1; i++) {
-            UserNode currentTo = edges.get(i).getTo();
-            UserNode nextFrom = edges.get(i + 1).getFrom();
             String currentNft= ((EdgeNFT) edges.get(i)).getNftId();
-
             if (!currentNft.equals(nft)) {
-                throw new IllegalArgumentException(
-                    "Invalid ChainNFT: edge " + i +
-                    " nft " + currentNft +
-                    " != nft " + nft
-                );
-            }
-
-            if (!currentTo.equals(nextFrom)) {
-                throw new IllegalArgumentException(
-                    "Invalid Chain: edge " + i +
-                    " destination != edge " + (i + 1) + " source"
-                );
+                throw new PatternValidationException("Chain's edges have different NFT IDs at position " + i);
             }
         }
     }
@@ -96,8 +76,8 @@ public class Chain extends Pattern {
     public String toString() {
         return String.format(
             "Chain: %s → ... → %s (k=%d , Δt=%d sec)",
-            getFirstNode().getAddress().substring(0, 8),
-            getLastNode().getAddress().substring(0, 8),
+            getFirstNode().getSimpleAddress(),
+            getLastNode().getSimpleAddress(),
             getSize(),
             getDuration()
         );

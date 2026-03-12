@@ -18,6 +18,15 @@ public class UserNode {
     }
 
     public String getAddress() { return address; }
+    public String getSimpleAddress() {
+        if (address == null) return null;
+
+        int len = address.length();
+        if (len <= 8) {
+            return address;
+        }
+        return address.substring(len - 8);
+    }
     public NavigableSet<Edge> getOutgoingEdges() { return outgoingEdges; }
     public NavigableSet<Edge> getIncomingEdges() { return incomingEdges; }
 

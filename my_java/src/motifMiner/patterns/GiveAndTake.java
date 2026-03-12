@@ -15,7 +15,7 @@ public class GiveAndTake extends Pattern {
         return getEdges().isEmpty() ? null : getEdges().get(0).getTo();
     }
 
-    public UserNode getCenter() {
+    public UserNode getCenterNode() {
         return getEdges().isEmpty() ? null : getEdges().get(1).getTo();
     }
     
@@ -24,12 +24,48 @@ public class GiveAndTake extends Pattern {
     }
 
     @Override
+    public void validate() throws PatternValidationException {
+        if (edges.size() < 2) {
+            throw new PatternValidationException(
+                "GiveAndTake must contain at least 2 edges"
+            );
+        }
+        if (edges.size() % 2 != 0) {
+            throw new PatternValidationException(
+                "GiveAndTake must contain an even number of edges"
+            );
+        }
+
+        UserNode center = getCenterNode();
+
+        for (int i = 0; i < edges.size(); i++) {
+            Edge e = edges.get(i);
+
+            if (i % 2 == 0) {
+                // vendita: center → X
+                if (!e.getFrom().equals(center)) {
+                    throw new PatternValidationException(
+                        "Expected selling edge at position " + i
+                    );
+                }
+            } else {
+                // acquisto: Y → center
+                if (!e.getTo().equals(center)) {
+                    throw new PatternValidationException(
+                        "Expected buying edge at position " + i
+                    );
+                }
+            }
+        }
+    }
+
+    @Override
     public String toString() {
         return String.format(
             "GiveAndTake:  %s → [%s] → %s (k=%d , Δt=%d sec)",
-            getFromNode().getAddress().substring(0, 8),
-            getCenter().getAddress().substring(0, 8),
-            getToNode().getAddress().substring(0, 8),
+            getFromNode().getSimpleAddress(),
+            getCenterNode().getSimpleAddress(),
+            getToNode().getSimpleAddress(),
             getSize(),
             getDuration()
         );

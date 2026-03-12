@@ -1,0 +1,13 @@
+=== GRAPH INFO ===
+Nodi: 0
+Archi: 0
+Delta (sec): 300
+
+
+=== MergedInStar (grouped by size) ===
+Totale pattern: 0
+
+
+=== MergedGiveAndTake (grouped by size) ===
+Totale pattern: 0
+

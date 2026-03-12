@@ -32,7 +32,7 @@ public class ConsecutiveOutStar extends OutStar {
     public String toString() {
         return String.format(
             "ConsecutiveOutStar: center %s (k=%d , Δt=%d sec)",
-            getCenter().getAddress().substring(0, 8),
+            getCenter().getSimpleAddress(),
             getSize(),
             getDuration()
         );

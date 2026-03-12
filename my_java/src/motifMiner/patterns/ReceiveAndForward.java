@@ -20,16 +20,52 @@ public class ReceiveAndForward extends Pattern {
     }
 
     public UserNode getForwardToNode() {
-        return edges.get(edges.size() - 1).getTo();
+        return edges.get(1).getTo();
+    }
+
+    @Override
+    public void validate() throws PatternValidationException {
+        if (edges.size() < 2) {
+            throw new PatternValidationException(
+                "ReceiveAndForward must contain at least 2 edges"
+            );
+        }
+        if (edges.size() % 2 != 0) {
+            throw new PatternValidationException(
+                "ReceiveAndForward must contain an even number of edges"
+            );
+        }
+
+        UserNode center = getCenterNode();
+
+        for (int i = 0; i < edges.size(); i++) {
+            Edge e = edges.get(i);
+
+            if (i % 2 == 0) {
+                // acquisto: Y → center
+                if (!e.getTo().equals(center)) {
+                    throw new PatternValidationException(
+                        "Expected buying edge at position " + i
+                    );
+                }
+            } else {
+                // vendita: center → X
+                if (!e.getFrom().equals(center)) {
+                    throw new PatternValidationException(
+                        "Expected selling edge at position " + i
+                    );
+                }
+            }
+        }
     }
 
     @Override
     public String toString() {
         return String.format(
             "ReceiveAndForward: %s → [%s] → %s (k=%d , Δt=%d sec)",
-            getReceiveFromNode(),
-            getCenterNode(),
-            getForwardToNode(),
+            getReceiveFromNode().getSimpleAddress(),
+            getCenterNode().getSimpleAddress(),
+            getForwardToNode().getSimpleAddress(),
             getSize(),
             getDuration()
         );

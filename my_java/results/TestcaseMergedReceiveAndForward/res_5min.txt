@@ -1,0 +1,27 @@
+=== GRAPH INFO ===
+Nodi: 18
+Archi: 16
+Delta (sec): 300
+
+
+=== MergedInStar (grouped by size) ===
+Totale pattern: 1
+
+size 3 → 1 pattern
+
+=== MergedGiveAndTake (grouped by size) ===
+Totale pattern: 2
+
+size 2 → 1 pattern
+size 4 → 1 pattern
+
+=== MergedReceiveAndForward (grouped by size) ===
+Totale pattern: 4
+
+size 2 → 3 pattern
+size 4 → 1 pattern
+
+=== MergedReceiveAndForwardNFT (grouped by size) ===
+Totale pattern: 3
+
+size 2 → 3 pattern

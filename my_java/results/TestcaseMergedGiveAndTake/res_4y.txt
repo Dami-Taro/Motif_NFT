@@ -1,0 +1,16 @@
+=== GRAPH INFO ===
+Nodi: 18
+Archi: 16
+Delta (sec): 126144000
+
+
+=== MergedInStar (grouped by size) ===
+Totale pattern: 2
+
+size 2 → 2 pattern
+
+=== MergedGiveAndTake (grouped by size) ===
+Totale pattern: 3
+
+size 2 → 1 pattern
+size 4 → 2 pattern

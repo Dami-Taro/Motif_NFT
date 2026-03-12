@@ -4,7 +4,7 @@ import java.util.List;
 
 import src.graph.Edge;
 
-public class ConsecutiveInStar extends InStar {
+public class ConsecutiveInStar extends DistinctInStar {
 
     private final Edge firstSell;
     private final Edge lastSell;
@@ -32,7 +32,7 @@ public class ConsecutiveInStar extends InStar {
     public String toString() {
         return String.format(
             "ConsecutiveInStar: center %s (k=%d , Δt=%d sec)",
-            getCenter().getAddress().substring(0, 8),
+            getCenter().getSimpleAddress(),
             getSize(),
             getDuration()
         );

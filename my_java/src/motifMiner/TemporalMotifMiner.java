@@ -3,7 +3,9 @@ package src.motifMiner;
 import java.util.*;
 
 import src.graph.Edge;
+import src.graph.EdgeNFT;
 import src.graph.Graph;
+import src.graph.MergedIterator;
 import src.graph.UserNode;
 import src.motifMiner.patterns.*;
 
@@ -84,17 +86,17 @@ public class TemporalMotifMiner {
         }
     }
 
-    // ============ IN-STAR PATTERN ============
+    // ============ DISTINCT IN-STAR PATTERN ============
     
     /**
-     * Pattern: InStar (A→X, B→X, C→X, ...)
+     * Pattern: DistinctInStar (A→X, B→X, C→X, ...)
      * Motif base: due archi A→X, B→X (A ≠ B)
      * Regola incrementale: aggiungere archi da nuovi nodi verso X
      * 
      * Significato: utente X che colleziona NFT da più utenti diversi
      */
-    public List<InStar> findInStars(int minSize) {
-        List<InStar> allPatterns = new ArrayList<>();
+    public List<DistinctInStar> findDistinctInStars(int minSize) {
+        List<DistinctInStar> allPatterns = new ArrayList<>();
 
         for (UserNode nodeX : graph.getNodes()) {
             List<Edge> incomingEdges =
@@ -104,14 +106,14 @@ public class TemporalMotifMiner {
 
             incomingEdges.sort(Comparator.comparingLong(Edge::getTimestamp));
 
-            findValidInStarSubsets(incomingEdges, minSize, allPatterns);
+            findValidDistinctInStarSubsets(incomingEdges, minSize, allPatterns);
         }
 
         return allPatterns;
     }
- 
-    private void findValidInStarSubsets(List<Edge> edges, int minSize, 
-                                        List<InStar> results) {
+
+    private void findValidDistinctInStarSubsets(List<Edge> edges, int minSize, 
+                                        List<DistinctInStar> results) {
         // Inizia dal primo arco e costruisci incrementalmente
         for (int start = 0; start <= edges.size() - minSize; start++) {
             Edge firstEdge = edges.get(start);
@@ -139,13 +141,379 @@ public class TemporalMotifMiner {
             }
             // Se abbiamo raggiunto la dimensione minima, salva il pattern
             if (currentPattern.size() >= minSize) {
-                results.add(new InStar(new ArrayList<>(currentPattern)));
+                results.add(new DistinctInStar(new ArrayList<>(currentPattern)));
             }
         }
     }
     
-   
+    // ============ MERGED IN-STAR PATTERN ============
+
+    /**
+     * Pattern: Consecutive InStar (A→X, B→X, C→X, ...)
+     * Motif base: due archi A→X, B→X
+     * Regola incrementale: aggiungere archi verso X
+     * 
+     * Significato: utente X che colleziona NFT in un intervallo di tempo ristretto
+     */
+    public List<InStar> findMergedInStars(int minSize) {
+
+        List<InStar> results = new ArrayList<>();
+
+        for (UserNode center : graph.getNodes()) {
+
+            MergedIterator mergedIt = new MergedIterator(
+                center.getOutgoingEdges(),
+                center.getIncomingEdges()
+            );
+
+            findValidMergedInStarSubsets(
+                center,
+                mergedIt,
+                minSize,
+                results
+            );
+        }
+
+        return results;
+    }
+
+    private void findValidMergedInStarSubsets(
+            UserNode center,
+            MergedIterator mergedIt,
+            int minSize,
+            List<InStar> results) {
+
+        List<Edge> currentPattern = new ArrayList<>();
+        long startTime = -1;
+        long endTime = -1;
+
+        while (mergedIt.hasNext()) {
+
+            Edge edge = mergedIt.next();
+
+            // 1) FINE PER DELTA
+            if ( !currentPattern.isEmpty() && edge.getTimestamp() > endTime ) {
+
+                if (currentPattern.size() >= minSize) {
+                    results.add(new InStar(new ArrayList<>(currentPattern)));
+                }
+
+                currentPattern.clear();
+                startTime = -1;
+                endTime = -1;
+                // NOT continue → l’arco va rivalutato
+            }
+
+            // 2) FINE PER ARCO NON INCREMENTALE
+            if ( !edge.getTo().equals(center) ) {
+
+                if ( !currentPattern.isEmpty() ) {
+                    if (currentPattern.size() >= minSize) {
+                        results.add(new InStar(new ArrayList<>(currentPattern)));
+                    }
+                    currentPattern.clear();
+                    startTime = -1;
+                    endTime = -1;
+                }
+
+                continue;
+            }
+
+            // 3) ARCO INCREMENTALE
+            if (edge.getTo().equals(center)) {
+
+                if (currentPattern.isEmpty()) {
+                    startTime = edge.getTimestamp();
+                    endTime = startTime + delta;
+                }
+
+                currentPattern.add(edge);
+                continue;
+            }
+
+            System.err.println("Unexpected case in findValidMergedInStarSubsets");
+        }
+
+        // EVENTUALE PATTERN FINALE
+        if (currentPattern.size() >= minSize) {
+            results.add(new InStar(new ArrayList<>(currentPattern)));
+        }
+        currentPattern.clear();
+        startTime = -1;
+        endTime = -1;
+        
+    }
+
+    // ============ GIVE AND TAKE PATTERN ============
+
+    /**
+     * Pattern: GiveAndTake (B→C, A→B, B→D, E→B, ...)
+     * Motif base: due archi B→C, A→B (B vende poi compra)
+     * Regola incrementale: aggiungere altri archi alternando vendite (B→X) e acquisti (Y→B)
+     * 
+     * Significato: utente B che alterna vendite e acquisti
+     * Gli archi devono alternarsi: vendita (outgoing), acquisto (incoming), vendita, acquisto, ...
+     */
 
 
+    // ============ MERGED GIVE AND TAKE PATTERN ============
+    /**
+     * Pattern: GiveAndTake (B→C, A→B, B→D, E→B, ...) con algoritmo merged
+     * Motif base: due archi B→C, A→B (B vende poi compra)
+     * Regola incrementale: aggiungere altri archi alternando vendite (B→X) e acquisti (Y→B)
+     */
+    public List<GiveAndTake> findMergedGiveAndTakes(int minSize) {
+
+        List<GiveAndTake> results = new ArrayList<>();
+
+        for (UserNode center : graph.getNodes()) {
+
+            MergedIterator mergedIt = new MergedIterator(
+                center.getOutgoingEdges(),
+                center.getIncomingEdges()
+            );
+
+            findMergedGiveAndTakePatterns(
+                center,
+                mergedIt,
+                minSize,
+                results
+            );
+        }
+
+        return results;
+    }
+  
+    private void findMergedGiveAndTakePatterns(
+            UserNode center,
+            MergedIterator mergedIt,
+            int minSize,
+            List<GiveAndTake> results) {
+
+        List<Edge> currentPattern = new ArrayList<>();
+
+        boolean expectingOutgoing = true; // il primo deve essere vendita
+        long startTime = -1;
+        long endTime = -1;
+
+        while (mergedIt.hasNext()) {
+
+            Edge edge = mergedIt.next();
+
+            // 1) FINE PER DELTA
+            if ( !currentPattern.isEmpty() && edge.getTimestamp() > endTime ) {
+
+                if (!expectingOutgoing) {
+                    currentPattern.remove(currentPattern.size() - 1);
+                }
+                if (currentPattern.size() >= minSize) {
+                    results.add(new GiveAndTake(new ArrayList<>(currentPattern)));
+                }
+
+                currentPattern.clear();
+                startTime = -1;
+                endTime = -1;
+                expectingOutgoing = true;
+                // NOT continue → l’arco va rivalutato
+            }
+
+            // 2) FINE PER ARCO NON INCREMENTALE
+            if(  (expectingOutgoing && !edge.getFrom().equals(center))  || 
+                 (!expectingOutgoing && !edge.getTo().equals(center)) ) {
+
+                if(currentPattern.isEmpty()) {
+                    continue;
+                }
+
+                if (!expectingOutgoing) {
+                    currentPattern.remove(currentPattern.size() - 1);
+                }
+
+                if (currentPattern.size() >= minSize) {
+                    results.add(new GiveAndTake(new ArrayList<>(currentPattern)));
+                }
+                currentPattern.clear();
+                startTime = -1;
+                endTime = -1;
+                expectingOutgoing = true;
+
+                continue;
+            }
+
+            // 3) ARCO INCREMENTALE
+            if( (expectingOutgoing && edge.getFrom().equals(center))  || 
+                (!expectingOutgoing && edge.getTo().equals(center)) ) {
+
+                if (currentPattern.isEmpty()) {
+                    startTime = edge.getTimestamp();
+                    endTime = startTime + delta;
+                }
+
+                currentPattern.add(edge);
+                expectingOutgoing = !expectingOutgoing;
+
+                continue;
+            }
+
+            System.err.println("Unexpected case in findMergedGiveAndTakePatterns");
+
+        }
+        // EVENTUALE PATTERN FINALE
+        if (!currentPattern.isEmpty() && !expectingOutgoing) {
+            currentPattern.remove(currentPattern.size() - 1);
+        }
+        if (currentPattern.size() >= minSize) {
+            results.add(new GiveAndTake(new ArrayList<>(currentPattern)));
+        }
+    }
+
+    // ============ MERGED RECEIVE AND FORWARD NFT PATTERN ============
+    /**
+     * Pattern: ReceiveAndForward (A→B, B→C, D→B, B→E, ...) con algoritmo merged
+     * Motif base: due archi B→C, A→B (B vende poi compra)
+     * Regola incrementale: aggiungere altri archi alternando acquisti (Y→B) e vendite (B→X) dello stesso NFT
+     */
+    public List<ReceiveAndForward> findMergedReceiveAndForward(int minSize) {
+
+        List<ReceiveAndForward> results = new ArrayList<>();
+
+        for (UserNode center : graph.getNodes()) {
+
+            MergedIterator mergedIt = new MergedIterator(
+                center.getOutgoingEdges(),
+                center.getIncomingEdges()
+            );
+
+            findMergedReceiveAndForwardPatterns(
+                center,
+                mergedIt,
+                minSize,
+                results
+            );
+        }
+
+        return results;
+    }
+  
+    private void findMergedReceiveAndForwardPatterns(
+            UserNode center,
+            MergedIterator mergedIt,
+            int minSize,
+            List<ReceiveAndForward> results) {
+
+        List<Edge> currentPattern = new ArrayList<>();
+
+        boolean expectingIncoming = true; // il primo deve essere vendita
+        long startTime = -1;
+        long endTime = -1;
+
+        while (mergedIt.hasNext()) {
+
+            Edge edge = mergedIt.next();
+
+            // 1) FINE PER DELTA
+            if ( !currentPattern.isEmpty() && edge.getTimestamp() > endTime ) {
+
+                if (!expectingIncoming) {
+                    currentPattern.remove(currentPattern.size() - 1);
+                }
+                if (currentPattern.size() >= minSize) {
+                    results.add(new ReceiveAndForward(new ArrayList<>(currentPattern)));
+                }
+
+                currentPattern.clear();
+                startTime = -1;
+                endTime = -1;
+                expectingIncoming = true;
+                // NOT continue → l’arco va rivalutato
+            }
+
+            // 2) FINE PER ARCO NON INCREMENTALE
+            if(  (expectingIncoming && !edge.getTo().equals(center))  || 
+                 (!expectingIncoming && !edge.getFrom().equals(center)) ) {
+
+                if(currentPattern.isEmpty()) {
+                    continue;
+                }
+
+                if (!expectingIncoming) {
+                    currentPattern.remove(currentPattern.size() - 1);
+                }
+
+                if (currentPattern.size() >= minSize) {
+                    results.add(new ReceiveAndForward(new ArrayList<>(currentPattern)));
+                }
+                currentPattern.clear();
+                startTime = -1;
+                endTime = -1;
+                expectingIncoming = true;
+
+                continue;
+            }
+
+            // 3) ARCO INCREMENTALE
+            if( (expectingIncoming && edge.getTo().equals(center))  || 
+                (!expectingIncoming && edge.getFrom().equals(center)) ) {
+
+                if (currentPattern.isEmpty()) {
+                    startTime = edge.getTimestamp();
+                    endTime = startTime + delta;
+                }
+
+                currentPattern.add(edge);
+                expectingIncoming = !expectingIncoming;
+
+                continue;
+            }
+
+            System.err.println("Unexpected case in findValidMergedReceiveAndForwardPatterns");
+
+        }
+        // EVENTUALE PATTERN FINALE
+        if (!currentPattern.isEmpty() && !expectingIncoming) {
+            currentPattern.remove(currentPattern.size() - 1);
+        }
+        if (currentPattern.size() >= minSize) {
+            results.add(new ReceiveAndForward(new ArrayList<>(currentPattern)));
+        }
+    }
+
+
+    // ============ MERGED RECEIVE AND FORWARD NFT PATTERN ============
+    /**
+     * Pattern: ReceiveAndForward (A→B, B→C, D→B, B→E, ...) con algoritmo merged
+     * Motif base: due archi B→C, A→B (B vende poi compra)
+     * Regola incrementale: aggiungere altri archi alternando acquisti (Y→B) e vendite (B→X) dello stesso NFT
+     */
+    public List<ReceiveAndForwardNFT> findMergedReceiveAndForwardNFT(int minSize, List<ReceiveAndForward> receiveAndForwardPatterns) {
+        List<ReceiveAndForwardNFT> results = new ArrayList<>();
+
+        List<Edge> currentPattern;
+
+        for (ReceiveAndForward pattern : receiveAndForwardPatterns) {
+
+            if ( !( (pattern.getEdges().get(0)) instanceof EdgeNFT ) ) continue;
+            
+            currentPattern = new ArrayList<>();
+            List<Edge> edges = pattern.getEdges();            
+
+            for (int i = 0; i < edges.size(); i+=2) {
+                String nftReceived = ( (EdgeNFT) edges.get(i) ).getNftId();
+                String nftForwarded = ( (EdgeNFT) edges.get(i+1) ).getNftId();
+
+                if( nftReceived.equals(nftForwarded) ){
+                    currentPattern.add(edges.get(i));   // received
+                    currentPattern.add(edges.get(i+1)); // forwarded
+                }
+            }
+
+            if(currentPattern.size()>=minSize) results.add( new ReceiveAndForwardNFT(currentPattern) );
+
+        }
+
+        return results;
+
+    }
+    
 
 }

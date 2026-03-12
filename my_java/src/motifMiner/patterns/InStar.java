@@ -26,10 +26,29 @@ public class InStar extends Pattern {
     }
 
     @Override
+    public void validate() throws PatternValidationException {
+        if (edges.size() < 2) {
+            throw new PatternValidationException(
+                "InStar must contain at least 2 edges"
+            );
+        }
+
+        UserNode center = edges.get(0).getTo();
+
+        for (Edge e : edges) {
+            if (!e.getTo().equals(center)) {
+                throw new PatternValidationException(
+                    "All edges must point to the same center node"
+                );
+            }
+        }
+    }
+
+    @Override
     public String toString() {
         return String.format(
             "InStar: center %s (k=%d , Δt=%d sec)",
-            getCenter().getAddress().substring(0, 8),
+            getCenter().getAddress(),
             getSize(),
             getDuration()
         );

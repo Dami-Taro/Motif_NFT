@@ -33,4 +33,5 @@ public abstract class Pattern {
     public String toString(){
         return String.format("Pattern (k=%d , Δt=%d sec)", getSize(), getDuration());
     }
+    public abstract void validate() throws PatternValidationException;
 }

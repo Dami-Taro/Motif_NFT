@@ -26,10 +26,36 @@ public class OutStar extends Pattern {
     }
 
     @Override
+    public void validate() throws PatternValidationException {
+        if (edges.size() < 2) {
+            throw new PatternValidationException(
+                "OutStar must contain at least 2 edges"
+            );
+        }
+
+        UserNode center = edges.get(0).getFrom();
+        Set<UserNode> targets = new HashSet<>();
+
+        for (Edge e : edges) {
+            if (!e.getFrom().equals(center)) {
+                throw new PatternValidationException(
+                    "All edges must originate from the same center node"
+                );
+            }
+
+            if (!targets.add(e.getTo())) {
+                throw new PatternValidationException(
+                    "Duplicate target node in OutStar"
+                );
+            }
+        }
+    }
+
+    @Override
     public String toString() {
         return String.format(
             "OutStar: center %s (k=%d , Δt=%d sec)",
-            getCenter().getAddress().substring(0, 8),
+            getCenter().getSimpleAddress(),
             getSize(),
             getDuration()
         );
