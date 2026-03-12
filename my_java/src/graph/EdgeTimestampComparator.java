@@ -15,6 +15,6 @@ public class EdgeTimestampComparator implements Comparator<Edge> {
         if (cmp != 0) return cmp;
 
         // tie-breaker deterministico
-        return Long.compare(e1.getId(), e2.getId());
+        return Long.compare(e2.getId(), e1.getId());
     }
 }

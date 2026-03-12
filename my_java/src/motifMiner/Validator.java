@@ -6,7 +6,6 @@ import java.util.*;
 import src.graph.DatasetNFT;
 import src.graph.Edge;
 import src.graph.UserNode;
-import src.io.ResultWriter;
 import src.motifMiner.patterns.Pattern;
 import src.motifMiner.patterns.PatternValidationException;
 

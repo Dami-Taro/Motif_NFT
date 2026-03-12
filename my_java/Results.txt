@@ -1,0 +1,81 @@
+Datasets:
+    1) axie_infinity
+    2) decenterland
+    3) the_sandbox
+
+Filters:
+    a) unfiltered: ogni transazione da csv al grafo
+    b) no 0x0: rimosse le transazioni con buyer o seller 0x0000000000000000000000000000000000000000 -> mint o burn
+    c) filtered: rimosse transazioni con buyer entity o seller entity diverse da "" -> "Element NFT Marketplace", "PoolTogether", "MoonPay", "Reservoir", "Squid", "Burn Addresses"
+
+1: axie_infinity
+    a) unfiltered
+        Nodi: 48543
+        Archi: 713365
+        Nfts: 235392
+        interruptions: 480
+    b) no 0x0
+        Nodi: 48523
+        Archi: 523527
+        Nfts: 181956
+        interruptions: 359
+    c) filtered
+        Nodi: 48520
+        Archi: 523524
+        Nfts: 181955
+        interruptions: 359
+        
+2: decenterland
+    a) unfiltered
+        Nodi: 39429
+        Archi: 421050
+        Nfts: 70966
+        interruptions: 274683
+    b) no 0x0
+        Nodi: 29490
+        Archi: 259733
+        Nfts: 32255
+        interruptions: 186545
+    c) filtered
+        Nodi: 29427
+        Archi: 259367
+        Nfts: 32223
+        interruptions: 186426
+
+3: the_sandbox
+    a) unfiltered
+        Nodi: 191928
+        Archi: 717436
+        Nfts: 121686
+        interruptions: 398073
+    b) no 0x0
+        Nodi: 185742
+        Archi: 591042
+        Nfts: 81265
+        interruptions: 394218
+    c) filtered
+        Nodi: 185648
+        Archi: 590122
+        Nfts: 81157
+        interruptions: 394098
+
+
+Acquisizione dati:
+csv completo:
+    block_number,block_timestamp,block_hash,transaction_hash,transaction_index,log_index,value,contract_type,transaction_type,token_address,token_id,from_address_entity,from_address_entity_logo,from_address,from_address_label,to_address_entity,to_address_entity_logo,to_address,to_address_label,amount,verified,operator,possible_spam,verified_collection
+csv rilevante:
+    from_address,to_address,block_timestamp,token_id
+    from_address_entity,to_address_entity
+
+filtraggio:
+    no 0x0: filter out if
+        from_address_entity == 0x0000000000000000000000000000000000000000 o
+        to_address_entity   == 0x0000000000000000000000000000000000000000
+    filtered: filter out if 
+        from_address_entity != "" o
+        to_address_entity   != ""
+
+problemi riscontrati:
+    in dataset (2) e (3) molti nft_id sono nella forma "1.3951577043758477e+40", "1.157920892373162e+77", "1.0208471007628154e+39" anziché i classici numeri interi come "100", "992", "1361" -> devono essere ignorati?
+    token_address è un valore fisso per ogni transazione della stessa collezione quindi inutilizzabile
+    transaction_type ha valore "Single" per ogni transazione e quindi inutilizzabile -> ho discriminato tramite il campo from_address_entity e to_address_entity

@@ -1,0 +1,11 @@
+=== all transactions nft : chains ===
+Found 6 chain interruption in 7 different nfts
+nft:	 node1 -> node2 ... 	|	 nextChain ...
+
+0xNFT1:	0xusr1 -> xcenter1 -> 0xusr2	|	xcenter1 -> 0xusr3	|	0xusr4 -> xcenter1 -> 0xusr5	|	0xusr6 -> xcenter1 -> 0xusr7	|	0xusr8 -> xcenter1	|	
+0xNFT2:	0xusr8 -> xcenter2	|	
+0xNFT3:	0xusr13 -> xcenter3	|	0xusr14 -> xcenter3	|	0xusr15 -> xcenter3	|	
+0xNFT4:	xcenter2 -> 0xusr9	|	
+0xNFT5:	0xusr10 -> xcenter2	|	
+0xNFT6:	xcenter2 -> 0xusr11	|	
+0xNFT7:	0xusr12 -> xcenter2	|	

@@ -160,6 +160,47 @@ public class DatasetNFT {
         ResultWriter.appendLinesToFile(everyNftNonContiguousTransactions,outputFile);
     }
 
+    // controlla che ogni NavigableSet<Edge> nftTransactions sia contigua
+    // se non lo è stampa le catene di transazioni contigue
+    public void printAllTransactions(Path outputFile){
+        String title = "=== all transactions nft : chains ===";
+        int totalChainInterruptions = 0;
+
+        List<String> everyNftNonContiguousTransactions = new ArrayList<>();
+
+        for (String nft : this.getNFTs()) {
+
+            List<NavigableSet<Edge>> contiguousTransactions = this.getNftContiguousTransaction(nft);
+            totalChainInterruptions += contiguousTransactions.size() - 1;
+            StringBuilder line = new StringBuilder();
+
+            if( true ){ //contiguousTransactions.size() > 1 >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
+                for (NavigableSet<Edge> contiguousTransaction : contiguousTransactions) {
+
+                    if (contiguousTransaction.isEmpty()) continue;
+                    Edge curretEdge = contiguousTransaction.first();
+
+                    for (Edge edge : contiguousTransaction) {
+                        curretEdge = edge;
+                        line.append(curretEdge.getFrom().getSimpleAddress() + " -> " );
+                    }
+                    line.append(curretEdge.getTo().getSimpleAddress() + "\t|\t");
+                }
+                everyNftNonContiguousTransactions.add(nft + ":\t" + line.toString());
+            }
+
+        }
+        //aggiungo linee iniziali
+        int nftcount = everyNftNonContiguousTransactions.size();
+        if( nftcount > 0 ){
+            everyNftNonContiguousTransactions.add(0, title);
+            everyNftNonContiguousTransactions.add(1, "Found " + totalChainInterruptions + " chain interruption in " + nftcount + " different nfts");
+            everyNftNonContiguousTransactions.add(2, "nft:\t node1 -> node2 ... \t|\t nextChain ...\n");
+        }
+
+        ResultWriter.appendLinesToFile(everyNftNonContiguousTransactions,outputFile);
+    }
+
     // SO GIÀ CHE NON È CONTIGUA: controlla se NavigableSet<Edge> nftTransactions contiene transazioni non contigue
     public void validateAbortedTransactions(Path outputFile){
         /* 

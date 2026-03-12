@@ -5,6 +5,7 @@ import java.nio.file.Paths;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
+import java.util.NavigableSet;
 
 import src.graph.DatasetNFT;
 import src.graph.Edge;
@@ -29,7 +30,7 @@ public class Main {
         int minSameNFTCycle = 2;
 
         boolean processFileList = false; // se true per ogni file crea datsetNFT e vede se è valido
-        boolean loadFileList = true; // se true, carica i FileInfos da file invece di ricostruirli da zero
+        boolean loadFileList = false; // se true, carica i FileInfos da file invece di ricostruirli da zero
         boolean customFileList = true; // se true, carica i FileInfos da file invece di ricostruirli da zero
         boolean continueDeltaAfterFileListBuilt = true; // se true, continua con l'analisi dopo la creazione di filesInfos
         boolean continueMiningAfterDeltaComputed = true; // se true, continua con l'analisi dopo la creazione di filesInfos
@@ -56,13 +57,25 @@ public class Main {
         }
         else if (customFileList) {
             //fileList.add(new FileInfos(Paths.get("collections/boredapeyachtclub.json"), 0));
-            fileList.add(new FileInfos(Paths.get("collections/pfp/proof-moonbirds.json"), 0));
+            //fileList.add(new FileInfos(Paths.get("collections/pfp/proof-moonbirds.json"), 0));
             //fileList.add(new FileInfos(Paths.get("collections/pfp/cyberkongz.json"), 0));
             //fileList.add(new FileInfos(Paths.get("collections/gaming/cryptokitties.json"), 0));
             //fileList.add(new FileInfos(Paths.get("collections/gaming/neo-tokyo-part-4-land-deeds-legacy.json"), 0));
             //fileList.add(new FileInfos(Paths.get("collections/gaming/nftrees.json"), 0));
             //fileList.add(new FileInfos(Paths.get("collections/TestcaseSameNFTCycle.json"), 0));
             //fileList.add(new FileInfos(Paths.get("collections/gaming/bccg.json"), 0));
+            //fileList.add(new FileInfos(Paths.get("collections/DatasetJson/axie_infinity.json"), 0));
+            
+            //fileList.add(new FileInfos(Paths.get("collections/DatasetJson_filtered/axie_infinity.json"), 0));
+            //fileList.add(new FileInfos(Paths.get("collections/DatasetJson_no0x0/axie_infinity.json"), 0));
+            //fileList.add(new FileInfos(Paths.get("collections/DatasetJson_unfiltered/axie_infinity.json"), 0));
+
+            //fileList.add(new FileInfos(Paths.get("collections/DatasetJson_nftHash/axie_infinity.json"), 0));
+            //fileList.add(new FileInfos(Paths.get("collections/DatasetJson_nftHash/decentraland.json"), 0));
+            //fileList.add(new FileInfos(Paths.get("collections/DatasetJson_nftHash/the_sandbox.json"), 0));
+            
+            //fileList.add(new FileInfos(Paths.get("collections/DatasetJson/decentraland.json"), 0));
+            //fileList.add(new FileInfos(Paths.get("collections/DatasetJson/the_sandbox.json"), 0));
         }
 
         System.out.println("== File list of " + fileList.size() + " collections ===");
@@ -87,6 +100,14 @@ public class Main {
                 Graph g = Loader.loadGraphFromJsonNFT(collectionPath);
                 DatasetNFT dsNFT = Loader.LoadDatasetNFTFromJson(collectionPath);
 
+
+                //carefull
+                Path resultPRINTALL = resultPath.resolve("zPRINT_ALL_NFT_TRANSACTIONS.txt");
+                ResultWriter.createNewFile(resultPRINTALL);
+                dsNFT.printAllTransactions(resultPRINTALL);
+                
+                
+
                 // CONTINUOUS TRANSACTIONS FILES
                 Path resultContiguousFile = resultPath.resolve("zContinuousTransactions.txt");
                 Path resultNonContiguousFile = resultPath.resolve("zNonContiguousTransactions.txt");
@@ -94,7 +115,25 @@ public class Main {
                 ResultWriter.createNewFile(resultNonContiguousFile);
                 dsNFT.printNftContiguousTransactionSizes(resultContiguousFile);
                 dsNFT.printOnlyNonContiguousTransactions(resultNonContiguousFile);
+
+                // boolean truee = true;
+                // if (truee) return;
+/*
+                // aggiungo a resultContiguusFile le transazioni dell'nft 2163
+                List<String> linesToAdd = new ArrayList<>();
+                linesToAdd.add("Contiguous");
+                NavigableSet<Edge> nftTransactions = dsNFT.getNFTTransactions("2163");
+                StringBuilder sb = new StringBuilder();
+                sb.append("NFT 2163 transactions: ");
+                for(Edge e : nftTransactions) {
+                    sb.append(e.getFrom().getSimpleAddress() + " -> ");
+                }
+                linesToAdd.add(sb.toString());
+                ResultWriter.appendLinesToFile(linesToAdd, resultNonContiguousFile);
+*/
                 
+
+
                 // ===== SET DELTAS =====
                 Map<String, Long> deltas = Preprocess.computeDeltaMap(g);
 
