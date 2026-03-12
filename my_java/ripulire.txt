@@ -1,0 +1,11 @@
+https([^']*)
+'traits': \[([^\]]*)\]
+'nft': \{([^}]*)\},
+'payment': \{([^}]*)\},
+
+buyer -> #buyer#
+seller -> #seller#
+time_stamp -> #time_stamp#
+event_type -> #event_type#
+
+#event_type#([^#]*)

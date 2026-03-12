@@ -1,0 +1,39 @@
+# cartelle pesanti
+**/collections/
+**/results/
+
+# altre cartelle da ignorare
+testcase/
+Ambiente_prova/
+
+# file extra
+prompt.txt
+motifCounter_V2.txt
+my_python/boredapeyachtclub.txt
+my_python/ESEGUIRE_CODICE_PYTHON.txt
+my_python/myDataset.csv
+my_python/output.json
+my_python/output_file.json
+my_python/zContinuousTransactions.txt
+my_python/zNonContiguousTransactions.txt
+
+# dataset python
+my_python/Dataset/
+my_python/DatasetJson_filtered/
+my_python/DatasetJson_nftHash/
+my_python/DatasetJson_no0x0/
+my_python/DatasetJson_unfiltered/
+my_python/jsonCollections/
+
+# file compilati java
+*.class
+
+# eventuali log
+*.log
+
+# file temporanei
+*.tmp
+
+# file di dati
+*.json
+
