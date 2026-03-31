@@ -3,6 +3,8 @@ axie_infinity:
     filtered:   N:48520, E:523524, Nfts:181955, X:359, brokenNfts:354
     raw:
         assets: N:48520, E:523524, Nfts:181955, X:359, brokenNfts:354
+    raw_unique:
+        assets: N:48497, E:510201, Nfts:176172, X:2225, brokenNfts:2106
 
 
 decenterland:
@@ -13,6 +15,11 @@ decenterland:
         estate: N:3618,  E:8553,   Nfts:3881,  X:41,    brokenNfts:39
         land:   N:14780, E:185226, Nfts:86574, X:34,    brokenNfts:34
         names:  N:10037, E:19470,  Nfts:13440, X:6,     brokenNfts:6
+    raw_unique:
+        assets: N:7522,  E:31705,  Nfts:15774, X:7745,  brokenNfts:4102
+        estate: N:3555,  E:7212,   Nfts:3816,  X:459,   brokenNfts:372
+        land:   N:14714, E:53532,  Nfts:23451, X:3472,  brokenNfts:2906
+        names:  N:10010, E:16698,  Nfts:12831, X:178,   brokenNfts:175
 
 
 the_sandbox:
@@ -21,6 +28,9 @@ the_sandbox:
     raw:
         assets: N:166197, E:466073, Nfts:6722,   X:445000, brokenNfts:5443
         land:   N:29569,  E:189734, Nfts:80707,  X:182,    brokenNfts:182
+    raw_unique:
+        assets: N:150326, E:330170, Nfts:6028,   X:313407, brokenNfts:4663
+        land:   N:29434,  E:63006,  Nfts:31325,  X:2103,   brokenNfts:1905
 
 
 

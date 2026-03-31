@@ -78,14 +78,14 @@ public class Main {
             //fileList.add(new FileInfos(Paths.get("collections/DatasetJson/the_sandbox.json"), 0));
 
 
-            fileList.add(new FileInfos(Paths.get("collections/DatasetJson_raw/axie_infinity_assets.json"), 0));
-            fileList.add(new FileInfos(Paths.get("collections/DatasetJson_raw/decentraland_assets.json"), 0));
-            fileList.add(new FileInfos(Paths.get("collections/DatasetJson_raw/the_sandbox_assets.json"), 0));
+            fileList.add(new FileInfos(Paths.get("collections/DatasetJson_raw_unique/axie_infinity_assets.json"), 0));
+            fileList.add(new FileInfos(Paths.get("collections/DatasetJson_raw_unique/decentraland_assets.json"), 0));
+            fileList.add(new FileInfos(Paths.get("collections/DatasetJson_raw_unique/the_sandbox_assets.json"), 0));
 
-            fileList.add(new FileInfos(Paths.get("collections/DatasetJson_raw/decentraland_estate.json"), 0));
-            fileList.add(new FileInfos(Paths.get("collections/DatasetJson_raw/decentraland_land.json"), 0));
-            fileList.add(new FileInfos(Paths.get("collections/DatasetJson_raw/decentraland_names.json"), 0));
-            fileList.add(new FileInfos(Paths.get("collections/DatasetJson_raw/the_sandbox_land.json"), 0));
+            fileList.add(new FileInfos(Paths.get("collections/DatasetJson_raw_unique/decentraland_estate.json"), 0));
+            fileList.add(new FileInfos(Paths.get("collections/DatasetJson_raw_unique/decentraland_land.json"), 0));
+            fileList.add(new FileInfos(Paths.get("collections/DatasetJson_raw_unique/decentraland_names.json"), 0));
+            fileList.add(new FileInfos(Paths.get("collections/DatasetJson_raw_unique/the_sandbox_land.json"), 0));
         }
 
         System.out.println("== File list of " + fileList.size() + " collections ===");

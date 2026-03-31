@@ -3,7 +3,7 @@ import os
 from datetime import datetime
 
 INPUT_ROOT = "my_python/DatasetRaw"
-OUTPUT_ROOT = "my_python/DatasetJson_raw"
+OUTPUT_ROOT = "my_python/DatasetJson_raw_unique"
 #INPUT_ROOT = "my_python/DatasetExtra"
 #OUTPUT_ROOT = "my_python/DatasetJson_extra"
 
@@ -34,6 +34,10 @@ def convert_collection(collection_path, output_file):
     # Ordinamento corretto: 0,1,2,3,...
     files.sort(key=extract_index)
 
+    # 🔥 struttura per deduplicazione globale della collezione
+    seen_transactions = {}
+    duplicate_count = 0
+
     with open(output_file, "w", encoding="utf-8") as fout:
 
         for filename in files:
@@ -62,12 +66,15 @@ def convert_collection(collection_path, output_file):
 
                 possible_spam = tx.get("possible_spam")
 
+                block_hash = tx.get("block_hash")
+                tx_hash = tx.get("transaction_hash")
+
                 # ------------------------
                 # FILTRI
                 # ------------------------
 
                 # dati mancanti
-                if not seller or not buyer or not token_id:
+                if not seller or not buyer or not token_id or not block_hash or not tx_hash:
                     continue
 
                 # skip se ci sono entity
@@ -77,6 +84,20 @@ def convert_collection(collection_path, output_file):
                 # spam
                 if possible_spam is True:
                     continue
+
+                # ------------------------
+                # FILTRO DUPLICATI
+                # ------------------------
+
+                if block_hash not in seen_transactions:
+                    seen_transactions[block_hash] = set()
+
+                if tx_hash in seen_transactions[block_hash]:
+                    #print(f"skip {tx_hash} bc duplicated")
+                    duplicate_count += 1
+                    continue  # duplicato
+
+                seen_transactions[block_hash].add(tx_hash)
 
                 # ------------------------
 
@@ -98,6 +119,7 @@ def convert_collection(collection_path, output_file):
 
             fout.write(json.dumps(wrapper) + "\n")
 
+    print(f"Duplicati rimossi: {duplicate_count}")
     print(f"Creato: {output_file}")
 
 
