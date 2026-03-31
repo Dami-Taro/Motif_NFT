@@ -3,10 +3,10 @@ import json
 import os
 from datetime import datetime
 
-INPUT_DIR = "Dataset"
-OUTPUT_DIR = "DatasetJson_filtered"
+INPUT_DIR = "my_python/Dataset"
+OUTPUT_DIR = "my_python/DatasetJson_count"
 
-NULL_ADDRESS = "0x0000000000000000000000000000000000000000"
+#NULL_ADDRESS = "0x0000000000000000000000000000000000000000"
 
 
 def iso_to_epoch(ts):
@@ -18,6 +18,13 @@ def iso_to_epoch(ts):
 
 
 def convert_csv_to_json(input_path, output_path):
+
+    # ------------------------
+    # CONTATORI
+    # ------------------------
+    incomplete_count = 0
+    spam_count = 0
+    entity_counts = {}
 
     with open(input_path, newline='', encoding="utf-8") as fin, \
          open(output_path, "w", encoding="utf-8") as fout:
@@ -41,14 +48,36 @@ def convert_csv_to_json(input_path, output_path):
             possible_spam = row.get("possible_spam")
 
             # ------------------------
-            # FILTRI
+            # FILTRI + CONTATORI
             # ------------------------
 
             # dati mancanti
-            if not seller or not buyer or not token_address or not token_id: #token_hash:
-                print(f"{input_path} - skipped line {line_number} (missing fields)")
+            if not seller or not buyer or not token_address or not token_id:
+                incomplete_count += 1
                 continue
 
+            entity_skip = False
+
+            # seller entity
+            if seller_entity:
+                if seller_entity not in entity_counts:
+                    entity_counts[seller_entity] = {"seller": 0, "buyer": 0}
+                entity_counts[seller_entity]["seller"] += 1
+                #continue
+                entity_skip = True
+
+            # buyer entity
+            if buyer_entity:
+                if buyer_entity not in entity_counts:
+                    entity_counts[buyer_entity] = {"seller": 0, "buyer": 0}
+                entity_counts[buyer_entity]["buyer"] += 1
+                #continue
+                entity_skip = True
+
+            if entity_skip :
+                continue
+
+            """
             # mint
             if seller.lower() == NULL_ADDRESS:
                 #print(f"{input_path} - skipped line {line_number} (mint)")
@@ -58,28 +87,16 @@ def convert_csv_to_json(input_path, output_path):
             if buyer.lower() == NULL_ADDRESS:
                 #print(f"{input_path} - skipped line {line_number} (burn)")
                 continue
-
             """
-            # token_id corrotti (float scientifici)
-            if "e+" in token_id.lower():
-                continue"""
 
             # spam nft
             if possible_spam and possible_spam.lower() == "true":
-                continue
-
-            # interazioni con smart contract
-            if seller_entity:
-                print(f"{input_path} - skipped line {line_number} ({seller_entity})")
-                continue
-
-            if buyer_entity:
-                print(f"{input_path} - skipped line {line_number} ({buyer_entity})")
+                spam_count += 1
                 continue
 
             # ------------------------
 
-            identifier = f"{token_id}" #f"{token_hash}" 
+            identifier = f"{token_id}"
 
             event = {
                 "asset_events": [
@@ -96,11 +113,22 @@ def convert_csv_to_json(input_path, output_path):
 
             fout.write(json.dumps(event) + "\n")
 
+    # ------------------------
+    # STAMPA RISULTATI
+    # ------------------------
+
+    print(f"\n--- Statistiche per {os.path.basename(input_path)} ---")
+    print(f"Incompleto: {incomplete_count}")
+    print(f"Spam: {spam_count}")
+
+    for entity, counts in entity_counts.items():
+        print(f"{entity}: {counts['seller']} {counts['buyer']}")
+
 
 def main():
 
     os.makedirs(OUTPUT_DIR, exist_ok=True)
-
+    
     for filename in os.listdir(INPUT_DIR):
 
         if not filename.endswith(".csv"):

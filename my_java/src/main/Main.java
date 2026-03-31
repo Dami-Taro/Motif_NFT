@@ -5,10 +5,10 @@ import java.nio.file.Paths;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
-import java.util.NavigableSet;
+//import java.util.NavigableSet;
 
 import src.graph.DatasetNFT;
-import src.graph.Edge;
+//import src.graph.Edge;
 import src.graph.Graph;
 import src.io.Loader;
 import src.io.ResultWriter;
@@ -76,6 +76,16 @@ public class Main {
             
             //fileList.add(new FileInfos(Paths.get("collections/DatasetJson/decentraland.json"), 0));
             //fileList.add(new FileInfos(Paths.get("collections/DatasetJson/the_sandbox.json"), 0));
+
+
+            fileList.add(new FileInfos(Paths.get("collections/DatasetJson_raw/axie_infinity_assets.json"), 0));
+            fileList.add(new FileInfos(Paths.get("collections/DatasetJson_raw/decentraland_assets.json"), 0));
+            fileList.add(new FileInfos(Paths.get("collections/DatasetJson_raw/the_sandbox_assets.json"), 0));
+
+            fileList.add(new FileInfos(Paths.get("collections/DatasetJson_raw/decentraland_estate.json"), 0));
+            fileList.add(new FileInfos(Paths.get("collections/DatasetJson_raw/decentraland_land.json"), 0));
+            fileList.add(new FileInfos(Paths.get("collections/DatasetJson_raw/decentraland_names.json"), 0));
+            fileList.add(new FileInfos(Paths.get("collections/DatasetJson_raw/the_sandbox_land.json"), 0));
         }
 
         System.out.println("== File list of " + fileList.size() + " collections ===");

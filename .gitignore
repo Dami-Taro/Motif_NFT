@@ -35,4 +35,5 @@ my_python/jsonCollections/
 
 # file di dati
 *.json
+*.csv
 
