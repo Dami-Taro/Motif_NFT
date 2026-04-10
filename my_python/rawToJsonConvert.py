@@ -3,9 +3,7 @@ import os
 from datetime import datetime
 
 INPUT_ROOT = "my_python/DatasetRaw"
-OUTPUT_ROOT = "my_python/DatasetJson_raw_unique"
-#INPUT_ROOT = "my_python/DatasetExtra"
-#OUTPUT_ROOT = "my_python/DatasetJson_extra"
+OUTPUT_ROOT = "my_python/DatasetJson_raw_entity"
 
 
 def iso_to_epoch(ts):
@@ -33,10 +31,6 @@ def convert_collection(collection_path, output_file):
 
     # Ordinamento corretto: 0,1,2,3,...
     files.sort(key=extract_index)
-
-    # 🔥 struttura per deduplicazione globale della collezione
-    seen_transactions = {}
-    duplicate_count = 0
 
     with open(output_file, "w", encoding="utf-8") as fout:
 
@@ -66,44 +60,30 @@ def convert_collection(collection_path, output_file):
 
                 possible_spam = tx.get("possible_spam")
 
-                block_hash = tx.get("block_hash")
-                tx_hash = tx.get("transaction_hash")
-
                 # ------------------------
                 # FILTRI
                 # ------------------------
 
                 # dati mancanti
-                if not seller or not buyer or not token_id or not block_hash or not tx_hash:
+                if not seller or not buyer or not token_id:
                     continue
 
                 # skip se ci sono entity
-                if seller_entity is not None or buyer_entity is not None:
-                    continue
+                #if seller_entity is not None or buyer_entity is not None:
+                    #continue
+                    
 
                 # spam
                 if possible_spam is True:
                     continue
 
                 # ------------------------
-                # FILTRO DUPLICATI
-                # ------------------------
-
-                if block_hash not in seen_transactions:
-                    seen_transactions[block_hash] = set()
-
-                if tx_hash in seen_transactions[block_hash]:
-                    #print(f"skip {tx_hash} bc duplicated")
-                    duplicate_count += 1
-                    continue  # duplicato
-
-                seen_transactions[block_hash].add(tx_hash)
-
-                # ------------------------
 
                 event = {
                     "seller": seller,
+                    "seller_entity": seller_entity,
                     "buyer": buyer,
+                    "buyer_entity": buyer_entity,
                     "event_timestamp": timestamp,
                     "nft": {
                         "identifier": str(token_id)
@@ -119,7 +99,6 @@ def convert_collection(collection_path, output_file):
 
             fout.write(json.dumps(wrapper) + "\n")
 
-    print(f"Duplicati rimossi: {duplicate_count}")
     print(f"Creato: {output_file}")
 
 

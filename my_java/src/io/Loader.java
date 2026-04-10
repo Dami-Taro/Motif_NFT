@@ -4,6 +4,7 @@ import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 
 import src.graph.Graph;
+import src.graph.UserNode;
 import src.graph.DatasetNFT;
 
 import java.io.BufferedReader;
@@ -20,7 +21,9 @@ public class Loader {
     // Evento singolo
     private static class EventDTO {
         String seller;
+        String seller_entity;
         String buyer;
+        String buyer_entity;
         long event_timestamp;
         NFTDTO nft;
     }
@@ -132,11 +135,24 @@ public class Loader {
                     event.buyer == null ||
                     event.event_timestamp <= 0)
                     continue;
+
                 if(includeNFT && (
                     event.nft == null ||
                     event.nft.identifier == null)){
                     nonNFTEvents++;
                     continue;
+                }
+
+                UserNode sellerNode = graph.getOrCreateNode(event.seller);
+                UserNode buyerNode  = graph.getOrCreateNode(event.buyer);
+
+                if (event.seller_entity != null) {
+                    //if( !Constants.isBURN(event.seller_entity) ) System.out.println("nft: " +event.nft.identifier+ ": (" +event.seller_entity+ ")" +event.seller + " -> " + event.buyer);
+                    sellerNode.setEntity(event.seller_entity);
+                }
+                if (event.buyer_entity != null) {
+                    //if( !Constants.isBURN(event.buyer_entity) ) System.out.println("⚠️nft: " +event.nft.identifier+ ": " +event.seller + " -> " + event.buyer+ " (" +event.buyer_entity+ ")");
+                    buyerNode.setEntity(event.buyer_entity);
                 }
 
                 if(includeNFT)

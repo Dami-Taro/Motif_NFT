@@ -99,6 +99,9 @@ public class GraphTemporalMotifMiner {
         List<DistinctInStar> allPatterns = new ArrayList<>();
 
         for (UserNode nodeX : graph.getNodes()) {
+
+            if(nodeX.getEntity()!=null) continue; // skip se nodo ha entity (es. marketplace)
+
             List<Edge> incomingEdges =
                 new ArrayList<>(nodeX.getIncomingEdges());
 
@@ -268,6 +271,8 @@ public class GraphTemporalMotifMiner {
 
         for (UserNode center : graph.getNodes()) {
 
+            if(center.getEntity()!=null) continue; // skip se nodo ha entity (es. marketplace)
+
             MergedIterator mergedIt = new MergedIterator(
                 center.getOutgoingEdges(),
                 center.getIncomingEdges()
@@ -367,17 +372,19 @@ public class GraphTemporalMotifMiner {
         }
     }
 
-    // ============ MERGED RECEIVE AND FORWARD NFT PATTERN ============
+    // ============ MERGED RECEIVE AND FORWARD PATTERN ============
     /**
      * Pattern: ReceiveAndForward (A→B, B→C, D→B, B→E, ...) con algoritmo merged
      * Motif base: due archi B→C, A→B (B vende poi compra)
-     * Regola incrementale: aggiungere altri archi alternando acquisti (Y→B) e vendite (B→X) dello stesso NFT
+     * Regola incrementale: aggiungere altri archi alternando acquisti (Y→B) e vendite (B→X) Non importa quale NFT
      */
     public List<ReceiveAndForward> findMergedReceiveAndForward(int minSize) {
 
         List<ReceiveAndForward> results = new ArrayList<>();
 
         for (UserNode center : graph.getNodes()) {
+
+            if(center.getEntity()!=null) continue; // skip se nodo ha entity (es. marketplace)
 
             MergedIterator mergedIt = new MergedIterator(
                 center.getOutgoingEdges(),

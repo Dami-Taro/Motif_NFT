@@ -11,6 +11,7 @@ import src.graph.DatasetNFT;
 import src.graph.Edge;
 //import src.graph.EdgeTimestampComparator;
 import src.graph.UserNode;
+import src.main.Constants;
 import src.motifMiner.patterns.SameNFTChain;
 import src.motifMiner.patterns.SameNFTCycle;
 
@@ -83,11 +84,21 @@ public class NFTsTemporalMotifMiner {
         if ( !edgeIterator.hasNext() ) return;
 
         List<Edge> currentPattern = new ArrayList<>();
+        Edge firstEdge = null;
+        while ( !edgeIterator.hasNext() && firstEdge == null ) {
+            
+            firstEdge = edgeIterator.next();
+            if ( Constants.isBURN(firstEdge.getFrom().getEntity()) || Constants.isBURN(firstEdge.getTo().getEntity()) ) 
+                firstEdge = null; // skip se diretto da o verso burn entity (Mint o Burn)
+        
+        }
+        if(firstEdge==null) return; 
         currentPattern.add( edgeIterator.next() );
 
         while(edgeIterator.hasNext()){
             
             Edge currentEdge = edgeIterator.next();
+            if ( Constants.isBURN(currentEdge.getFrom().getEntity()) || Constants.isBURN(currentEdge.getTo().getEntity()) )  continue; // skip se diretto da o verso burn entity (Mint o Burn)
 
             //aggiungo currentEdge a nuovo pattern
             if( outOfTime(currentPattern.get(0), delta, currentEdge) ){
@@ -170,6 +181,9 @@ public class NFTsTemporalMotifMiner {
             
             //aggiungo currentEdge a timeWindow e aggiorno previousUsers
             windowEdges.add(currentEdge);
+
+            if( currentEdge.getFrom().getEntity() != null) continue; // non memorizzo i nodi con entity (es. marketplace)
+
             previousUsers.put( currentEdge.getFrom(), currentEdge);
             this.moveTimeWindow(windowEdges, previousUsers);
 
@@ -192,10 +206,11 @@ public class NFTsTemporalMotifMiner {
         Edge lastEdge = windowEdges.get(windowEdges.size()-1);
         
         UserNode cycledNode = lastEdge.getTo();
+        if( cycledNode.getEntity() != null) throw new RuntimeException("errore nella rilevazione del SameNFTCycle del nft " + currentNft + ": nodo con entity non dovrebbe essere in previousUsers. Nodo: " + cycledNode.getSimpleAddress() + ", entity: " + cycledNode.getEntity());
 
         //trovo l'indice dove inia il ciclo
         int firstEdgeIndex = windowEdges.indexOf( previousUsers.get(cycledNode) );
-        if (firstEdgeIndex == -1) throw new RuntimeException("errore nella rilevazione del SameNFTCycle del nft " + currentNft + ": non presente arco con lastNode: " + cycledNode.getSimpleAddress() + ". previousUserValue: " + previousUsers.get(cycledNode).getFrom().getSimpleAddress() + " -> " + previousUsers.get(cycledNode).getTo().getSimpleAddress());; //non dovrebbe mai succedere
+        if (firstEdgeIndex == -1) throw new RuntimeException("errore nella rilevazione del SameNFTCycle del nft " + currentNft + ": non presente arco con lastNode: " + cycledNode.getSimpleAddress() + ". previousUserValue: " + previousUsers.get(cycledNode).getFrom().getSimpleAddress() + " -> " + previousUsers.get(cycledNode).getTo().getSimpleAddress());
 
         //aggiungo ciclo a results
         SameNFTCycle cycle = new SameNFTCycle( new ArrayList<>( windowEdges.subList(firstEdgeIndex, lastEdgeIndex+1)), currentNft);
