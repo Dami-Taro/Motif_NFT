@@ -99,18 +99,6 @@ Delta (sec): 49
 Totale pattern: 221
 
 size 2 → 221 pattern
-Contiguous
-
-=== SameNFTChain Counts by Size (grouped by size) ===
-Totale pattern: 221
-
-size 2 → 221 pattern
-
-=== SameNFTCycle Counts by Size (grouped by size) ===
-Totale pattern: 5
-
-size 2 → 5 pattern
-Contiguous
 
 === SameNFTCycle Counts by Size (grouped by size) ===
 Totale pattern: 5

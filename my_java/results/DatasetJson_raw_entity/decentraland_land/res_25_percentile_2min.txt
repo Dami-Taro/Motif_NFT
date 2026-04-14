@@ -149,21 +149,6 @@ Totale pattern: 3298
 size 2 → 3261 pattern
 size 3 → 35 pattern
 size 4 → 2 pattern
-Contiguous
-
-=== SameNFTChain Counts by Size (grouped by size) ===
-Totale pattern: 3298
-
-size 2 → 3261 pattern
-size 3 → 35 pattern
-size 4 → 2 pattern
-
-=== SameNFTCycle Counts by Size (grouped by size) ===
-Totale pattern: 1532
-
-size 2 → 1531 pattern
-size 3 → 1 pattern
-Contiguous
 
 === SameNFTCycle Counts by Size (grouped by size) ===
 Totale pattern: 1532

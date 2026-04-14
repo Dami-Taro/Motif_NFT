@@ -12,8 +12,11 @@ import src.graph.Edge;
 //import src.graph.EdgeTimestampComparator;
 import src.graph.UserNode;
 import src.main.Constants;
+import src.motifMiner.patterns.PatternValidationException;
 import src.motifMiner.patterns.SameNFTChain;
 import src.motifMiner.patterns.SameNFTCycle;
+import src.motifMiner.patterns.NoAnomalySameNFTChain;
+import src.motifMiner.patterns.NoAnomalySameNFTCycle;
 
 public class NFTsTemporalMotifMiner {
     
@@ -84,6 +87,8 @@ public class NFTsTemporalMotifMiner {
         if ( !edgeIterator.hasNext() ) return;
 
         List<Edge> currentPattern = new ArrayList<>();
+        currentPattern.add(edgeIterator.next());
+        /* 
         Edge firstEdge = null;
         while ( edgeIterator.hasNext() && firstEdge == null ) {
             
@@ -94,15 +99,16 @@ public class NFTsTemporalMotifMiner {
         }
         if(firstEdge==null){System.out.println(currentNft + ": "+nftTransactions.first().getFrom().getSimpleAddress() + "-> null first edge\n"); return; }
         currentPattern.add( firstEdge );
+        */
 
         while(edgeIterator.hasNext()){
             
             Edge currentEdge = edgeIterator.next();
-            if ( Constants.isBURN(currentEdge.getFrom().getEntity()) || Constants.isBURN(currentEdge.getTo().getEntity()) )  continue; // skip se diretto da o verso burn entity (Mint o Burn)
-
+            
             //aggiungo currentEdge a nuovo pattern
             if( outOfTime(currentPattern.get(0), delta, currentEdge) ){
 
+                removeEntitySameNFTChainPattern(currentPattern);
                 if( currentPattern.size() >= minSize )
                     results.add(new SameNFTChain( new ArrayList<>(currentPattern), currentNft));
 
@@ -115,10 +121,26 @@ public class NFTsTemporalMotifMiner {
             currentPattern.add(currentEdge);
 
         }
+        removeEntitySameNFTChainPattern(currentPattern);
         if( currentPattern.size() >= minSize )
             results.add(new SameNFTChain( new ArrayList<>(currentPattern), currentNft));
 
     }
+    private void removeEntitySameNFTChainPattern( List<Edge> patternEdges){
+        if( patternEdges == null ) return;
+        
+        if( (!patternEdges.isEmpty()) && patternEdges.get(0).getFrom().getEntity() != null ){
+            System.err.println("TROVATO UN CAZZO DI BURN ADDRESS: \""+patternEdges.get(0).getFrom().getEntity()+"\" != \"Burn Addresses\"");
+        }
+        if( (!patternEdges.isEmpty()) && Constants.isBURN(patternEdges.get(0).getFrom().getEntity()) ){ 
+            System.err.println("TROVATO UN CAZZO DI BURN ADDRESS:" + patternEdges.get(0).getFrom().getSimpleAddress() + "->" + patternEdges.get(0).getTo().getSimpleAddress() + " in pattern: " + patternEdges);
+            patternEdges.remove(0);
+        }
+        if( (!patternEdges.isEmpty()) && Constants.isBURN(patternEdges.get(patternEdges.size()-1).getTo().getEntity()) ){ 
+            patternEdges.remove(patternEdges.size()-1);
+        }
+    }
+    
 
     // ============ SAME NFT CYCLE ============
     /**
@@ -292,5 +314,41 @@ public class NFTsTemporalMotifMiner {
         return results;
     }
  */
+
+    public List<NoAnomalySameNFTChain> findNoAnomalySameNFTChain(List<SameNFTChain> input) {
+
+        List<NoAnomalySameNFTChain> results = new ArrayList<>();
+
+        for (SameNFTChain chain : input) {
+            try {
+                NoAnomalySameNFTChain clean = new NoAnomalySameNFTChain(chain);
+                clean.validate(); // 🔹 controlla anomalie
+
+                results.add(clean);
+
+            } catch (PatternValidationException e) {
+            }
+        }
+
+        return results;
+    }
+
+    public List<NoAnomalySameNFTCycle> findNoAnomalySameNFTCycle(List<SameNFTCycle> input) {
+
+        List<NoAnomalySameNFTCycle> results = new ArrayList<>();
+
+        for (SameNFTCycle cycle : input) {
+            try {
+                NoAnomalySameNFTCycle clean = new NoAnomalySameNFTCycle(cycle);
+                clean.validate();
+
+                results.add(clean);
+
+            } catch (PatternValidationException e) {
+            }
+        }
+
+        return results;
+    }
 
 }
