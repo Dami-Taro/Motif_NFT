@@ -85,15 +85,15 @@ public class NFTsTemporalMotifMiner {
 
         List<Edge> currentPattern = new ArrayList<>();
         Edge firstEdge = null;
-        while ( !edgeIterator.hasNext() && firstEdge == null ) {
+        while ( edgeIterator.hasNext() && firstEdge == null ) {
             
             firstEdge = edgeIterator.next();
             if ( Constants.isBURN(firstEdge.getFrom().getEntity()) || Constants.isBURN(firstEdge.getTo().getEntity()) ) 
                 firstEdge = null; // skip se diretto da o verso burn entity (Mint o Burn)
         
         }
-        if(firstEdge==null) return; 
-        currentPattern.add( edgeIterator.next() );
+        if(firstEdge==null){System.out.println(currentNft + ": "+nftTransactions.first().getFrom().getSimpleAddress() + "-> null first edge\n"); return; }
+        currentPattern.add( firstEdge );
 
         while(edgeIterator.hasNext()){
             

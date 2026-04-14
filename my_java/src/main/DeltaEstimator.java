@@ -25,6 +25,9 @@ public class DeltaEstimator {
         List<Double> interEventTimes = new ArrayList<>();
 
         for (UserNode node : graph.getNodes()) {
+            if( node.getEntity() != null) {
+                continue;
+            }
 
             if (node.getIncomingEdges().size() + node.getOutgoingEdges().size() < 2) {
                 continue;
