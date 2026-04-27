@@ -8,7 +8,9 @@ import java.nio.file.StandardOpenOption;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
+import java.util.Set;
 import java.util.TreeMap;
+import java.util.TreeSet;
 
 import src.graph.DatasetNFT;
 import src.graph.Graph;
@@ -17,11 +19,33 @@ import src.motifMiner.patterns.Pattern;
 public class ResultWriter {
 
     // Crea e sovrascrive nuovo file
-    public static void createNewFile(Path output){
-        try (BufferedWriter writer = Files.newBufferedWriter(output)) {} 
+    public static void createEmptyFile(Path filePath){
+        try (BufferedWriter writer = Files.newBufferedWriter(filePath)) {} 
         catch (IOException e) {
             System.err.println("Errore creazione file: "
-                    + output);
+                    + filePath);
+            e.printStackTrace();
+        }
+    }
+
+    // Appende una lista di string lines a un file già esistente
+    public static void appendLinesToFile(
+            List<String> lines,
+            Path output) {
+
+        String title = lines.isEmpty() ? "no lines appended to file" : "===" + lines.get(0) + "===";
+
+        try (BufferedWriter writer = Files.newBufferedWriter(
+                output,
+                StandardOpenOption.CREATE,
+                StandardOpenOption.APPEND)){
+
+            for (String line : lines) {
+                writer.write(line + "\n");
+            }
+
+        } catch (IOException e) {
+            System.err.println("Errore durante l'append delle linee su file: " + output + " (section: " + title + ")");
             e.printStackTrace();
         }
     }
@@ -69,28 +93,6 @@ public class ResultWriter {
         } catch (IOException e) {
             System.err.println("Errore durante la scrittura delle informazioni del grafo su file: "
                     + output);
-            e.printStackTrace();
-        }
-    }
-
-    // Appende una lista di string lines a un file già esistente
-    public static void appendLinesToFile(
-            List<String> lines,
-            Path output) {
-
-        String title = lines.isEmpty() ? "no lines appended to file" : "===" + lines.get(0) + "===";
-
-        try (BufferedWriter writer = Files.newBufferedWriter(
-                output,
-                StandardOpenOption.CREATE,
-                StandardOpenOption.APPEND)){
-
-            for (String line : lines) {
-                writer.write(line + "\n");
-            }
-
-        } catch (IOException e) {
-            System.err.println("Errore durante l'append delle linee su file: " + output + " (section: " + title + ")");
             e.printStackTrace();
         }
     }
@@ -161,8 +163,8 @@ public class ResultWriter {
     }
 
 
-    // Raggruppa i pattern per dimensione in una mappa ordinata
-    private static Map<Integer, List<Pattern>> groupPatternsBySize(List<? extends Pattern> patterns) {
+    // Raggruppa i pattern per dimensione in una mappa ordinata {size -> list of pattern}
+    public static Map<Integer, List<Pattern>> groupPatternsBySize(List<? extends Pattern> patterns) {
 
         Map<Integer, List<Pattern>> grouped = new TreeMap<>();
 
@@ -174,8 +176,56 @@ public class ResultWriter {
         return grouped;
     }
 
+    // Conta il numero di pattern per dimensione e restituisce una mappa {size -> #pattern}
+    public static Map<Integer, Integer> countPatternSize(List<? extends Pattern> patterns) {
+        
+        Map<Integer, Integer> counts = new TreeMap<>();
 
+        for (Pattern pattern : patterns) {
+            int size = pattern.getSize();
+            counts.merge(size, 1, Integer::sum);
+        }
 
+        return counts;
+    }
+
+    /*
+    public static List<String> patternCountsToString(
+            Map<String, Map<Integer, Integer>> namedCounts,
+            String firstColumnName,
+            int defaultValue
+    ) {
+        List<String> lines = new ArrayList<>();
+
+        // Trova tutti i k possibili (unione)
+        Set<Integer> allK = new TreeSet<>();
+        for (Map<Integer, Integer> map : namedCounts.values()) {
+            allK.addAll(map.keySet());
+        }
+
+        // Header
+        StringBuilder header = new StringBuilder(firstColumnName);
+        for (String colName : namedCounts.keySet()) {
+            header.append("\t").append(colName);
+        }
+        lines.add(header.toString());
+
+        // Righe
+        for (int k : allK) {
+            StringBuilder row = new StringBuilder();
+            row.append(k);
+
+            for (Map<Integer, Integer> map : namedCounts.values()) {
+                int value = map.getOrDefault(k, defaultValue);
+                row.append("\t").append(value);
+            }
+
+            lines.add(row.toString());
+        }
+
+        return lines;
+    }
+ */
 
 }
 
