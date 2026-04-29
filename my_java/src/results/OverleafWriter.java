@@ -744,7 +744,7 @@ public class OverleafWriter {
 
             // ===== SETTINGS =====
             String delta = "50_percentile";
-            int maxK = 20;
+            int maxK = -1;
 
             // ===== COLUMNS =====
             List<String> collections = Arrays.asList(
@@ -757,6 +757,10 @@ public class OverleafWriter {
                 "the_sandbox_land"
             );
 
+            if (maxK == -1) {
+                maxK = getMaxK(results, patternName, collections, delta);
+            }
+
             // ===== HEADER =====
             StringBuilder header = new StringBuilder("k");
             for (String collectionName : collections) {
@@ -768,6 +772,7 @@ public class OverleafWriter {
             for (int k = 1; k <= maxK; k++) {
 
                 StringBuilder row = new StringBuilder(String.valueOf(k));
+                boolean hasData = false;
 
                 for (String collectionName : collections) {
 
@@ -786,11 +791,15 @@ public class OverleafWriter {
                     }
 
                     int value = getCountBySize(d.getPatternResults(), patternName, k);
+                    if( value > 0 ) hasData = true;
 
                     row.append(SEP).append(value);
                 }
 
-                lines.add(row.toString());
+                if (hasData) {
+                    lines.add(row.toString());
+                }
+                
             }
 
             // ===== WRITE FILE =====
@@ -802,21 +811,196 @@ public class OverleafWriter {
         }
     }
     private static int getCountBySize(Map<String, List<Integer>> patternResults, String patternName, int k) {
-    if (patternResults == null) return 0;
+        if (patternResults == null) return 0;
 
-    List<Integer> values = patternResults.get(patternName);
+        List<Integer> values = patternResults.get(patternName);
 
-    if (values == null || values.isEmpty()) {
-        System.out.println("PatternSizeDist values not found for pattern: " + patternName);
-        return 0;
+        if (values == null || values.isEmpty()) {
+            System.out.println("PatternSizeDist values not found for pattern: " + patternName);
+            return 0;
+        }
+
+        int count = 0;
+        for (int v : values) {
+            if (v == k) count++;
+        }
+
+        return count;
+    }
+    private static int getMaxK(Results results, String patternName, List<String> collections, String delta) {
+
+        int maxK = 0;
+
+        for (String collectionName : collections) {
+
+            Collection collection = results.getCollection(collectionName);
+            if (collection == null) {
+                System.out.println("getMaxK collection not found: " + collectionName);
+                continue;
+            }
+
+            Delta d = collection.getDelta(delta);
+            if (d == null) {
+                System.out.println("getMaxK delta not found: " + delta + " in " + collectionName);
+                continue;
+            }
+
+            Map<String, List<Integer>> patternResults = d.getPatternResults();
+            if (patternResults == null) continue;
+
+            List<Integer> values = patternResults.get(patternName);
+            if (values == null || values.isEmpty()) continue;
+
+            for (int v : values) {
+                if (v > maxK) {
+                    maxK = v;
+                }
+            }
+        }
+
+        System.out.println("Computed maxK for " + patternName + ": " + maxK);
+
+        return maxK;
     }
 
-    int count = 0;
-    for (int v : values) {
-        if (v == k) count++;
+    public static void writePatternSizeBoxPlot(Results results){
+        if (results == null || results.getCollections().isEmpty()) return;
+
+        List<String> patterns = Arrays.asList(
+            InStar.class.getSimpleName(),
+            GiveAndTake.class.getSimpleName(),
+            ReceiveAndForwardNFT.class.getSimpleName(),
+            SameNFTChain.class.getSimpleName(),
+            SameNFTCycle.class.getSimpleName()
+        );
+
+        for (String pattern : patterns) {
+            do_writePatternSizeBoxPlot(results, pattern);
+        }
+    }
+    private static void do_writePatternSizeBoxPlot(Results results, String patternName) {
+
+        try {
+            Path overleafDir = results.getResultDir().resolve("overleaf");
+            Files.createDirectories(overleafDir);
+
+            Path file = overleafDir.resolve("patternSizeBoxPlot_" + patternName + ".tex");
+            ResultWriter.createEmptyFile(file);
+
+            List<String> lines = new ArrayList<>();
+
+            // ===== SETTINGS =====
+            String delta = "50_percentile";
+
+            // ===== COLLECTIONS =====
+            List<String> collections = Arrays.asList(
+                "axie_infinity_assets",
+                "decentraland_estate",
+                "decentraland_land",
+                "decentraland_names",
+                "the_sandbox_land"
+            );
+
+            List<String> boxPlots = new ArrayList<>();
+            List<String> outliersList = new ArrayList<>();
+
+            int position = 1;
+
+            for (String collectionName : collections) {
+
+                Collection collection = results.getCollection(collectionName);
+                if (collection == null) {
+                    System.out.println("BoxPlot collection not found: " + collectionName);
+                    position++;
+                    continue;
+                }
+
+                Delta d = collection.getDelta(delta);
+                if (d == null) {
+                    System.out.println("BoxPlot delta not found: " + delta + " in " + collectionName);
+                    position++;
+                    continue;
+                }
+
+                Map<String, List<Integer>> patternResults = d.getPatternResults();
+                if (patternResults == null) {
+                    position++;
+                    continue;
+                }
+
+                List<Integer> values = patternResults.get(patternName);
+                if (values == null || values.isEmpty()) {
+                    System.out.println("BoxPlot values not found for pattern: " + patternName);
+                    position++;
+                    continue;
+                }
+
+                double[] arr = values.stream().mapToDouble(Integer::doubleValue).toArray();
+
+                Arrays.sort(arr);
+
+                //double min = arr[0];
+                //double max = arr[arr.length - 1];
+                
+
+                org.apache.commons.math3.stat.descriptive.rank.Percentile p = new org.apache.commons.math3.stat.descriptive.rank.Percentile();
+
+                double q1 = p.evaluate(arr, 25);
+                double median = p.evaluate(arr, 50);
+                double q3 = p.evaluate(arr, 75);
+
+                double iqr = q3 - q1;
+                double lowerBound = q1 - 1.5 * iqr;
+                double upperBound = q3 + 1.5 * iqr;
+
+                // ===== BOX =====
+                String box = String.format(
+                    "draw position=%d, lower whisker=%.2f, lower quartile=%.2f, median=%.2f, upper quartile=%.2f, upper whisker=%.2f",
+                    position, lowerBound, q1, median, q3, upperBound
+                );
+
+                boxPlots.add("{" + box + "}");
+
+                // ===== OUTLIERS (semplice: fuori da [Q1-1.5IQR, Q3+1.5IQR]) =====
+
+                double oldVal = 0.0;
+                for (double v : arr) {
+                    if (v == oldVal) continue; // evita di considerare più volte lo stesso valore come outlier
+                    if (v < lowerBound || v > upperBound) {
+                        outliersList.add("(" + position + "," + (int)v + ")");
+                    }
+                    oldVal = v;
+                }
+
+                position++;
+            }
+
+            // ===== BUILD TEX =====
+            lines.add("\\sizeBoxPlot");
+            lines.add("{Pattern size distribution: " + patternName + "}");
+            lines.add("{patternSizeBoxPlot_" + patternName + "}");
+
+            for (String b : boxPlots) {
+                lines.add(b);
+            }
+
+            // OUTLIERS
+            StringBuilder outliers = new StringBuilder("{");
+            for (String o : outliersList) {
+                outliers.append(o).append(" ");
+            }
+            outliers.append("}");
+
+            lines.add(outliers.toString());
+
+            // ===== WRITE =====
+            System.out.println("Writing data to: " + file);
+            ResultWriter.appendLinesToFile(lines, file);
+
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
     }
 
-    return count;
-}
 
 }

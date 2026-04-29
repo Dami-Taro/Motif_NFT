@@ -1,12 +1,10 @@
 package src.main;
 
 import java.io.IOException;
-import java.io.UncheckedIOException;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.util.ArrayList;
-import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
 //import java.util.NavigableSet;
@@ -148,10 +146,6 @@ public class Main {
                 dsNFT.printNftContiguousTransactionSizes(resultContiguousFile);
                 dsNFT.printOnlyNonContiguousTransactions(resultNonContiguousFile);
 
-                // overleaf file
-                //Path overleafFile = resultPath.resolve(collectionName + "_overleaf.dat");
-                //ResultWriter.createNewFile(overleafFile);
-
                 // boolean truee = true;
                 // if (truee) return;
 /*
@@ -264,6 +258,7 @@ public class Main {
 
         System.out.println(results);
 
+        // SCRITTURA OVERLEAF FILES
         OverleafWriter.writeDiffAnomalyCount(results);
         OverleafWriter.writeRatioAnomalyCount(results);
         OverleafWriter.writePatternCount(results);
@@ -273,6 +268,7 @@ public class Main {
         OverleafWriter.writeTableCollectionInfo(results);
         OverleafWriter.writeTableCollectionPercentiles(results);
         OverleafWriter.writePatternSizeDistribution(results);
+        OverleafWriter.writePatternSizeBoxPlot(results);
 
         System.out.println("=== Analisi completata ===");
     }
