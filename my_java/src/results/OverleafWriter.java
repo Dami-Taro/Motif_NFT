@@ -858,7 +858,7 @@ public class OverleafWriter {
             }
         }
 
-        System.out.println("Computed maxK for " + patternName + ": " + maxK);
+        //System.out.println("Computed maxK for " + patternName + ": " + maxK);
 
         return maxK;
     }
@@ -992,6 +992,377 @@ public class OverleafWriter {
             outliers.append("}");
 
             lines.add(outliers.toString());
+
+            // ===== WRITE =====
+            System.out.println("Writing data to: " + file);
+            ResultWriter.appendLinesToFile(lines, file);
+
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+
+    public static void writePatternSizeCumulative(Results results){
+        if (results == null || results.getCollections().isEmpty()) return;
+
+        // ===== FILES =====
+        List<String> patterns = Arrays.asList(
+            InStar.class.getSimpleName(),
+            GiveAndTake.class.getSimpleName(),
+            ReceiveAndForwardNFT.class.getSimpleName(),
+            SameNFTChain.class.getSimpleName(),
+            SameNFTCycle.class.getSimpleName()
+        );
+
+        for (String pattern : patterns) {
+            do_writePatternSizeCumulative(results, pattern);
+        }
+    }
+    private static void do_writePatternSizeCumulative(Results results, String patternName) {
+
+        try {
+            Path overleafDir = results.getResultDir().resolve("overleaf");
+            Files.createDirectories(overleafDir);
+
+            Path file = overleafDir.resolve("patternSizeCumulative_" + patternName + ".dat");
+            ResultWriter.createEmptyFile(file);
+
+            List<String> lines = new ArrayList<>();
+
+            // ===== SETTINGS =====
+            String delta = "50_percentile";
+            int maxK = -1;
+
+            // ===== COLUMNS =====
+            List<String> collections = Arrays.asList(
+                "axie_infinity_assets",
+                //"decentraland_assets",
+                "decentraland_estate",
+                "decentraland_land",
+                "decentraland_names",
+                //"the_sandbox_assets",
+                "the_sandbox_land"
+            );
+
+            if (maxK == -1) {
+                maxK = getMaxK(results, patternName, collections, delta);
+            }
+
+            // ===== HEADER =====
+            StringBuilder header = new StringBuilder("k");
+            for (String collectionName : collections) {
+                header.append(SEP).append(formatCollection(collectionName));
+            }
+            lines.add(header.toString());
+
+            // ===== PARTENZA =====
+            StringBuilder firstValues = new StringBuilder("1");
+            for (int i = 0; i < collections.size(); i++) {
+                firstValues.append(SEP).append("0");
+            }
+            lines.add(firstValues.toString());
+
+            // ===== PRECOMPUTE TOTALS =====
+            Map<String, Integer> totals = new HashMap<>();
+
+            for (String collectionName : collections) {
+
+                Collection collection = results.getCollection(collectionName);
+                if (collection == null) {
+                    totals.put(collectionName, 0);
+                    continue;
+                }
+
+                Delta d = collection.getDelta(delta);
+                if (d == null) {
+                    totals.put(collectionName, 0);
+                    continue;
+                }
+
+                Map<String, List<Integer>> patternResults = d.getPatternResults();
+                if (patternResults == null) {
+                    totals.put(collectionName, 0);
+                    continue;
+                }
+
+                List<Integer> values = patternResults.get(patternName);
+                totals.put(collectionName, (values != null) ? values.size() : 0);
+            }
+
+            // ===== CUMULATIVE COUNTERS =====
+            String defaultValue = "-1";
+            Map<String, Integer> cumulative = new HashMap<>();
+            for (String c : collections) cumulative.put(c, 0);
+
+            // ===== FINAL K =====
+            Map<String, Integer> finalK = new HashMap<>();
+            for (String c : collections) finalK.put(c, -1);
+
+            // ===== ROWS =====
+            for (int k = 1; k <= maxK; k++) {
+
+                StringBuilder row = new StringBuilder(String.valueOf(k));
+                boolean hasData = false;
+                
+                for (String collectionName : collections) {
+
+                    Collection collection = results.getCollection(collectionName);
+                    if (collection == null) {
+                        row.append(SEP).append(defaultValue);
+                        continue;
+                    }
+
+                    Delta d = collection.getDelta(delta);
+                    if (d == null) {
+                        row.append(SEP).append(defaultValue);
+                        continue;
+                    }
+
+                    int countK = getCountBySize(d.getPatternResults(), patternName, k);
+
+                    if ( countK > 0 ){ 
+                        hasData = true;
+
+                        // aggiorno cumulativo
+                        cumulative.put(collectionName, cumulative.get(collectionName) + countK);
+                        int total = totals.get(collectionName);
+                        int cumulativeCount = cumulative.get(collectionName);
+
+                        // salva il k finale quando raggiungo il totale
+                        if (countK > 0 && cumulativeCount == total && finalK.get(collectionName) == -1) {
+                            finalK.put(collectionName, k);
+                        }
+
+                        double value = 0.0;
+                        if (total > 0) {
+                            value = (double) cumulativeCount / total;
+                        }
+                        //if( value == 1) value = 0.0; // per creare un tick verticale nel grafico
+
+                        row.append(SEP).append(String.format("%.4f", value));
+                    }
+                    else {
+                        row.append(SEP).append(defaultValue);
+                    }
+                }
+
+                if( hasData ) {
+                    lines.add(row.toString());
+                }
+            }
+
+            // ===== ADDING FINAL K LINES =====
+            for (String collectionName : collections) {
+
+                int kFinal = finalK.get(collectionName);
+                if (kFinal == -1) continue;
+
+                StringBuilder row = new StringBuilder(String.valueOf(kFinal));
+
+                for (String c : collections) {
+                    if (c.equals(collectionName)) {
+                        row.append(SEP).append("0");
+                    } else {
+                        row.append(SEP).append(defaultValue);
+                    }
+                }
+
+                lines.add(row.toString());
+            }
+
+            // ===== WRITE =====
+            System.out.println("Writing data to: " + file);
+            ResultWriter.appendLinesToFile(lines, file);
+
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+
+    public static void writeTableSizeOutlier(Results results){
+        if (results == null || results.getCollections().isEmpty()) return;
+
+        List<String> patterns = Arrays.asList(
+            InStar.class.getSimpleName(),
+            GiveAndTake.class.getSimpleName(),
+            ReceiveAndForwardNFT.class.getSimpleName(),
+            SameNFTChain.class.getSimpleName(),
+            SameNFTCycle.class.getSimpleName()
+        );
+
+        for (String pattern : patterns) {
+            do_writeTableSizeOutlier(results, pattern);
+        }
+    }
+    private static void do_writeTableSizeOutlier(Results results, String patternName) {
+
+        try {
+            Path outDir = results.getResultDir().resolve("overleaf");
+            Files.createDirectories(outDir);
+
+            Path file = outDir.resolve("patternSizeOutlier_" + patternName + ".tex");
+            ResultWriter.createEmptyFile(file);
+
+            List<String> lines = new ArrayList<>();
+
+            // ===== SETTINGS =====
+            String delta = "50_percentile";
+
+            // moving window radius
+            int w = 3;
+
+            // anomaly threshold
+            double alpha = 4;
+
+            // ===== COLLECTIONS =====
+            List<String> collections = Arrays.asList(
+                "axie_infinity_assets",
+                "decentraland_estate",
+                "decentraland_land",
+                "decentraland_names",
+                "the_sandbox_land"
+            );
+
+            // ===== TABLE HEADER =====
+            lines.add("\\begin{tabular}{lc}");
+            lines.add("\\toprule");
+            lines.add("Id & Outliers \\\\");
+            lines.add("\\midrule");
+
+            // ===== ROWS =====
+            for (String collectionName : collections) {
+
+                Collection collection = results.getCollection(collectionName);
+
+                if (collection == null) {
+                    System.out.println("OutlierTable collection not found: " + collectionName);
+                    continue;
+                }
+
+                Delta d = collection.getDelta(delta);
+
+                if (d == null) {
+                    System.out.println("OutlierTable delta not found: " + delta + " in " + collectionName);
+                    continue;
+                }
+
+                Map<String, List<Integer>> patternResults = d.getPatternResults();
+
+                if (patternResults == null) {
+                    continue;
+                }
+
+                List<Integer> values = patternResults.get(patternName);
+
+                if (values == null || values.isEmpty()) {
+                    continue;
+                }
+
+                // ===== BUILD DISTRIBUTION =====
+
+                // key = size k
+                // value = count of patterns having that size
+                Map<Integer, Integer> sizeCountMap = new TreeMap<>();
+
+                for (int v : values) {
+
+                    int count = sizeCountMap.getOrDefault(v, 0);
+                    sizeCountMap.put(v, count + 1);
+                }
+
+                // ===== CREATE COUNTS ARRAY =====
+
+                int[] counts = new int[sizeCountMap.size()];
+                int[] ks = new int[sizeCountMap.size()];
+
+                int idx = 0;
+
+                for (Map.Entry<Integer, Integer> entry : sizeCountMap.entrySet()) {
+
+                    ks[idx] = entry.getKey();       // real k value
+                    counts[idx] = entry.getValue(); // count for that k
+
+                    idx++;
+                }
+
+                // ===== DETECT OUTLIERS =====
+
+                List<Integer> outliers = new ArrayList<>();
+
+                for (int i = 0; i < counts.length; i++) {
+
+                    int yk = counts[i];
+
+                    List<Integer> window = new ArrayList<>();
+
+                    for (
+                        int j = Math.max(0, i - w);
+                        j <= Math.min(counts.length - 1, i + w);
+                        j++
+                    ) {
+
+                        if (j == i) continue;
+
+                        window.add(counts[j]);
+                    }
+
+                    if (window.isEmpty()) continue;
+
+                    // ===== MEAN =====
+                    double mean = 0.0;
+
+                    for (int v : window) {
+                        mean += v;
+                    }
+
+                    mean /= window.size();
+
+                    // ===== STD =====
+                    double variance = 0.0;
+
+                    for (int v : window) {
+                        variance += Math.pow(v - mean, 2);
+                    }
+
+                    variance /= window.size();
+
+                    double std = Math.sqrt(variance);
+
+                    // ===== ANOMALY TEST =====
+                    if (yk > mean + alpha * std) {
+                        outliers.add(ks[i]);
+                    }
+                }
+
+                // ===== FORMAT ROW =====
+
+                StringBuilder outlierText = new StringBuilder();
+
+                if (outliers.isEmpty()) {
+                    outlierText.append("-");
+                }
+                else {
+                    for (int i = 0; i < outliers.size(); i++) {
+
+                        if (i > 0) {
+                            outlierText.append(", ");
+                        }
+
+                        outlierText.append(outliers.get(i));
+                    }
+                }
+
+                lines.add(
+                    formatCollection(collectionName)
+                    + " & "
+                    + outlierText
+                    + " \\\\"
+                );
+            }
+
+            // ===== TABLE FOOTER =====
+            lines.add("\\bottomrule");
+            lines.add("\\end{tabular}");
 
             // ===== WRITE =====
             System.out.println("Writing data to: " + file);

@@ -20,7 +20,6 @@ import src.motifMiner.NFTsTemporalMotifMiner;
 import src.motifMiner.patterns.*;
 import src.results.Collection;
 import src.results.Delta;
-import src.results.OverleafWriter;
 import src.results.Results;
 
 public class Main {
@@ -256,19 +255,11 @@ public class Main {
 
         System.out.println("creazione files overleaf.dat\n");
 
-        System.out.println(results);
+        // ===== SAVE RESULTS =====
+        Path resultsJson = resultDir.resolve("results.json");
+        results.saveToJson(resultsJson);
 
-        // SCRITTURA OVERLEAF FILES
-        OverleafWriter.writeDiffAnomalyCount(results);
-        OverleafWriter.writeRatioAnomalyCount(results);
-        OverleafWriter.writePatternCount(results);
-        OverleafWriter.writeMaxPatternLength(results);
-        OverleafWriter.writeTableCollectionInfo(results);
-        OverleafWriter.writeTotalPatternCount(results);
-        OverleafWriter.writeTableCollectionInfo(results);
-        OverleafWriter.writeTableCollectionPercentiles(results);
-        OverleafWriter.writePatternSizeDistribution(results);
-        OverleafWriter.writePatternSizeBoxPlot(results);
+        System.out.println(results);
 
         System.out.println("=== Analisi completata ===");
     }

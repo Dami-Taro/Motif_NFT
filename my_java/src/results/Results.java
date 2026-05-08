@@ -1,11 +1,20 @@
 package src.results;
 
 import java.nio.file.Path;
+import java.nio.file.Paths;
 import java.util.*;
+import java.io.IOException;
+import java.io.Reader;
+import java.io.Writer;
+import java.nio.file.Files;
+
+import com.google.gson.Gson;
+import com.google.gson.GsonBuilder;
 
 public class Results {
 
-    private Path resultDir;
+    private transient Path resultDir;
+    private String resultDirString;
     // collectionName -> Collection
     private Map<String, Collection> collections = new LinkedHashMap<>();
 
@@ -72,5 +81,57 @@ public class Results {
         }
 
         return sb.toString();
+    }
+
+    // ===== JSON SERIALIZATION =====
+    public void saveToJson(Path outputFile) {
+        try {
+            if (outputFile.getParent() != null) {
+                Files.createDirectories(outputFile.getParent());
+            }
+
+            // sincronizza stringa prima del salvataggio
+            if (resultDir != null) {
+                resultDirString = resultDir.toString();
+            }
+
+            Gson gson = new GsonBuilder()
+                    .setPrettyPrinting()
+                    .create();
+
+            try (Writer writer = Files.newBufferedWriter(outputFile)) {
+                gson.toJson(this, writer);
+            }
+
+            System.out.println("✅ Results salvato in: " + outputFile);
+
+        } catch (IOException e) {
+            System.err.println("❌ Errore salvataggio Results");
+            e.printStackTrace();
+        }
+    }
+
+    public static Results loadFromJson(Path inputFile) {
+        try {
+            Gson gson = new GsonBuilder().create();
+
+            try (Reader reader = Files.newBufferedReader(inputFile)) {
+
+                Results results = gson.fromJson(reader, Results.class);
+
+                // ricostruzione Path
+                if (results != null && results.resultDirString != null) {
+                    results.resultDir = Paths.get(results.resultDirString);
+                }
+
+                return results;
+            }
+
+        } catch (IOException e) {
+            System.err.println("❌ Errore caricamento Results");
+            e.printStackTrace();
+        }
+
+        return null;
     }
 }
